@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+class Profile {
+    String ID
+    String firstName
+    String lastName
+    int age
+    List<String> petsOwn
+    List<RentalHistory>
+    String emailAddress
+}
+
+class Pet {
+    String ID
+    String name
+    enum KindOfPet
+    String ownerID
+    int age
+    enum gender
+    List<RentalHistory>
+}
+
+class RentalHistory{
+    String petID
+    String profileID
+    int timesRented
+    double score
+}
+
+enum KindOfPet {
+    DOG
+    CAT
+}
+
+enum Gender{
+    MALE
+    FEMALE
+}
+
+@enduml
