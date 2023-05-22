@@ -4,23 +4,27 @@
 
 
 class Profile {
+    String emailAddress
     String ID
     String firstName
     String lastName
     int age
     List<String> petsOwn
-    List<RentalHistory>
-    String emailAddress
+    List<String> rental
+    List<String> favoritePets
+    List<String> historyProfile
+
 }
 
 class Pet {
     String ID
     String name
-    enum KindOfPet
     String ownerID
     int age
+    enum kindOfPet
     enum gender
-    List<RentalHistory>
+    boolean available
+    List<String> historyPet
 }
 
 class RentalHistory{
@@ -38,6 +42,11 @@ enum KindOfPet {
 enum Gender{
     MALE
     FEMALE
+}
+
+Class ActiveRental{
+    Sting rentalID
+    List<String> rentalHistory
 }
 
 @enduml
