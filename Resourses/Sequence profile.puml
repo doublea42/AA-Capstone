@@ -1,0 +1,17 @@
+@startuml
+title Profile
+participant Client
+participant APIGateway_Lambda
+participant CreateProfile
+participant ProfileDao
+database DynamoDB
+
+Client -> APIGateway_Lambda : HTTP RQ
+APIGateway_Lambda -> CreateProfile : CreateProfile Request
+
+CreateProfile-> DynamoDB : getProfileId
+DynamoDB --> CreateProfile : return profile object
+CreateProfile --> APIGateway_Lambda : return Create profile Request
+APIGateway_Lambda --> Client : return 2XX response with CreateEventResponse data
+
+@enduml
