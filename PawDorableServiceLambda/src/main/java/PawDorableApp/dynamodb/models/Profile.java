@@ -5,7 +5,6 @@ import java.util.Objects;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 
 @DynamoDBTable(tableName = "Profile")
@@ -19,8 +18,17 @@ public class Profile {
     private List<String> myPets;
     private List<String> rental;
     private List<String> rentalHistory;
-    private List<String> favoriteRental;
 
+    @DynamoDBHashKey(attributeName = "ID")
+    public String getID() {
+        return ID;
+    }
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    private List<String> favoriteRental;
+    @DynamoDBAttribute(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -28,15 +36,7 @@ public class Profile {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
+    @DynamoDBAttribute(attributeName = "firstName")
     public String getFirstName() {
         return firstName;
     }
@@ -44,7 +44,7 @@ public class Profile {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
+    @DynamoDBAttribute(attributeName = "lastName")
     public String getLastName() {
         return lastName;
     }
@@ -52,7 +52,7 @@ public class Profile {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+    @DynamoDBAttribute(attributeName = "age")
     public int getAge() {
         return age;
     }
@@ -60,7 +60,7 @@ public class Profile {
     public void setAge(int age) {
         this.age = age;
     }
-
+    @DynamoDBAttribute(attributeName = "myPets")
     public List<String> getMyPets() {
         return myPets;
     }
@@ -68,7 +68,7 @@ public class Profile {
     public void setMyPets(List<String> myPets) {
         this.myPets = myPets;
     }
-
+    @DynamoDBAttribute(attributeName = "rental")
     public List<String> getRental() {
         return rental;
     }
@@ -76,7 +76,7 @@ public class Profile {
     public void setRental(List<String> rental) {
         this.rental = rental;
     }
-
+    @DynamoDBAttribute(attributeName = "rentalHistory")
     public List<String> getRentalHistory() {
         return rentalHistory;
     }
@@ -84,7 +84,7 @@ public class Profile {
     public void setRentalHistory(List<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
-
+    @DynamoDBAttribute(attributeName = "favoriteRental")
     public List<String> getFavoriteRental() {
         return favoriteRental;
     }

@@ -1,11 +1,17 @@
 package PawDorableApp.dynamodb.models;
 
-import src.main.java.com.nashss.se.pawdorableservice.models.Gender;
-import src.main.java.com.nashss.se.pawdorableservice.models.KindOfPet;
+
+
+import PawDorableApp.models.Gender;
+import PawDorableApp.models.KindOfPet;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
 import java.util.Objects;
 
+@DynamoDBTable(tableName = "Pet")
 public class Pet {
     private String ID;
     private Enum<KindOfPet> kindOfPet;
@@ -16,6 +22,7 @@ public class Pet {
     private List<String> rentalHistory;
     private boolean available;
 
+    @DynamoDBHashKey(attributeName = "ID")
     public String getID() {
         return ID;
     }
@@ -23,7 +30,7 @@ public class Pet {
     public void setID(String ID) {
         this.ID = ID;
     }
-
+    @DynamoDBAttribute(attributeName = "kindOfPet")
     public Enum<KindOfPet> getKindOfPet() {
         return kindOfPet;
     }
@@ -32,6 +39,7 @@ public class Pet {
         this.kindOfPet = kindOfPet;
     }
 
+    @DynamoDBAttribute(attributeName = "name")
     public String getName() {
         return name;
     }
@@ -40,6 +48,7 @@ public class Pet {
         this.name = name;
     }
 
+    @DynamoDBAttribute(attributeName = "ownerID")
     public String getOwnerID() {
         return ownerID;
     }
@@ -48,6 +57,7 @@ public class Pet {
         this.ownerID = ownerID;
     }
 
+    @DynamoDBAttribute(attributeName = "age")
     public int getAge() {
         return age;
     }
@@ -56,6 +66,7 @@ public class Pet {
         this.age = age;
     }
 
+    @DynamoDBAttribute(attributeName = "gender")
     public Enum<Gender> getGender() {
         return gender;
     }
@@ -64,6 +75,7 @@ public class Pet {
         this.gender = gender;
     }
 
+    @DynamoDBAttribute(attributeName = "rentalHistory")
     public List<String> getRentalHistory() {
         return rentalHistory;
     }
@@ -72,6 +84,7 @@ public class Pet {
         this.rentalHistory = rentalHistory;
     }
 
+    @DynamoDBAttribute(attributeName = "available")
     public boolean isAvailable() {
         return available;
     }
