@@ -10,5 +10,5 @@ import javax.inject.Singleton;
 public class ActiveRentalDao {
     private final Logger log = LogManager.getLogger();
 //    private final DynamoDBMapper dynamoDbMapper;
-//    private final MetricsPublisher metricsPublisher;
+    private final MetricsPublisher metricsPublisher;
 }
