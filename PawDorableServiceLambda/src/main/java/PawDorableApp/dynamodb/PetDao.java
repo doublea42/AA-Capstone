@@ -1,6 +1,7 @@
 package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Pet;
+import PawDorableApp.exceptions.PetNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -27,8 +28,12 @@ public class PetDao {
         Pet selectedPet = this.dynamoDbMapper.load(Pet.class ,petID);
         if(petID == null){
             metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 1);
-//            throw new
+            throw new PetNotFoundException("could not find Pet with id " + petID);
         }
-        return null;
+
+        metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 0);
+        return selectedPet;
     }
+
+
 }
