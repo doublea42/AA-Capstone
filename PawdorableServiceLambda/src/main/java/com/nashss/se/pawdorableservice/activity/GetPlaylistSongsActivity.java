@@ -6,8 +6,6 @@ import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
-import com.nashss.se.musicplaylistservice.models.SongModel;
-import com.nashss.se.musicplaylistservice.models.SongOrder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

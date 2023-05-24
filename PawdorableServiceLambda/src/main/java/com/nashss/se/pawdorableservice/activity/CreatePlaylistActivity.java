@@ -6,7 +6,6 @@ import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
 import com.nashss.se.musicplaylistservice.exceptions.InvalidAttributeValueException;
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 
 import com.nashss.se.projectresources.music.playlist.servic.util.MusicPlaylistServiceUtils;
 

@@ -5,7 +5,6 @@ import com.nashss.se.musicplaylistservice.activity.results.SearchPlaylistsResult
 import com.nashss.se.musicplaylistservice.converters.ModelConverter;
 import com.nashss.se.musicplaylistservice.dynamodb.PlaylistDao;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

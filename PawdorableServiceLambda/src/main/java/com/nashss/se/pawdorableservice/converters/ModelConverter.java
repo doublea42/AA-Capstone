@@ -2,8 +2,6 @@ package com.nashss.se.musicplaylistservice.converters;
 
 import com.nashss.se.musicplaylistservice.dynamodb.models.AlbumTrack;
 import com.nashss.se.musicplaylistservice.dynamodb.models.Playlist;
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
-import com.nashss.se.musicplaylistservice.models.SongModel;
 
 import java.util.ArrayList;
 import java.util.List;

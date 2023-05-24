@@ -1,7 +1,5 @@
 package com.nashss.se.musicplaylistservice.activity.results;
 
-import com.nashss.se.musicplaylistservice.models.PlaylistModel;
-
 public class GetPlaylistResult {
     private final PlaylistModel playlist;
 
