@@ -1,5 +1,6 @@
 package PawDorableApp.dynamodb.models;
 
+import PawDorableApp.utils.IdGenerator;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
@@ -28,6 +29,10 @@ public class ActiveRental {
 
     public void setRentalHistory(List<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
+    }
+
+    public String createId(){
+        return IdGenerator.generateId();
     }
 
     @Override

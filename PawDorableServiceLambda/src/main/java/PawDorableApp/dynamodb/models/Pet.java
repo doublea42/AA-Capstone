@@ -4,6 +4,7 @@ package PawDorableApp.dynamodb.models;
 
 import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
+import PawDorableApp.utils.IdGenerator;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
@@ -91,6 +92,10 @@ public class Pet {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String createId(){
+        return IdGenerator.generateId();
     }
 
     @Override
