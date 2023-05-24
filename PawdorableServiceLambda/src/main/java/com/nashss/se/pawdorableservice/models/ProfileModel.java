@@ -72,7 +72,8 @@ public class ProfileModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProfileModel that = (ProfileModel) o;
-        return age == that.age && Objects.equals(emailAddress, that.emailAddress)
+        return age == that.age
+                && Objects.equals(emailAddress, that.emailAddress)
                 && Objects.equals(ID, that.ID)
                 && Objects.equals(firstName, that.firstName)
                 && Objects.equals(lastName, that.lastName)
