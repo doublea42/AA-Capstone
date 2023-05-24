@@ -67,7 +67,7 @@ public class RentalHistory {
         return timesRented == that.timesRented
                 && Double.compare(that.score, score) == 0
                 && Objects.equals(historyID, that.historyID)
-                && Objects.equals(petID, that.petID) 
+                && Objects.equals(petID, that.petID)
                 && Objects.equals(profileID, that.profileID);
     }
 
