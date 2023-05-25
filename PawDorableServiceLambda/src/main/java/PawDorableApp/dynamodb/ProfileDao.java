@@ -1,7 +1,6 @@
 package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Profile;
-import PawDorableApp.exceptions.PetNotFoundException;
 import PawDorableApp.exceptions.ProfileInvalidValuesException;
 import PawDorableApp.exceptions.ProfileNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
