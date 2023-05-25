@@ -32,7 +32,7 @@ public class CreateProfileActivity {
                 || !PawDorableServiceUtils.isValidString(createProfileRequest.getLast())){
             throw new ProfileInvalidValuesException("Your Name cannot contain illegal characters");
         }
-        if(!PawDorableServiceUtils.validAge(Integer.parseInt(createProfileRequest.getAge())){
+        if(!PawDorableServiceUtils.validAge(Integer.parseInt(createProfileRequest.getAge()))){
             throw new ProfileInvalidValuesException("Your age is out range");
         }
 
