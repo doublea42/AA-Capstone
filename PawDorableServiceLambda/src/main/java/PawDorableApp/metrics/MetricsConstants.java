@@ -6,6 +6,7 @@ public class MetricsConstants {
     public static final String NAMESPACE_NAME = "U3/PawDorableService";
 //    public static final String GETPROFILE_PROFILENOTFOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
     public static final String GETPET_PETNOTFOUND_COUNT = "GetPet.PetNotFoundException.Count";
+    public static final String UPDATEPET_INVALIDATTRIBUTEVALUE = "UpdatePet.PetInvalidAttributeException.Count";
 
 
 
