@@ -351,6 +351,19 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
 
+  ProfileTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "profiles"
+
+
 #  PlaylistsTable:
 #    Type: AWS::DynamoDB::Table
 #    Properties:
