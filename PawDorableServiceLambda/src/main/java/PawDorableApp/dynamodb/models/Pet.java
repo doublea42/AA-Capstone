@@ -94,9 +94,7 @@ public class Pet {
         this.available = available;
     }
 
-    public String createId(){
-        return IdGenerator.generateId();
-    }
+
 
     @Override
     public boolean equals(Object o) {

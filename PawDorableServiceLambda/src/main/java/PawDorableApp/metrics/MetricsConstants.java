@@ -4,7 +4,8 @@ public class MetricsConstants {
     public static final String SERVICE = "Service";
     public static final String SERVICE_NAME = "PawDorableService";
     public static final String NAMESPACE_NAME = "U3/PawDorableService";
-    public static final String GETPROFILE_PROFILENOTFOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
+    public static final String GETP_ROFILE_PROFILE_NOT_FOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
+    public static final String UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT = "UpdateProfile.ProfileInvalidAttributeException.Count";
     public static final String GETPET_PETNOTFOUND_COUNT = "GetPet.PetNotFoundException.Count";
     public static final String UPDATEPET_INVALIDATTRIBUTEVALUE = "UpdatePet.PetInvalidAttributeException.Count";
 

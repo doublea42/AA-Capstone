@@ -2,12 +2,16 @@ package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Profile;
 import PawDorableApp.exceptions.PetNotFoundException;
+import PawDorableApp.exceptions.ProfileInvalidValuesException;
+import PawDorableApp.exceptions.ProfileNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
+import PawDorableApp.utils.IdGenerator;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
@@ -25,8 +29,8 @@ public class ProfileDao {
     public Profile getPofile(String profileID){
         Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,profileID);
         if(profileID == null){
-            metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 1);
-            throw new PetNotFoundException("could not find Profile with id " + profileID);
+            metricsPublisher.addCount(MetricsConstants.GETP_ROFILE_PROFILE_NOT_FOUND_COUNT, 1);
+            throw new ProfileNotFoundException("could not find Profile with id " + profileID);
         }
 
         metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 0);
@@ -37,9 +41,60 @@ public class ProfileDao {
                                int age, List<String> myPets, List<String> rental,
                                List<String> rentalHistory, List<String> favorite){
 
-        return null;
+        if(email == null || email.isEmpty() || first == null || first.isEmpty()
+                || last == null || last.isEmpty() || this.ageCheck(age)){
+            metricsPublisher.addCount(MetricsConstants.UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT, 1);
+            throw new ProfileInvalidValuesException("could not update Profile with current values");
+        }
+
+        Profile selectedProfile = new Profile();
+
+        if(isNew){
+            selectedProfile.setID(IdGenerator.generateId());
+            selectedProfile.setMyPets(new ArrayList<>(myPets));
+            selectedProfile.setRental(new ArrayList<>(rental));
+            selectedProfile.setRentalHistory(new ArrayList<>(rentalHistory));
+            selectedProfile.setFavoriteRental(new ArrayList<>(favorite));
+        }
+        else{
+
+            if(!myPets.isEmpty()){
+                Profile tempProfile = this.getPofile(id);
+                List<String> tempList = tempProfile.getMyPets();
+                tempList.addAll(myPets);
+                tempProfile.setMyPets(tempList);
+            }
+            if(!rental.isEmpty()){
+                Profile tempProfile = this.getPofile(id);
+                List<String> tempList = tempProfile.getRental();
+                tempList.addAll(rental);
+                tempProfile.setRental(tempList);
+            }
+            if(!rentalHistory.isEmpty()){
+                Profile tempProfile = this.getPofile(id);
+                List<String> tempList = tempProfile.getRentalHistory();
+                tempList.addAll(rentalHistory);
+                tempProfile.setRentalHistory(tempList);
+            }
+            if(!favorite.isEmpty()){
+                Profile tempProfile = this.getPofile(id);
+                List<String> tempList = tempProfile.getFavoriteRental();
+                tempList.addAll(favorite);
+                tempProfile.setFavoriteRental(tempList);
+            }
+        }
+
+        selectedProfile.setFirstName(first);
+        selectedProfile.setLastName(last);
+        selectedProfile.setAge(age);
+        selectedProfile.setEmailAddress(email);
+
+
+        return selectedProfile;
     }
 
-
+    private Boolean ageCheck(int age){
+        return age > 18 || age < 100;
+    }
 
 }
