@@ -20,6 +20,7 @@ public class Profile {
     private List<String> myPets;
     private List<String> rental;
     private List<String> rentalHistory;
+    private List<String> favoriteRental;
 
     @DynamoDBHashKey(attributeName = "ID")
     public String getID() {
@@ -29,7 +30,6 @@ public class Profile {
         this.ID = ID;
     }
 
-    private List<String> favoriteRental;
     @DynamoDBAttribute(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
