@@ -7,10 +7,8 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
-import PawDorableApp.utils.IdGenerator;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -48,7 +46,7 @@ public class PetDao {
         Pet selectedPet = new Pet();
 
         if(isNew){
-            selectedPet.setID(IdGenerator.generateId());
+            selectedPet.setID(PawDorableServiceUtils.generateId());
             selectedPet.setRentalHistory(new ArrayList<>(newRentalHistory));
         }
 

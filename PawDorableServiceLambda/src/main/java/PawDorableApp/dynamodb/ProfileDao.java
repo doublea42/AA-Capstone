@@ -5,7 +5,7 @@ import PawDorableApp.exceptions.ProfileInvalidValuesException;
 import PawDorableApp.exceptions.ProfileNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
-import PawDorableApp.utils.IdGenerator;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -49,7 +49,7 @@ public class ProfileDao {
         Profile selectedProfile = new Profile();
 
         if(isNew){
-            selectedProfile.setID(IdGenerator.generateId());
+            selectedProfile.setID(PawDorableServiceUtils.generateId());
             selectedProfile.setMyPets(new ArrayList<>(myPets));
             selectedProfile.setRental(new ArrayList<>(rental));
             selectedProfile.setRentalHistory(new ArrayList<>(rentalHistory));

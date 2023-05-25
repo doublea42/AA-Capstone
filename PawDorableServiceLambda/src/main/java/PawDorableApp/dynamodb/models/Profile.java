@@ -3,7 +3,7 @@ package PawDorableApp.dynamodb.models;
 import java.util.List;
 import java.util.Objects;
 
-import PawDorableApp.utils.IdGenerator;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
@@ -96,7 +96,7 @@ public class Profile {
     }
 
     public String createId(){
-        return IdGenerator.generateId();
+        return PawDorableServiceUtils.generateId();
     }
     @Override
     public boolean equals(Object o) {
