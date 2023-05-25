@@ -7,9 +7,8 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -47,13 +46,13 @@ public class PetDao {
         Pet selectedPet = new Pet();
 
         if(isNew){
-            selectedPet.setID(selectedPet.createId());
+            selectedPet.setID(PawDorableServiceUtils.generateId());
             selectedPet.setRentalHistory(new ArrayList<>(newRentalHistory));
         }
 
 
-        if(name != null && !name.isEmpty() && kindOfPet != null
-                && ownerID !=null && !ownerID.isEmpty() && gender !=null){
+        if(name != null || !name.isEmpty() || kindOfPet != null
+                || ownerID !=null || !ownerID.isEmpty() || gender !=null){
 
             selectedPet.setKindOfPet(kindOfPet);
             selectedPet.setName(name);
@@ -66,6 +65,7 @@ public class PetDao {
                 Pet oldPet = this.getPet(ID);
                 List<String> previosList = oldPet.getRentalHistory();
                 previosList.addAll(newRentalHistory);
+                selectedPet.setRentalHistory(previosList);
             }
         }
         else{

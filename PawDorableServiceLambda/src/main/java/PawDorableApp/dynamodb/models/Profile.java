@@ -3,7 +3,7 @@ package PawDorableApp.dynamodb.models;
 import java.util.List;
 import java.util.Objects;
 
-import PawDorableApp.utils.IdGenerator;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
@@ -20,6 +20,7 @@ public class Profile {
     private List<String> myPets;
     private List<String> rental;
     private List<String> rentalHistory;
+    private List<String> favoriteRental;
 
     @DynamoDBHashKey(attributeName = "ID")
     public String getID() {
@@ -29,7 +30,6 @@ public class Profile {
         this.ID = ID;
     }
 
-    private List<String> favoriteRental;
     @DynamoDBAttribute(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
@@ -96,7 +96,7 @@ public class Profile {
     }
 
     public String createId(){
-        return IdGenerator.generateId();
+        return PawDorableServiceUtils.generateId();
     }
     @Override
     public boolean equals(Object o) {
