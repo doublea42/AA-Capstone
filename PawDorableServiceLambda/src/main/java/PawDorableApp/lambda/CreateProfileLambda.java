@@ -18,7 +18,6 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateProfileRequest> input, Context context) {
-        );
         return super.runActivity(
                 () -> {
                     CreateProfileRequest unauthenticatedRequest = input.fromBody(CreateProfileRequest.class);
