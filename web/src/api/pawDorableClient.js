@@ -9,7 +9,7 @@ export default class PawDorableClient extends BindingClass{
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout']; 
         this.bindClassMethods(methodsToBind, this);
 
-        this.Authenticator = new Authenticator();
+        this.authenticator = new Authenticator();
         this.props = props;
 
         axios.defaults.baseURL = process.env.API_BASE_URL;
