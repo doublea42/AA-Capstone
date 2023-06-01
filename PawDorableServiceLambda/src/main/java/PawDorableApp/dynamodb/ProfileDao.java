@@ -88,7 +88,7 @@ public class ProfileDao {
         selectedProfile.setAge(age);
         selectedProfile.setEmailAddress(email);
 
-
+        dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }
 

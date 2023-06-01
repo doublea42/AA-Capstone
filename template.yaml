@@ -240,8 +240,7 @@ Resources:
           Properties:
             Path: /Profile/create
             Method: post
-            Auth:
-              Authorizer: 'NONE'
+
 
 
 #  GetPlaylistLambda:
