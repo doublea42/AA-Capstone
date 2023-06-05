@@ -1,5 +1,6 @@
 package PawDorableApp.lambda;
 
+import PawDorableApp.dependency.DaggerServiceComponent;
 import PawDorableApp.dependency.ServiceComponent;
 import com.google.common.io.Closer;
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,8 @@ public class LambdaActivityRunner<TRequest, TResult> {
             TRequest request = requestSupplier.get();
             ServiceComponent serviceComponent = getService();
             TResult result = handleRequest.apply(request, serviceComponent);
+            log.info("-----------------> here");
+//            log.info("handle request error");
             return LambdaResponse.success(result);
         } catch (Exception e) {
             return LambdaResponse.error(e);
@@ -35,7 +38,7 @@ public class LambdaActivityRunner<TRequest, TResult> {
     private ServiceComponent getService() {
         log.info("getService");
         if (service == null) {
-//            service = DaggerServiceComponent.create();
+            service = DaggerServiceComponent.create();
         }
         return service;
     }

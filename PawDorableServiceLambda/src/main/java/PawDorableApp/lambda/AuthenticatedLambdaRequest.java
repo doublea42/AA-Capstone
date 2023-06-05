@@ -2,6 +2,8 @@ package PawDorableApp.lambda;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.function.Function;
 
 public class AuthenticatedLambdaRequest<T> extends LambdaRequest<T> {
 
+    private final Logger log = LogManager.getLogger();
     /**
      * Use the given converter to create an instance of T from the claims included in the request's JWT token.
      * @param converter Contains the conversion code

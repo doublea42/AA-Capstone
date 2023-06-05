@@ -3,9 +3,14 @@ package PawDorableApp.activity.request;
 import PawDorableApp.models.ProfileModel;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 @JsonDeserialize(builder = CreateProfileRequest.Builder.class)
 public class CreateProfileRequest {
+    private final Logger log = LogManager.getLogger();
+    // {"email": "jhon@notARealMail.com", "first": "Jhon", "last": "Smith", "age": "35"}
 
     private final String email;
     private final String first;
@@ -59,8 +64,8 @@ public class CreateProfileRequest {
     public String toString(String email, String first, String last, String age) {
         return "CreateProfileRequest{" +
                 "email= " + email + '\'' +
-                "firstName= " + first + '\'' +
-                "lastName= " + last + '\'' +
+                "first= " + first + '\'' +
+                "last= " + last + '\'' +
                 "age= " + age + '\'' +
                 '}';
     }
@@ -80,11 +85,11 @@ public class CreateProfileRequest {
             this.email = email;
             return this;
         }
-        public Builder withFirstName(String first){
+        public Builder withFirst(String first){
             this.first = first;
             return this;
         }
-        public Builder withLastName(String last){
+        public Builder withLast(String last){
             this.last = last;
             return this;
         }

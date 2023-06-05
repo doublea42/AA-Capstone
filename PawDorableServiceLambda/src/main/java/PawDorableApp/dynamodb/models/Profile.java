@@ -22,7 +22,7 @@ public class Profile {
     private List<String> rentalHistory;
     private List<String> favoriteRental;
 
-    @DynamoDBHashKey(attributeName = "ID")
+    @DynamoDBAttribute(attributeName = "ID")
     public String getID() {
         return ID;
     }
@@ -30,7 +30,7 @@ public class Profile {
         this.ID = ID;
     }
 
-    @DynamoDBAttribute(attributeName = "emailAddress")
+    @DynamoDBHashKey(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
     }

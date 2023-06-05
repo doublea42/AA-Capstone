@@ -37,7 +37,7 @@ public class CreateProfileActivity {
         }
 
         Profile newProfile = profileDao.saveProfile(true,"", createProfileRequest.getEmail(),
-                createProfileRequest.getFirst(), createProfileRequest.getLast(), Integer.parseInt(createProfileRequest.getAge()),
+                createProfileRequest.getFirst(), createProfileRequest.getLast(), createProfileRequest.getAge(),
                null, null, null, null);
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
