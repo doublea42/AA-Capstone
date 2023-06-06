@@ -1,0 +1,26 @@
+
+
+Create Profile
+
+curl -X POST http://127.0.0.1:3000/Profile/Create \
+-H 'Authorization: Bearer <token>' \
+-d '{<info>}'
+
+curl -X POST http://127.0.0.1:3000/Profile/Create \
+-H 'Authorization: Bearer eyJraWQiOiJnMmROa0VOaDk0V0hxeUtcL3BcL1lvb0s4Rm14YWJUXC9LSXhiRlloYjBRakVzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI4NDgyNWY3Ny1mNTRlLTRhZGItYTFjMS05NzU4ZWZlMDBkY2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl84MlB0eUZlZ1EiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiI2MzA1cjdoM3MxcHVwbjNrZjc4bnJlcmw1MSIsIm9yaWdpbl9qdGkiOiI3ZDk4ZGFkNC1lNzY5LTRmZjUtODJmYS1iZjc4YjkwNTZkZmIiLCJldmVudF9pZCI6IjIzYzMxYTE0LWVlYzctNDZmZS04ZmZkLWFhM2Y3OGU1NjdjYSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicGhvbmUgb3BlbmlkIHByb2ZpbGUgZW1haWwiLCJhdXRoX3RpbWUiOjE2ODU2NDQ4NDQsImV4cCI6MTY4NTY0ODQ0NCwiaWF0IjoxNjg1NjQ0ODQ0LCJqdGkiOiJkMzBmMjBhYy03OGM0LTQwNzgtOTUzMC05MzYyNzFlOGNkZWUiLCJ1c2VybmFtZSI6Ijg0ODI1Zjc3LWY1NGUtNGFkYi1hMWMxLTk3NThlZmUwMGRjYiJ9.KJH1QFGl8A9W5z7uwctxN2DaoN4J42gjQqCCJs3-NvqPZPhfsCwbKaKl3-NIO01YbYPkedN1ww5NJ-KF8YoM6wOdCOPIDNd1WsKyapQBfDuyBn9wATgi54ccVdTjdg3dK-GKK1c-pDoC-In7sl55J9INVwCGDlkavTNpCKW2K1uoHnoFbnj5odsHkT2pQ-Yv4xeCutZr7ybDg5F4uVbO7ATtJeoYeOtMmZd_H9TL3r_gb0xh1L9SdZ_bH_nrKx48Y0Kkv4gKgx00tIxiYgOwDFRRRz2LXLXdH9k9epMWKo1bM_d1_eyf3thbZjmbJ-OGEHi9qRdFLA4pTv7NmcRm6w' \
+-d '{"emailAddress": "JhonSmith@notRealMail.com"}'
+
+{ "error_message": "null" }%
+
+curl -X POST http://127.0.0.1:3000/Profile/Create \
+-H 'Authorization: Bearer eyJraWQiOiJnMmROa0VOaDk0V0hxeUtcL3BcL1lvb0s4Rm14YWJUXC9LSXhiRlloYjBRakVzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI4NDgyNWY3Ny1mNTRlLTRhZGItYTFjMS05NzU4ZWZlMDBkY2IiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0yLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMl84MlB0eUZlZ1EiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiI2MzA1cjdoM3MxcHVwbjNrZjc4bnJlcmw1MSIsIm9yaWdpbl9qdGkiOiI3ZDk4ZGFkNC1lNzY5LTRmZjUtODJmYS1iZjc4YjkwNTZkZmIiLCJldmVudF9pZCI6IjIzYzMxYTE0LWVlYzctNDZmZS04ZmZkLWFhM2Y3OGU1NjdjYSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicGhvbmUgb3BlbmlkIHByb2ZpbGUgZW1haWwiLCJhdXRoX3RpbWUiOjE2ODU2NDQ4NDQsImV4cCI6MTY4NTY0ODQ0NCwiaWF0IjoxNjg1NjQ0ODQ0LCJqdGkiOiJkMzBmMjBhYy03OGM0LTQwNzgtOTUzMC05MzYyNzFlOGNkZWUiLCJ1c2VybmFtZSI6Ijg0ODI1Zjc3LWY1NGUtNGFkYi1hMWMxLTk3NThlZmUwMGRjYiJ9.KJH1QFGl8A9W5z7uwctxN2DaoN4J42gjQqCCJs3-NvqPZPhfsCwbKaKl3-NIO01YbYPkedN1ww5NJ-KF8YoM6wOdCOPIDNd1WsKyapQBfDuyBn9wATgi54ccVdTjdg3dK-GKK1c-pDoC-In7sl55J9INVwCGDlkavTNpCKW2K1uoHnoFbnj5odsHkT2pQ-Yv4xeCutZr7ybDg5F4uVbO7ATtJeoYeOtMmZd_H9TL3r_gb0xh1L9SdZ_bH_nrKx48Y0Kkv4gKgx00tIxiYgOwDFRRRz2LXLXdH9k9epMWKo1bM_d1_eyf3thbZjmbJ-OGEHi9qRdFLA4pTv7NmcRm6w' \
+-d '{"emailAddress": "jhon@notARealMail.com", "firstName": "Jhon", "lastName": "Smith", "age": 35}'
+
+{ "error_message": "Unable to deserialize CreateProfileRequest from request body" }%
+
+random names
+{"emailAddress": "Dylan@notARealMail.com", "firstName": "Dylan", "lastName": "Kent", "age": 35}
+{"emailAddress": "Fatma@notARealMail.com", "firstName": "Fatma", "lastName": "Silva", "age": 19}
+{"emailAddress": "Amirah @notARealMail.com", "firstName": "Amirah ", "lastName": "Downs", "age": 91}
+{"emailAddress": "Pamela @notARealMail.com", "firstName": "Pamela ", "lastName": "Wells", "age": 63}
+{"emailAddress": "Tori @notARealMail.com", "firstName": "Tori ", "lastName": "Ward", "age": 35}

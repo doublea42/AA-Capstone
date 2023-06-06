@@ -7,6 +7,8 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,6 +18,7 @@ import java.util.List;
 @Singleton
 public class ProfileDao {
 
+    private final Logger log = LogManager.getLogger();
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
@@ -37,11 +40,13 @@ public class ProfileDao {
     }
 
     public Profile saveProfile(boolean isNew, String id, String email, String first, String last,
-                               int age, List<String> myPets, List<String> rental,
+                               String age, List<String> myPets, List<String> rental,
                                List<String> rentalHistory, List<String> favorite){
 
+
+//        log.info("valies in the input email {} first {} last {} age {}", email, first, last, age);
         if(email == null || email.isEmpty() || first == null || first.isEmpty()
-                || last == null || last.isEmpty() || this.ageCheck(age)){
+                || last == null || last.isEmpty() || !this.ageCheck(age)){
             metricsPublisher.addCount(MetricsConstants.UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT, 1);
             throw new ProfileInvalidValuesException("could not update Profile with current values");
         }
@@ -50,10 +55,11 @@ public class ProfileDao {
 
         if(isNew){
             selectedProfile.setID(PawDorableServiceUtils.generateId());
-            selectedProfile.setMyPets(new ArrayList<>(myPets));
-            selectedProfile.setRental(new ArrayList<>(rental));
-            selectedProfile.setRentalHistory(new ArrayList<>(rentalHistory));
-            selectedProfile.setFavoriteRental(new ArrayList<>(favorite));
+            selectedProfile.setMyPets(new ArrayList<String>());
+            selectedProfile.setRental(new ArrayList<String>());
+            selectedProfile.setRentalHistory(new ArrayList<String>());
+            selectedProfile.setFavoriteRental(new ArrayList<String>());
+
         }
         else{
 
@@ -82,18 +88,22 @@ public class ProfileDao {
                 tempProfile.setFavoriteRental(tempList);
             }
         }
+//        log.info("-----------> here");
+
 
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
-        selectedProfile.setAge(age);
+        selectedProfile.setAge(Integer.parseInt(age));
         selectedProfile.setEmailAddress(email);
 
+//        log.info("-----------> here profile {}", selectedProfile);
 
+        dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }
 
-    private Boolean ageCheck(int age){
-        return age > 18 || age < 100;
+    private Boolean ageCheck(String age){
+        return Integer.parseInt(age) > 18 || Integer.parseInt(age) < 100;
     }
 
 }

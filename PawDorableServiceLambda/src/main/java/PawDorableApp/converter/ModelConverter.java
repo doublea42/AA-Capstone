@@ -13,7 +13,7 @@ public class ModelConverter {
 
         return ProfileModel.builder()
                 .withID(profile.getID())
-                .withEmail(profile.getEmailAddress())
+                .withEmailAddress(profile.getEmailAddress())
                 .withFirstName(profile.getFirstName())
                 .withLastName(profile.getLastName())
                 .withAge(profile.getAge())

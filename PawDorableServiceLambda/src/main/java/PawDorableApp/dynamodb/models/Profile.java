@@ -22,17 +22,18 @@ public class Profile {
     private List<String> rentalHistory;
     private List<String> favoriteRental;
 
-    @DynamoDBHashKey(attributeName = "ID")
+    @DynamoDBHashKey(attributeName = "emailAddress")
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    @DynamoDBAttribute(attributeName = "ID")
     public String getID() {
         return ID;
     }
+
     public void setID(String ID) {
         this.ID = ID;
-    }
-
-    @DynamoDBAttribute(attributeName = "emailAddress")
-    public String getEmailAddress() {
-        return emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
