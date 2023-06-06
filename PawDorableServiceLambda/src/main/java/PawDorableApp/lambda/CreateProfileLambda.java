@@ -27,8 +27,8 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
 //                    log.info("--------------> lambda 2 request body <------------------", unauthenticatedRequest.toString());
                     return input.fromUserClaims(claims ->
                             CreateProfileRequest.builder()
-                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())
-//                                    .withEmail(claims.get("email"))
+//                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())
+                                    .withEmailAddress(claims.get("email"))
                                     .withFirstName(unauthenticatedRequest.getFirstName())
                                     .withLastName(unauthenticatedRequest.getLastName())
                                     .withAge(unauthenticatedRequest.getAge())
