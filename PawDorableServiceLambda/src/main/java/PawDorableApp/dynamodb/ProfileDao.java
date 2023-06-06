@@ -28,11 +28,11 @@ public class ProfileDao {
         this.metricsPublisher = metricsPublisher;
     }
 
-    public Profile getPofile(String profileID){
-        Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,profileID);
-        if(profileID == null){
+    public Profile getPofile(String email){
+        Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,email);
+        if(email == null){
             metricsPublisher.addCount(MetricsConstants.GETP_ROFILE_PROFILE_NOT_FOUND_COUNT, 1);
-            throw new ProfileNotFoundException("could not find Profile with id " + profileID);
+            throw new ProfileNotFoundException("could not find Profile with email " + email);
         }
 
         metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 0);

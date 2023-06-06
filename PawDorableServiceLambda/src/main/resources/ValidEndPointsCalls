@@ -1,0 +1,12 @@
+
+Create Profile
+
+curl -X POST http://127.0.0.1:3000/Profile/Create \
+-H 'Authorization: Bearer <token>' \
+-d '{"emailAddress": "", "firstName": " ", "lastName": "", "age": ""}'
+
+Get Profile
+
+curl -X GET http://127.0.0.1:3000/Profile/{emailAddress} \
+-H 'Authorization: Bearer <token>'
+
