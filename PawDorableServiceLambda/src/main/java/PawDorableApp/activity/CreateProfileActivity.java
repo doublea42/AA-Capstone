@@ -12,8 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateProfileActivity {
     private final Logger log = LogManager.getLogger();
@@ -28,16 +26,16 @@ public class CreateProfileActivity {
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest){
         log.info("Received CreateProfileRequest{}", createProfileRequest);
 
-        if(!PawDorableServiceUtils.isValidString(createProfileRequest.getFirst())
-                || !PawDorableServiceUtils.isValidString(createProfileRequest.getLast())){
+        if(!PawDorableServiceUtils.isValidString(createProfileRequest.getFirstName())
+                || !PawDorableServiceUtils.isValidString(createProfileRequest.getLastName())){
             throw new ProfileInvalidValuesException("Your Name cannot contain illegal characters");
         }
         if(!PawDorableServiceUtils.validAge(Integer.parseInt(createProfileRequest.getAge()))){
             throw new ProfileInvalidValuesException("Your age is out range");
         }
 
-        Profile newProfile = profileDao.saveProfile(true,"", createProfileRequest.getEmail(),
-                createProfileRequest.getFirst(), createProfileRequest.getLast(), createProfileRequest.getAge(),
+        Profile newProfile = profileDao.saveProfile(true,"", createProfileRequest.getEmailAddress(),
+                createProfileRequest.getFirstName(), createProfileRequest.getLastName(), createProfileRequest.getAge(),
                null, null, null, null);
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);

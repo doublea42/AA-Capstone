@@ -101,7 +101,7 @@ public class ProfileModel {
         private List<String> rentalHistory;
         private List<String> favoriteRental;
 
-        public Builder withEmail(String emailAddress){
+        public Builder withEmailAddress(String emailAddress){
             this.emailAddress = emailAddress;
             return this;
         }

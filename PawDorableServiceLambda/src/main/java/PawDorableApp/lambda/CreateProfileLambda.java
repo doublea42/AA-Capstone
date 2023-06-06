@@ -27,10 +27,10 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
 //                    log.info("--------------> lambda 2 request body <------------------", unauthenticatedRequest.toString());
                     return input.fromUserClaims(claims ->
                             CreateProfileRequest.builder()
-                                    .withEmail(unauthenticatedRequest.getEmail())
+                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())
 //                                    .withEmail(claims.get("email"))
-                                    .withFirst(unauthenticatedRequest.getFirst())
-                                    .withLast(unauthenticatedRequest.getLast())
+                                    .withFirstName(unauthenticatedRequest.getFirstName())
+                                    .withLastName(unauthenticatedRequest.getLastName())
                                     .withAge(unauthenticatedRequest.getAge())
                                     .build());
                 },

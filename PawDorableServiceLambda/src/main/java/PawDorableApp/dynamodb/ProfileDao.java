@@ -44,9 +44,9 @@ public class ProfileDao {
                                List<String> rentalHistory, List<String> favorite){
 
 
-        log.info("valies in the input email {} first {} last {} age {}", email, first, last, age);
+//        log.info("valies in the input email {} first {} last {} age {}", email, first, last, age);
         if(email == null || email.isEmpty() || first == null || first.isEmpty()
-                || last == null || last.isEmpty() || this.ageCheck(age)){
+                || last == null || last.isEmpty() || !this.ageCheck(age)){
             metricsPublisher.addCount(MetricsConstants.UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT, 1);
             throw new ProfileInvalidValuesException("could not update Profile with current values");
         }
@@ -55,10 +55,11 @@ public class ProfileDao {
 
         if(isNew){
             selectedProfile.setID(PawDorableServiceUtils.generateId());
-            selectedProfile.setMyPets(new ArrayList<>(myPets));
-            selectedProfile.setRental(new ArrayList<>(rental));
-            selectedProfile.setRentalHistory(new ArrayList<>(rentalHistory));
-            selectedProfile.setFavoriteRental(new ArrayList<>(favorite));
+            selectedProfile.setMyPets(new ArrayList<String>());
+            selectedProfile.setRental(new ArrayList<String>());
+            selectedProfile.setRentalHistory(new ArrayList<String>());
+            selectedProfile.setFavoriteRental(new ArrayList<String>());
+
         }
         else{
 
@@ -87,11 +88,15 @@ public class ProfileDao {
                 tempProfile.setFavoriteRental(tempList);
             }
         }
+//        log.info("-----------> here");
+
 
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
         selectedProfile.setAge(Integer.parseInt(age));
         selectedProfile.setEmailAddress(email);
+
+//        log.info("-----------> here profile {}", selectedProfile);
 
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;

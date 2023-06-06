@@ -1,6 +1,5 @@
 package PawDorableApp.activity.request;
 
-import PawDorableApp.models.ProfileModel;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -12,28 +11,28 @@ public class CreateProfileRequest {
     private final Logger log = LogManager.getLogger();
     // {"email": "jhon@notARealMail.com", "first": "Jhon", "last": "Smith", "age": "35"}
 
-    private final String email;
-    private final String first;
-    private final String last;
+    private final String emailAddress;
+    private final String firstName;
+    private final String lastName;
     private final String age;
 
     private CreateProfileRequest(String email, String first, String last, String age) {
-        this.email = email;
-        this.first = first;
-        this.last = last;
+        this.emailAddress = email;
+        this.firstName = first;
+        this.lastName = last;
         this.age = age;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public String getFirst() {
-        return first;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast() {
-        return last;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getAge() {
@@ -76,20 +75,20 @@ public class CreateProfileRequest {
     @JsonPOJOBuilder
     public static class Builder{
 
-        private String email;
+        private String emailAddress;
         private String first;
         private String last;
         private String age;
 
-        public Builder withEmail(String email){
-            this.email = email;
+        public Builder withEmailAddress(String email){
+            this.emailAddress = email;
             return this;
         }
-        public Builder withFirst(String first){
+        public Builder withFirstName(String first){
             this.first = first;
             return this;
         }
-        public Builder withLast(String last){
+        public Builder withLastName(String last){
             this.last = last;
             return this;
         }
@@ -99,7 +98,7 @@ public class CreateProfileRequest {
         }
 
         public CreateProfileRequest build(){
-            return new CreateProfileRequest(email,first,last,age);
+            return new CreateProfileRequest(emailAddress,first,last,age);
         }
 
     }
