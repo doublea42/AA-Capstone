@@ -44,7 +44,6 @@ public class ProfileDao {
                                List<String> rentalHistory, List<String> favorite){
 
 
-//        log.info("valies in the input email {} first {} last {} age {}", email, first, last, age);
         if(email == null || email.isEmpty() || first == null || first.isEmpty()
                 || last == null || last.isEmpty() || !this.ageCheck(age)){
             metricsPublisher.addCount(MetricsConstants.UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT, 1);

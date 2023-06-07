@@ -39,42 +39,25 @@ public class PetDao {
         return selectedPet;
     }
 
-    public Pet savePet(boolean isNew, String ID, Enum<KindOfPet> kindOfPet, String name,
-                       String ownerID, int age, Enum<Gender> gender,
+    public Pet savePet(boolean isNew, String ID, String kindOfPet, String name,
+                       String ownerEmail, String age, String gender,
                        List<String> newRentalHistory, boolean available){
 
-        Pet selectedPet = new Pet();
+       if(ID == null || ID.isEmpty()
+               || kindOfPet == null || kindOfPet.isEmpty()
+               || name == null || name.isEmpty()
+               || ownerEmail == null || ownerEmail.isEmpty()
+               || age == null || age.isEmpty()
+               || gender == null || gender.isEmpty()){
 
-        if(isNew){
-            selectedPet.setID(PawDorableServiceUtils.generateId());
-            selectedPet.setRentalHistory(new ArrayList<>(newRentalHistory));
-        }
+           metricsPublisher.addCount(MetricsConstants.UPDATEPET_INVALIDATTRIBUTEVALUE ,1);
+           throw new PetInvalidValuesException("could not update profile with current values");
 
+       }
 
-        if(name != null || !name.isEmpty() || kindOfPet != null
-                || ownerID !=null || !ownerID.isEmpty() || gender !=null){
+       
 
-            selectedPet.setKindOfPet(kindOfPet);
-            selectedPet.setName(name);
-            selectedPet.setOwnerID(ownerID);
-            selectedPet.setAge(age);
-            selectedPet.setGender(gender);
-            selectedPet.setAvailable(available);
-
-            if(!newRentalHistory.isEmpty()){
-                Pet oldPet = this.getPet(ID);
-                List<String> previosList = oldPet.getRentalHistory();
-                previosList.addAll(newRentalHistory);
-                selectedPet.setRentalHistory(previosList);
-            }
-        }
-        else{
-            metricsPublisher.addCount(MetricsConstants.UPDATEPET_INVALIDATTRIBUTEVALUE, 1);
-            throw new PetInvalidValuesException("could not update pet with current values");
-        }
-
-        this.dynamoDbMapper.save(selectedPet);
-        return selectedPet;
+        return null;
     }
 
 

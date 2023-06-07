@@ -16,7 +16,7 @@ public class Pet {
     private String ID;
     private Enum<KindOfPet> kindOfPet;
     private String name;
-    private String ownerID;
+    private String ownerEmail;
     private int age;
     private Enum<Gender> gender;
     private List<String> rentalHistory;
@@ -48,13 +48,13 @@ public class Pet {
         this.name = name;
     }
 
-    @DynamoDBAttribute(attributeName = "ownerID")
-    public String getOwnerID() {
-        return ownerID;
+    @DynamoDBAttribute(attributeName = "ownerEmail")
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
-    public void setOwnerID(String ownerID) {
-        this.ownerID = ownerID;
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 
     @DynamoDBAttribute(attributeName = "age")
@@ -104,12 +104,12 @@ public class Pet {
                 && Objects.equals(ID, pet.ID)
                 && Objects.equals(kindOfPet, pet.kindOfPet)
                 && Objects.equals(name, pet.name)
-                && Objects.equals(ownerID, pet.ownerID)
+                && Objects.equals(ownerEmail, pet.ownerEmail)
                 && Objects.equals(gender, pet.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, kindOfPet, name, ownerID, age, gender, available);
+        return Objects.hash(ID, kindOfPet, name, ownerEmail, age, gender, available);
     }
 }

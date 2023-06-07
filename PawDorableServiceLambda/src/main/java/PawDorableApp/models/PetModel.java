@@ -8,7 +8,7 @@ public class PetModel {
     private final String ID;
     private final Enum<KindOfPet> kindOfPet;
     private final String name;
-    private final String ownerID;
+    private final String ownerEmail;
     private final int age;
     private final Enum<Gender> gender;
     private final List<String> rentalHistory;
@@ -20,7 +20,7 @@ public class PetModel {
         this.ID = ID;
         this.kindOfPet = kindOfPet;
         this.name = name;
-        this.ownerID = ownerID;
+        this.ownerEmail = ownerID;
         this.age = age;
         this.gender = gender;
         this.rentalHistory = rentalHistory;
@@ -39,8 +39,8 @@ public class PetModel {
         return name;
     }
 
-    public String getOwnerID() {
-        return ownerID;
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
     public int getAge() {
@@ -69,14 +69,14 @@ public class PetModel {
                 && Objects.equals(ID, petModel.ID)
                 && Objects.equals(kindOfPet, petModel.kindOfPet)
                 && Objects.equals(name, petModel.name)
-                && Objects.equals(ownerID, petModel.ownerID)
+                && Objects.equals(ownerEmail, petModel.ownerEmail)
                 && Objects.equals(gender, petModel.gender)
                 && Objects.equals(rentalHistory, petModel.rentalHistory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, kindOfPet, name, ownerID, age, gender, rentalHistory, available);
+        return Objects.hash(ID, kindOfPet, name, ownerEmail, age, gender, rentalHistory, available);
     }
 
     public static Builder builder(){return  new Builder();}
@@ -85,7 +85,7 @@ public class PetModel {
         private String ID;
         private Enum<KindOfPet> kindOfPet;
         private String petName;
-        private String ownerID;
+        private String ownerEmail;
         private int age;
         private Enum<Gender> gender;
         private List<String> rentalHistory;
@@ -103,8 +103,8 @@ public class PetModel {
             this.petName = name;
             return this;
         }
-        public Builder withOwnerID(String owner){
-            this.ownerID = owner;
+        public Builder withOwnerEmail(String owner){
+            this.ownerEmail = owner;
             return this;
         }
         public Builder withAge(int age){
@@ -124,7 +124,7 @@ public class PetModel {
             return this;
         }
         public PetModel build(){
-            return new PetModel(ID,kindOfPet,petName,ownerID,age,gender,rentalHistory,available);
+            return new PetModel(ID,kindOfPet,petName,ownerEmail,age,gender,rentalHistory,available);
         }
     }
 

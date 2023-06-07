@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 @JsonDeserialize(builder = CreateProfileRequest.Builder.class)
 public class CreateProfileRequest {
     private final Logger log = LogManager.getLogger();
-    // {"email": "jhon@notARealMail.com", "first": "Jhon", "last": "Smith", "age": "35"}
 
     private final String emailAddress;
     private final String firstName;
