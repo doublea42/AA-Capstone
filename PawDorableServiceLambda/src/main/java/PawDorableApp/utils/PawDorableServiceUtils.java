@@ -1,5 +1,7 @@
 package PawDorableApp.utils;
 
+import PawDorableApp.models.Gender;
+import PawDorableApp.models.KindOfPet;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
@@ -28,6 +30,34 @@ public class PawDorableServiceUtils {
 
     public static boolean validAge(int age){
         return age > 17 && age < 100;
+    }
+
+    public static Enum<KindOfPet> petEnum(String UnknownPet){
+        if(UnknownPet.isEmpty()){
+            return null;
+        }
+        if (KindOfPet.CAT.toString().toLowerCase().equals(UnknownPet.toLowerCase())){
+            return KindOfPet.CAT;
+        }
+        else if(KindOfPet.DOG.toString().toLowerCase().equals(UnknownPet.toLowerCase())){
+            return KindOfPet.DOG;}
+        else{
+            return null;
+        }
+    }
+
+    public static Enum<Gender> genderEnum(String unknownGender){
+        if(unknownGender.isEmpty()){
+            return null;
+        }
+        if (Gender.MALE.toString().toLowerCase().equals(unknownGender.toLowerCase())){
+            return Gender.MALE;
+        }
+        else if(Gender.FEMALE.toString().toLowerCase().equals(unknownGender.toLowerCase())){
+            return Gender.FEMALE;}
+        else{
+            return null;
+        }
     }
 
 }

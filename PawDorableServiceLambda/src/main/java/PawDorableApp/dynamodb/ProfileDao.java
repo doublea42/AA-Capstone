@@ -62,30 +62,30 @@ public class ProfileDao {
         }
         else{
 
+            Profile tempProfile = this.getPofile(email);
+
             if(!myPets.isEmpty()){
-                Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getMyPets();
                 tempList.addAll(myPets);
-                tempProfile.setMyPets(tempList);
-            }else{selectedProfile.setMyPets(myPets);}
+                selectedProfile.setMyPets(tempList);
+            }else{selectedProfile.setMyPets(tempProfile.getMyPets());}
             if(!rental.isEmpty()){
-                Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getRental();
                 tempList.addAll(rental);
-                tempProfile.setRental(tempList);
-            }else{selectedProfile.setRental(rental);}
+                selectedProfile.setRental(tempList);
+            }else{selectedProfile.setRental(tempProfile.getRental());}
             if(!rentalHistory.isEmpty()){
-                Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getRentalHistory();
                 tempList.addAll(rentalHistory);
-                tempProfile.setRentalHistory(tempList);
-            }else{selectedProfile.setRentalHistory(rentalHistory);}
+                selectedProfile.setRentalHistory(tempList);
+            }else{selectedProfile.setRentalHistory(tempProfile.getRentalHistory());}
             if(!favorite.isEmpty()){
-                Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getFavoriteRental();
                 tempList.addAll(favorite);
-                tempProfile.setFavoriteRental(tempList);
-            }else{selectedProfile.setFavoriteRental(favorite);}
+                selectedProfile.setFavoriteRental(tempList);
+            }else{selectedProfile.setFavoriteRental(tempProfile.getFavoriteRental());}
+
+            selectedProfile.setID(id);
         }
 
 
