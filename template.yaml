@@ -279,7 +279,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /Profile/update
+            Path: /Profile/update/{emailAddress}
             Method: put
 
 

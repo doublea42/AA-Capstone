@@ -68,27 +68,26 @@ public class ProfileDao {
                 List<String> tempList = tempProfile.getMyPets();
                 tempList.addAll(myPets);
                 tempProfile.setMyPets(tempList);
-            }
+            }else{selectedProfile.setMyPets(myPets);}
             if(!rental.isEmpty()){
                 Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getRental();
                 tempList.addAll(rental);
                 tempProfile.setRental(tempList);
-            }
+            }else{selectedProfile.setRental(rental);}
             if(!rentalHistory.isEmpty()){
                 Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getRentalHistory();
                 tempList.addAll(rentalHistory);
                 tempProfile.setRentalHistory(tempList);
-            }
+            }else{selectedProfile.setRentalHistory(rentalHistory);}
             if(!favorite.isEmpty()){
                 Profile tempProfile = this.getPofile(id);
                 List<String> tempList = tempProfile.getFavoriteRental();
                 tempList.addAll(favorite);
                 tempProfile.setFavoriteRental(tempList);
-            }
+            }else{selectedProfile.setFavoriteRental(favorite);}
         }
-//        log.info("-----------> here");
 
 
         selectedProfile.setFirstName(first);
@@ -96,7 +95,6 @@ public class ProfileDao {
         selectedProfile.setAge(Integer.parseInt(age));
         selectedProfile.setEmailAddress(email);
 
-//        log.info("-----------> here profile {}", selectedProfile);
 
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
