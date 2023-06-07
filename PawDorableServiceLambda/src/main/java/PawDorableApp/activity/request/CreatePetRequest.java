@@ -10,15 +10,18 @@ public class CreatePetRequest {
     private final String age;
     private final String gender;
     private final String available;
+    private final String ownerEmail;
 
 
-    public CreatePetRequest(String name, String kind, String age, String gender, String available) {
+    public CreatePetRequest(String name, String kind, String age, String gender, String available, String ownerEmail) {
         this.name = name;
         this.kind = kind;
         this.age = age;
         this.gender = gender;
         this.available = available;
+        this.ownerEmail = ownerEmail;
     }
+
 
     public String getName() {
         return name;
@@ -40,6 +43,10 @@ public class CreatePetRequest {
         return available;
     }
 
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
     @Override
     public String toString() {
         return "CreatePetRequest{" +
@@ -47,7 +54,8 @@ public class CreatePetRequest {
                 ", kind='" + kind + '\'' +
                 ", age='" + age + '\'' +
                 ", gender='" + gender + '\'' +
-                ", abailiable='" + available + '\'' +
+                ", available='" + available + '\'' +
+                ", ownerEmail='" + ownerEmail + '\'' +
                 '}';
     }
 
@@ -56,6 +64,7 @@ public class CreatePetRequest {
     @JsonPOJOBuilder
     public static class Builder{
         private String name;
+        private String ownerEmail;
         private String kind;
         private String age;
         private String gender;
@@ -64,6 +73,10 @@ public class CreatePetRequest {
 
         public Builder withName(String name){
             this.name = name;
+            return this;
+        }
+        public Builder withOwnerEmail(String email){
+            this.ownerEmail = email;
             return this;
         }
         public Builder withKind(String kind){
@@ -83,7 +96,7 @@ public class CreatePetRequest {
             return this;
         }
 
-        public CreatePetRequest build() {return new CreatePetRequest(name,kind,age,gender,available);}
+        public CreatePetRequest build() {return new CreatePetRequest(name,ownerEmail,kind,age,gender,available);}
 
     }
 }
