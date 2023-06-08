@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonDeserialize(builder = CreatePetRequest.Builder.class)
 public class CreatePetRequest {
     private final String name;
-    private final String kind;
+    private final String kindOfPet;
     private final String age;
     private final String gender;
     private final String available;
@@ -15,20 +15,19 @@ public class CreatePetRequest {
 
     public CreatePetRequest(String name, String kind, String age, String gender, String available, String ownerEmail) {
         this.name = name;
-        this.kind = kind;
+        this.kindOfPet = kind;
         this.age = age;
         this.gender = gender;
         this.available = available;
         this.ownerEmail = ownerEmail;
     }
 
-
     public String getName() {
         return name;
     }
 
     public String getKind() {
-        return kind;
+        return kindOfPet;
     }
 
     public String getAge() {
@@ -51,7 +50,7 @@ public class CreatePetRequest {
     public String toString() {
         return "CreatePetRequest{" +
                 "name='" + name + '\'' +
-                ", kind='" + kind + '\'' +
+                ", kind='" + kindOfPet + '\'' +
                 ", age='" + age + '\'' +
                 ", gender='" + gender + '\'' +
                 ", available='" + available + '\'' +
@@ -63,12 +62,12 @@ public class CreatePetRequest {
 
     @JsonPOJOBuilder
     public static class Builder{
-        private String name;
-        private String ownerEmail;
-        private String kind;
-        private String age;
-        private String gender;
-        private String available;
+        private  String name;
+        private  String kindOfPet;
+        private  String age;
+        private  String gender;
+        private  String available;
+        private  String ownerEmail;
 
 
         public Builder withName(String name){
@@ -79,8 +78,8 @@ public class CreatePetRequest {
             this.ownerEmail = email;
             return this;
         }
-        public Builder withKind(String kind){
-            this.kind = kind;
+        public Builder withKindOfPet(String kind){
+            this.kindOfPet = kind;
             return this;
         }
         public Builder withAge(String age){
@@ -96,7 +95,7 @@ public class CreatePetRequest {
             return this;
         }
 
-        public CreatePetRequest build() {return new CreatePetRequest(name,ownerEmail,kind,age,gender,available);}
+        public CreatePetRequest build() {return new CreatePetRequest(name,kindOfPet,age,gender,available,ownerEmail);}
 
     }
 }

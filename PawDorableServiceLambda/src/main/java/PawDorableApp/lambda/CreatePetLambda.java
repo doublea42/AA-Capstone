@@ -4,9 +4,12 @@ import PawDorableApp.activity.request.CreatePetRequest;
 import PawDorableApp.activity.results.CreatePetResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, CreatePetResult>
         implements RequestHandler<AuthenticatedLambdaRequest<CreatePetRequest>, LambdaResponse> {
+    private final Logger log = LogManager.getLogger();
     /**
      * Handles a Lambda Function request
      *
@@ -19,12 +22,14 @@ public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, Crea
         return super.runActivity(
                 () -> {
                     CreatePetRequest unauthenticatedRequest = input.fromBody(CreatePetRequest.class);
+//                    log.info("here <------------------------------------");
+
                     return input.fromUserClaims(claims ->
                             CreatePetRequest.builder()
 //                                    .withOwnerEmail(unauthenticatedRequest.getOwnerEmail())
                                     .withOwnerEmail(claims.get("email"))
                                     .withName(unauthenticatedRequest.getName())
-                                    .withKind(unauthenticatedRequest.getKind())
+                                    .withKindOfPet(unauthenticatedRequest.getKind())
                                     .withAge(unauthenticatedRequest.getAge())
                                     .withGender(unauthenticatedRequest.getGender())
                                     .withAvailable(unauthenticatedRequest.getAvailable())

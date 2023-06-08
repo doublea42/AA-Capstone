@@ -35,22 +35,28 @@ public class CreatePetActivity {
         if(!PawDorableServiceUtils.isValidString(createPetRequest.getName())){
             throw new PetInvalidValuesException("Your Name cannot contain illegal characters");
         }
-
+//        log.info("here <-----------------------{}-----------", createPetRequest);
         Pet newPet = petDao.savePet(true,"", createPetRequest.getKind(), createPetRequest.getName(),
                 createPetRequest.getOwnerEmail(), createPetRequest.getAge(), createPetRequest.getGender(),
                 null, Boolean.parseBoolean(createPetRequest.getAvailable()));
 
+
+        log.info("here <------------------------------------");
         Profile tempPetOwner = profileDao.getPofile(createPetRequest.getOwnerEmail());
+        log.info("here <------------------{}------------------", tempPetOwner);
 
         List<String> newPetList = new ArrayList<>();
         newPetList.add(newPet.getID());
-
+        log.info("here <------------------------------------");
         profileDao.saveProfile(false, tempPetOwner.getID(), tempPetOwner.getEmailAddress(),
                 tempPetOwner.getFirstName(), tempPetOwner.getLastName(), String.valueOf(tempPetOwner.getAge()),
                 newPetList, tempPetOwner.getRental(),
                 tempPetOwner.getRentalHistory(), tempPetOwner.getFavoriteRental());
 
         PetModel petModel = new ModelConverter().toPetModel(newPet);
+        log.info("here <------------------------------------");
+
+
         return CreatePetResult.builder().withPet(petModel).build();
     }
 

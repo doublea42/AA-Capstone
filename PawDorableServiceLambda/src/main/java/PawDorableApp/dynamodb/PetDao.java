@@ -1,7 +1,6 @@
 package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Pet;
-import PawDorableApp.dynamodb.models.Profile;
 import PawDorableApp.exceptions.PetInvalidValuesException;
 import PawDorableApp.exceptions.PetNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
@@ -10,6 +9,8 @@ import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,7 +20,7 @@ import java.util.List;
 @Singleton
 public class PetDao {
 
-//    private final Logger log = LogManager.getLogger();
+    private final Logger log = LogManager.getLogger();
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
@@ -47,15 +48,19 @@ public class PetDao {
        Enum<KindOfPet> kind = PawDorableServiceUtils.petEnum(kindOfPet);
        Enum<Gender> petsGender = PawDorableServiceUtils.genderEnum(gender);
 
-        if(ID == null || ID.isEmpty()
-               || kind == null
+//        log.info("here <---------{}---------{}------------------",kind, petsGender);
+
+
+        if(kind == null
                || name == null || name.isEmpty()
                || ownerEmail == null || ownerEmail.isEmpty()
                || age == null || age.isEmpty()
                || petsGender == null){
 
+
+
            metricsPublisher.addCount(MetricsConstants.UPDATEPET_INVALIDATTRIBUTEVALUE ,1);
-           throw new PetInvalidValuesException("could not update profile with current values");
+           throw new PetInvalidValuesException("could not update pet with current values");
 
        }
 
@@ -82,9 +87,11 @@ public class PetDao {
         selectedPet.setGender(petsGender);
         selectedPet.setAvailable(available);
 
-
+        log.info("selected pet --------------------> {}", selectedPet);
 
         dynamoDbMapper.save(selectedPet);
+        log.info("here <------------------------------------");
+
         return selectedPet;
     }
 
