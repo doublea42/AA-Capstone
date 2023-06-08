@@ -444,6 +444,41 @@ Resources:
       BillingMode: "PAY_PER_REQUEST"
       TableName: "profile"
 
+  PetTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "pet"
+
+  RentalHistoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "rentalHistory"
+
+  ActiveRentalTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "activeRental"
 
 #  PlaylistsTable:
 #    Type: AWS::DynamoDB::Table
