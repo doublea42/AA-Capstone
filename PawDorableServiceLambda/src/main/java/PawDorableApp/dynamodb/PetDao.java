@@ -1,6 +1,7 @@
 package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Pet;
+import PawDorableApp.dynamodb.models.Profile;
 import PawDorableApp.exceptions.PetInvalidValuesException;
 import PawDorableApp.exceptions.PetNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
@@ -74,12 +75,12 @@ public class PetDao {
            selectedPet.setID(ID);
        }
 
-       selectedPet.setKindOfPet(kind);
-       selectedPet.setName(name);
-       selectedPet.setOwnerEmail(ownerEmail);
-       selectedPet.setAge(Integer.parseInt(age));
-       selectedPet.setGender(petsGender);
-       selectedPet.setAvailable(available);
+        selectedPet.setOwnerEmail(ownerEmail);
+        selectedPet.setKindOfPet(kind);
+        selectedPet.setName(name);
+        selectedPet.setAge(Integer.parseInt(age));
+        selectedPet.setGender(petsGender);
+        selectedPet.setAvailable(available);
 
 
 

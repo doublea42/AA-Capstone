@@ -22,9 +22,7 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateProfileRequest> input, Context context) {
         return super.runActivity(
                 () -> {
-//                    log.info("--------------> lambda 1{} <------------------", input);
                     CreateProfileRequest unauthenticatedRequest = input.fromBody(CreateProfileRequest.class);
-//                    log.info("--------------> lambda 2 request body <------------------", unauthenticatedRequest.toString());
                     return input.fromUserClaims(claims ->
                             CreateProfileRequest.builder()
 //                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())

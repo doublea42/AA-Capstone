@@ -1,5 +1,6 @@
 package PawDorableApp.dependency;
 
+import PawDorableApp.activity.CreatePetActivity;
 import PawDorableApp.activity.CreateProfileActivity;
 import PawDorableApp.activity.GetProfileActivity;
 import PawDorableApp.activity.UpdateProfileActivity;
@@ -13,4 +14,5 @@ public interface ServiceComponent {
     CreateProfileActivity provideCreateProfileActivity();
     GetProfileActivity provideGetProfileActivity();
     UpdateProfileActivity provideUpdateProfileActivity();
+    CreatePetActivity provideCreatePetActivity();
 }

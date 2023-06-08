@@ -1,6 +1,5 @@
 package PawDorableApp.lambda;
 
-import PawDorableApp.activity.request.GetProfileRequest;
 import PawDorableApp.activity.request.UpdateProfileRequest;
 import PawDorableApp.activity.results.UpdateProfileResult;
 import com.amazonaws.services.lambda.runtime.Context;

@@ -16,6 +16,22 @@ public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, Crea
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreatePetRequest> input, Context context) {
-        return null;
+        return super.runActivity(
+                () -> {
+                    CreatePetRequest unauthenticatedRequest = input.fromBody(CreatePetRequest.class);
+                    return input.fromUserClaims(claims ->
+                            CreatePetRequest.builder()
+//                                    .withOwnerEmail(unauthenticatedRequest.getOwnerEmail())
+                                    .withOwnerEmail(claims.get("email"))
+                                    .withName(unauthenticatedRequest.getName())
+                                    .withKind(unauthenticatedRequest.getKind())
+                                    .withAge(unauthenticatedRequest.getAge())
+                                    .withGender(unauthenticatedRequest.getGender())
+                                    .withAvailable(unauthenticatedRequest.getAvailable())
+                                    .build());
+                },
+                (request,serviceComponent) ->
+                        serviceComponent.provideCreatePetActivity().handleRequest(request)
+        );
     }
 }

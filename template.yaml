@@ -279,10 +279,28 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path: /Profile/update/{emailAddress}
+            Path: /profile/update/{emailAddress}
             Method: put
 
-
+  CreatePetLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PawDorableServiceLambda
+      Handler: PawDorableApp.lambda.CreatePetLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /pet/create
+            Method: post
 
 #  GetPlaylistLambda:
 #    Type: AWS::Serverless::Function
