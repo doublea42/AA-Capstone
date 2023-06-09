@@ -10,16 +10,17 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @DynamoDBTable(tableName = "pet")
 public class Pet {
     private String ID;
-    private Enum<KindOfPet> kindOfPet;
+    private String kindOfPet;
     private String name;
     private String ownerEmail;
     private int age;
-    private Enum<Gender> gender;
-    private List<String> rentalHistory;
+    private String gender;
+    private Set<String> rentalHistory;
     private boolean available;
 
     @DynamoDBHashKey(attributeName = "ID")
@@ -31,11 +32,11 @@ public class Pet {
         this.ID = ID;
     }
     @DynamoDBAttribute(attributeName = "kindOfPet")
-    public Enum<KindOfPet> getKindOfPet() {
+    public String getKindOfPet() {
         return kindOfPet;
     }
 
-    public void setKindOfPet(Enum<KindOfPet> kindOfPet) {
+    public void setKindOfPet(String kindOfPet) {
         this.kindOfPet = kindOfPet;
     }
 
@@ -67,20 +68,20 @@ public class Pet {
     }
 
     @DynamoDBAttribute(attributeName = "gender")
-    public Enum<Gender> getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Enum<Gender> gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
     @DynamoDBAttribute(attributeName = "rentalHistory")
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
-    public void setRentalHistory(List<String> rentalHistory) {
+    public void setRentalHistory(Set<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
 
