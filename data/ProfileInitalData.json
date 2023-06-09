@@ -7,19 +7,7 @@
           "ID": {"S": "HEYH6"},
           "firstName": {"S": "Jhon"},
           "lastName": {"S": "Smith"},
-          "age": {"S": "35"},
-          "myPets": {
-            "SS": [""]
-          },
-          "rental ": {
-            "SS": [""]
-          },
-          "rentalHistory": {
-            "SS": [""]
-          },
-          "favoriteRental": {
-            "SS": [""]
-          }
+          "age": {"N": "35"}
         }
       }
     },
@@ -30,19 +18,7 @@
           "ID": {"S": "356ASD"},
           "firstName": {"S": "Dylan"},
           "lastName": {"S": "Kent"},
-          "age": {"S": "35"},
-          "myPets": {
-            "SS": [""]
-          },
-          "rental ": {
-            "SS": [""]
-          },
-          "rentalHistory": {
-            "SS": [""]
-          },
-          "favoriteRental": {
-            "SS": [""]
-          }
+          "age": {"N": "35"}
         }
       }
     },
@@ -53,19 +29,7 @@
           "ID": {"S": "OS42S"},
           "firstName": {"S": "Tori"},
           "lastName": {"S": "Ward"},
-          "age": {"S": "35"},
-          "myPets": {
-            "SS": [""]
-          },
-          "rental ": {
-            "SS": [""]
-          },
-          "rentalHistory": {
-            "SS": [""]
-          },
-          "favoriteRental": {
-            "SS": [""]
-          }
+          "age": {"N": "35"}
         }
       }
     },
@@ -76,19 +40,7 @@
           "ID": {"S": "6SZM5"},
           "firstName": {"S": "Pamela"},
           "lastName": {"S": "Wells"},
-          "age": {"S": "63"},
-          "myPets": {
-            "SS": [""]
-          },
-          "rental ": {
-            "SS": [""]
-          },
-          "rentalHistory": {
-            "SS": [""]
-          },
-          "favoriteRental": {
-            "SS": [""]
-          }
+          "age": {"N": "63"}
         }
       }
     },
@@ -99,19 +51,7 @@
           "ID": {"S": "S4JRC"},
           "firstName": {"S": "Amirah "},
           "lastName": {"S": "Downs"},
-          "age": {"S": "91"},
-          "myPets": {
-            "SS": [""]
-          },
-          "rental ": {
-            "SS": [""]
-          },
-          "rentalHistory": {
-            "SS": [""]
-          },
-          "favoriteRental": {
-            "SS": [""]
-          }
+          "age": {"N": "91"}
         }
       }
     }

@@ -54,8 +54,7 @@ public class PetDao {
 //        log.info("here <---------{}---------{}------------------",kind, petsGender);
 
 
-        if(kind == null
-               || name == null || name.isEmpty()
+        if(kind == null || name == null || name.isEmpty()
                || ownerEmail == null || ownerEmail.isEmpty()
                || age == null || age.isEmpty()
                || petsGender == null){
@@ -71,16 +70,25 @@ public class PetDao {
 
        if(isNew){
            selectedPet.setID(PawDorableServiceUtils.generateId());
-           selectedPet.setRentalHistory(new HashSet<>());
+//           selectedPet.setRentalHistory(new HashSet<>());
        }
        else{
            Pet tempPet = this.getPet(ID);
+
            if(!rentalHistory.isEmpty()){
+               if(tempPet.getRentalHistory() == null){
+                   selectedPet.setRentalHistory(rentalHistory);
+               }
                Set<String> history = tempPet.getRentalHistory();
                history.addAll(rentalHistory);
                selectedPet.setRentalHistory(history);
-           }else{selectedPet.setRentalHistory(selectedPet.getRentalHistory());}
-           selectedPet.setID(ID);
+           }
+           else{
+               if(tempPet.getRentalHistory() != null){
+                   selectedPet.setRentalHistory(tempPet.getRentalHistory());
+               }
+               selectedPet.setID(ID);
+           }
        }
 
         selectedPet.setOwnerEmail(ownerEmail);

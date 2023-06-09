@@ -56,38 +56,68 @@ public class ProfileDao {
 
         if(isNew){
             selectedProfile.setID(PawDorableServiceUtils.generateId());
-            selectedProfile.setMyPets(new HashSet<>());
-            selectedProfile.setRental(new HashSet<>());
-            selectedProfile.setRentalHistory(new HashSet<>());
-            selectedProfile.setFavoriteRental(new HashSet<>());
-
         }
         else{
 
             Profile tempProfile = this.getPofile(email);
 
             if(!myPets.isEmpty()){
-                Set<String> tempList = tempProfile.getMyPets();
-                tempList.addAll(myPets);
-                selectedProfile.setMyPets(tempList);
-            }else{selectedProfile.setMyPets(tempProfile.getMyPets());}
+                if(tempProfile.getMyPets() == null){
+                    selectedProfile.setMyPets(myPets);
+                }
+                else{
+                    Set<String> tempList = tempProfile.getMyPets();
+                    tempList.addAll(myPets);
+                    selectedProfile.setMyPets(tempList);
+                }
+            }else{
+                if(tempProfile.getMyPets() != null){
+                    selectedProfile.setMyPets(tempProfile.getMyPets());
+                }
+            }
             if(!rental.isEmpty()){
-                Set<String> tempList = tempProfile.getRental();
-                tempList.addAll(rental);
-                selectedProfile.setRental(tempList);
-            }else{selectedProfile.setRental(tempProfile.getRental());}
+                if(tempProfile.getRental() == null){
+                    selectedProfile.setRental(rental);
+                }
+                else{
+                    Set<String> tempList = tempProfile.getRental();
+                    tempList.addAll(rental);
+                    selectedProfile.setRental(tempList);
+                }
+            }else{
+                if(tempProfile.getRental() != null){
+                    selectedProfile.setRental(tempProfile.getRental());
+                }
+            }
             if(!rentalHistory.isEmpty()){
-                Set<String> tempList = tempProfile.getRentalHistory();
-                tempList.addAll(rentalHistory);
-                selectedProfile.setRentalHistory(tempList);
-            }else{selectedProfile.setRentalHistory(tempProfile.getRentalHistory());}
+                if(tempProfile.getRentalHistory() == null){
+                    selectedProfile.setRentalHistory(rentalHistory);
+                }
+                else{
+                    Set<String> tempList = tempProfile.getRentalHistory();
+                    tempList.addAll(rentalHistory);
+                    selectedProfile.setRentalHistory(tempList);
+                }
+            }else{
+                if(tempProfile.getRentalHistory() != null){
+                    selectedProfile.setRentalHistory(tempProfile.getRentalHistory());
+                }
+            }
             if(!favorite.isEmpty()){
-                Set<String> tempList = tempProfile.getFavoriteRental();
-                tempList.addAll(favorite);
-                selectedProfile.setFavoriteRental(tempList);
-            }else{selectedProfile.setFavoriteRental(tempProfile.getFavoriteRental());}
-
-            selectedProfile.setID(id);
+                if(tempProfile.getFavoriteRental() == null){
+                    selectedProfile.setFavoriteRental(favorite);
+                }
+                else{
+                    Set<String> tempList = tempProfile.getFavoriteRental();
+                    tempList.addAll(favorite);
+                    selectedProfile.setFavoriteRental(tempList);
+                }
+            }else{
+                if(tempProfile.getFavoriteRental() != null){
+                    selectedProfile.setFavoriteRental(tempProfile.getFavoriteRental());
+                }
+            }
+           selectedProfile.setID(id);
         }
 
 

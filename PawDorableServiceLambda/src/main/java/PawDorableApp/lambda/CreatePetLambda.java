@@ -35,8 +35,14 @@ public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, Crea
                                     .withAvailable(unauthenticatedRequest.getAvailable())
                                     .build());
                 },
-                (request,serviceComponent) ->
-                        serviceComponent.provideCreatePetActivity().handleRequest(request)
+                (request,serviceComponent) ->{
+                    try{
+                        return serviceComponent.provideCreatePetActivity().handleRequest(request);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        throw e;
+                    }
+                }
         );
     }
 }
