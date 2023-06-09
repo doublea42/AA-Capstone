@@ -36,7 +36,7 @@ public class CreatePetActivity {
             throw new PetInvalidValuesException("Your Name cannot contain illegal characters");
         }
 //        log.info("here <-----------------------{}-----------", createPetRequest);
-        Pet newPet = petDao.savePet(true,"", createPetRequest.getKind(), createPetRequest.getName(),
+        Pet newPet = petDao.savePet(true,"", createPetRequest.getKindOfPet(), createPetRequest.getName(),
                 createPetRequest.getOwnerEmail(), createPetRequest.getAge(), createPetRequest.getGender(),
                 null, Boolean.parseBoolean(createPetRequest.getAvailable()));
 

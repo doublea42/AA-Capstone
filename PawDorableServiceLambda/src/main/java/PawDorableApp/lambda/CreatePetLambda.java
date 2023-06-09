@@ -29,7 +29,7 @@ public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, Crea
 //                                    .withOwnerEmail(unauthenticatedRequest.getOwnerEmail())
                                     .withOwnerEmail(claims.get("email"))
                                     .withName(unauthenticatedRequest.getName())
-                                    .withKindOfPet(unauthenticatedRequest.getKind())
+                                    .withKindOfPet(unauthenticatedRequest.getKindOfPet())
                                     .withAge(unauthenticatedRequest.getAge())
                                     .withGender(unauthenticatedRequest.getGender())
                                     .withAvailable(unauthenticatedRequest.getAvailable())

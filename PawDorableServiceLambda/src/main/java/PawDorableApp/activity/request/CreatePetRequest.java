@@ -26,7 +26,7 @@ public class CreatePetRequest {
         return name;
     }
 
-    public String getKind() {
+    public String getKindOfPet() {
         return kindOfPet;
     }
 
@@ -50,7 +50,7 @@ public class CreatePetRequest {
     public String toString() {
         return "CreatePetRequest{" +
                 "name='" + name + '\'' +
-                ", kind='" + kindOfPet + '\'' +
+                ", kindOfPet='" + kindOfPet + '\'' +
                 ", age='" + age + '\'' +
                 ", gender='" + gender + '\'' +
                 ", available='" + available + '\'' +
