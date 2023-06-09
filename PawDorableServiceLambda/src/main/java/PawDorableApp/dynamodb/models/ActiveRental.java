@@ -7,11 +7,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @DynamoDBTable(tableName = "ActiveRental")
 public class ActiveRental {
     private String rentalID;
-    private List<String> rentalHistory;
+    private Set<String> rentalHistory;
 
     @DynamoDBHashKey(attributeName = "rentalID")
     public String getRentalID() {
@@ -19,7 +20,7 @@ public class ActiveRental {
     }
 
     @DynamoDBAttribute(attributeName = "rentalHistory")
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
@@ -27,7 +28,7 @@ public class ActiveRental {
         this.rentalID = rentalID;
     }
 
-    public void setRentalHistory(List<String> rentalHistory) {
+    public void setRentalHistory(Set<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
 

@@ -13,7 +13,9 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Singleton
 public class ProfileDao {
@@ -40,8 +42,8 @@ public class ProfileDao {
     }
 
     public Profile saveProfile(boolean isNew, String id, String email, String first, String last,
-                               String age, List<String> myPets, List<String> rental,
-                               List<String> rentalHistory, List<String> favorite){
+                               String age, Set<String> myPets, Set<String> rental,
+                               Set<String> rentalHistory, Set<String> favorite){
 
 
         if(email == null || email.isEmpty() || first == null || first.isEmpty()
@@ -54,10 +56,10 @@ public class ProfileDao {
 
         if(isNew){
             selectedProfile.setID(PawDorableServiceUtils.generateId());
-            selectedProfile.setMyPets(new ArrayList<String>());
-            selectedProfile.setRental(new ArrayList<String>());
-            selectedProfile.setRentalHistory(new ArrayList<String>());
-            selectedProfile.setFavoriteRental(new ArrayList<String>());
+            selectedProfile.setMyPets(new HashSet<>());
+            selectedProfile.setRental(new HashSet<>());
+            selectedProfile.setRentalHistory(new HashSet<>());
+            selectedProfile.setFavoriteRental(new HashSet<>());
 
         }
         else{
@@ -65,22 +67,22 @@ public class ProfileDao {
             Profile tempProfile = this.getPofile(email);
 
             if(!myPets.isEmpty()){
-                List<String> tempList = tempProfile.getMyPets();
+                Set<String> tempList = tempProfile.getMyPets();
                 tempList.addAll(myPets);
                 selectedProfile.setMyPets(tempList);
             }else{selectedProfile.setMyPets(tempProfile.getMyPets());}
             if(!rental.isEmpty()){
-                List<String> tempList = tempProfile.getRental();
+                Set<String> tempList = tempProfile.getRental();
                 tempList.addAll(rental);
                 selectedProfile.setRental(tempList);
             }else{selectedProfile.setRental(tempProfile.getRental());}
             if(!rentalHistory.isEmpty()){
-                List<String> tempList = tempProfile.getRentalHistory();
+                Set<String> tempList = tempProfile.getRentalHistory();
                 tempList.addAll(rentalHistory);
                 selectedProfile.setRentalHistory(tempList);
             }else{selectedProfile.setRentalHistory(tempProfile.getRentalHistory());}
             if(!favorite.isEmpty()){
-                List<String> tempList = tempProfile.getFavoriteRental();
+                Set<String> tempList = tempProfile.getFavoriteRental();
                 tempList.addAll(favorite);
                 selectedProfile.setFavoriteRental(tempList);
             }else{selectedProfile.setFavoriteRental(tempProfile.getFavoriteRental());}

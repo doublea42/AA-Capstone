@@ -2,12 +2,13 @@ package PawDorableApp.models;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class ActiveRentalModel {
     private final String rentalID;
-    private final List<String> rentalHistory;
+    private final Set<String> rentalHistory;
 
-    public ActiveRentalModel(String rentalID, List<String> rentalHistory) {
+    public ActiveRentalModel(String rentalID, Set<String> rentalHistory) {
         this.rentalID = rentalID;
         this.rentalHistory = rentalHistory;
     }
@@ -16,7 +17,7 @@ public class ActiveRentalModel {
         return rentalID;
     }
 
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
@@ -40,13 +41,13 @@ public class ActiveRentalModel {
 
     public static class Builder{
         private String rentalID;
-        private List<String> rentalHistory;
+        private Set<String> rentalHistory;
 
         public Builder withRentalID(String id){
             this.rentalID = id;
             return this;
         }
-        public Builder withRentalHistory(List<String> rentalHistory){
+        public Builder withRentalHistory(Set<String> rentalHistory){
             this.rentalHistory = rentalHistory;
             return this;
         }

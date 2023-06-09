@@ -14,8 +14,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CreatePetActivity {
     private final Logger log = LogManager.getLogger();
@@ -45,7 +45,7 @@ public class CreatePetActivity {
         Profile tempPetOwner = profileDao.getPofile(createPetRequest.getOwnerEmail());
         log.info("here <------------------{}------------------", tempPetOwner);
 
-        List<String> newPetList = new ArrayList<>();
+        Set<String> newPetList = new HashSet<>();
         newPetList.add(newPet.getID());
         log.info("here <------------------------------------");
         profileDao.saveProfile(false, tempPetOwner.getID(), tempPetOwner.getEmailAddress(),

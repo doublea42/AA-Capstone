@@ -15,7 +15,9 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Singleton
 public class PetDao {
@@ -43,10 +45,11 @@ public class PetDao {
 
     public Pet savePet(boolean isNew, String ID, String kindOfPet, String name,
                        String ownerEmail, String age, String gender,
-                       List<String> rentalHistory, boolean available){
+                       Set<String> rentalHistory, boolean available){
 
-       Enum<KindOfPet> kind = PawDorableServiceUtils.petEnum(kindOfPet);
-       Enum<Gender> petsGender = PawDorableServiceUtils.genderEnum(gender);
+        KindOfPet kind = PawDorableServiceUtils.petEnum(kindOfPet);
+        Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
+
 
 //        log.info("here <---------{}---------{}------------------",kind, petsGender);
 
@@ -68,12 +71,12 @@ public class PetDao {
 
        if(isNew){
            selectedPet.setID(PawDorableServiceUtils.generateId());
-           selectedPet.setRentalHistory(new ArrayList<String>());
+           selectedPet.setRentalHistory(new HashSet<>());
        }
        else{
            Pet tempPet = this.getPet(ID);
            if(!rentalHistory.isEmpty()){
-               List<String> history = tempPet.getRentalHistory();
+               Set<String> history = tempPet.getRentalHistory();
                history.addAll(rentalHistory);
                selectedPet.setRentalHistory(history);
            }else{selectedPet.setRentalHistory(selectedPet.getRentalHistory());}

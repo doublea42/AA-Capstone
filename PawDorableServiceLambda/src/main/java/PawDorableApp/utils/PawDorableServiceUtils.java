@@ -32,7 +32,7 @@ public class PawDorableServiceUtils {
         return age > 17 && age < 100;
     }
 
-    public static Enum<KindOfPet> petEnum(String UnknownPet){
+    public static KindOfPet petEnum(String UnknownPet){
         if(UnknownPet.isEmpty()){
             return null;
         }
@@ -46,7 +46,7 @@ public class PawDorableServiceUtils {
         }
     }
 
-    public static Enum<Gender> genderEnum(String unknownGender){
+    public static Gender genderEnum(String unknownGender){
         if(unknownGender.isEmpty()){
             return null;
         }

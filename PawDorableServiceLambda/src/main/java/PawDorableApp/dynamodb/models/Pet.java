@@ -15,11 +15,11 @@ import java.util.Set;
 @DynamoDBTable(tableName = "pet")
 public class Pet {
     private String ID;
-    private String kindOfPet;
+    private KindOfPet kindOfPet;
     private String name;
     private String ownerEmail;
     private int age;
-    private String gender;
+    private Gender gender;
     private Set<String> rentalHistory;
     private boolean available;
 
@@ -32,11 +32,11 @@ public class Pet {
         this.ID = ID;
     }
     @DynamoDBAttribute(attributeName = "kindOfPet")
-    public String getKindOfPet() {
+    public KindOfPet getKindOfPet() {
         return kindOfPet;
     }
 
-    public void setKindOfPet(String kindOfPet) {
+    public void setKindOfPet(KindOfPet kindOfPet) {
         this.kindOfPet = kindOfPet;
     }
 
@@ -68,11 +68,11 @@ public class Pet {
     }
 
     @DynamoDBAttribute(attributeName = "gender")
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

@@ -2,6 +2,7 @@ package PawDorableApp.models;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class ProfileModel {
 
@@ -10,15 +11,15 @@ public class ProfileModel {
     private final String firstName;
     private final String lastName;
     private final int age;
-    private final List<String> myPets;
-    private final List<String> rental;
-    private final List<String> rentalHistory;
-    private final List<String> favoriteRental;
+    private final Set<String> myPets;
+    private final Set<String> rental;
+    private final Set<String> rentalHistory;
+    private final Set<String> favoriteRental;
 
     public ProfileModel(String emailAddress, String ID, String firstName,
-                        String lastName, int age, List<String> myPets,
-                        List<String> rental, List<String> rentalHistory,
-                        List<String> favoriteRental) {
+                        String lastName, int age, Set<String> myPets,
+                        Set<String> rental, Set<String> rentalHistory,
+                        Set<String> favoriteRental) {
 
         this.emailAddress = emailAddress;
         this.ID = ID;
@@ -51,19 +52,19 @@ public class ProfileModel {
         return age;
     }
 
-    public List<String> getMyPets() {
+    public Set<String> getMyPets() {
         return myPets;
     }
 
-    public List<String> getRental() {
+    public Set<String> getRental() {
         return rental;
     }
 
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
-    public List<String> getFavoriteRental() {
+    public Set<String> getFavoriteRental() {
         return favoriteRental;
     }
 
@@ -96,10 +97,10 @@ public class ProfileModel {
         private String firstName;
         private String lastName;
         private int age;
-        private List<String> myPets;
-        private List<String> rental;
-        private List<String> rentalHistory;
-        private List<String> favoriteRental;
+        private Set<String> myPets;
+        private Set<String> rental;
+        private Set<String> rentalHistory;
+        private Set<String> favoriteRental;
 
         public Builder withEmailAddress(String emailAddress){
             this.emailAddress = emailAddress;
@@ -121,19 +122,19 @@ public class ProfileModel {
             this.age = age;
             return this;
         }
-        public Builder withMyPets(List<String> pets){
+        public Builder withMyPets(Set<String> pets){
             this.myPets = pets;
             return this;
         }
-        public Builder withRental(List<String> pets){
+        public Builder withRental(Set<String> pets){
             this.rental = pets;
             return this;
         }
-        public Builder withRentalHistory(List<String> pets){
+        public Builder withRentalHistory(Set<String> pets){
             this.rentalHistory = pets;
             return this;
         }
-        public Builder withFavoriteRental(List<String> pets){
+        public Builder withFavoriteRental(Set<String> pets){
             this.favoriteRental = pets;
             return this;
         }
