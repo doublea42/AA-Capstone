@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@JsonDeserialize(builder = CreateProfileRequest.Builder.class)
+@JsonDeserialize(builder = CreateRentalHistoryRequest.Builder.class)
 public class CreateRentalHistoryRequest {
 //    private final Logger log = LogManager.getLogger();
 
