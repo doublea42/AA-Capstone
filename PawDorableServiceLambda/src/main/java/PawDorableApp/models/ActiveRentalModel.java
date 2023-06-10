@@ -6,9 +6,9 @@ import java.util.Set;
 
 public class ActiveRentalModel {
     private final String rentalID;
-    private final Set<String> rentalHistory;
+    private final String rentalHistory;
 
-    public ActiveRentalModel(String rentalID, Set<String> rentalHistory) {
+    public ActiveRentalModel(String rentalID, String rentalHistory) {
         this.rentalID = rentalID;
         this.rentalHistory = rentalHistory;
     }
@@ -17,7 +17,7 @@ public class ActiveRentalModel {
         return rentalID;
     }
 
-    public Set<String> getRentalHistory() {
+    public String getRentalHistory() {
         return rentalHistory;
     }
 
@@ -41,13 +41,13 @@ public class ActiveRentalModel {
 
     public static class Builder{
         private String rentalID;
-        private Set<String> rentalHistory;
+        private String rentalHistory;
 
         public Builder withRentalID(String id){
             this.rentalID = id;
             return this;
         }
-        public Builder withRentalHistory(Set<String> rentalHistory){
+        public Builder withRentalHistory(String rentalHistory){
             this.rentalHistory = rentalHistory;
             return this;
         }

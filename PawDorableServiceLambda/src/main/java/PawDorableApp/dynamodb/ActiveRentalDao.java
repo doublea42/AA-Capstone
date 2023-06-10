@@ -1,7 +1,10 @@
 package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.ActiveRental;
+import PawDorableApp.exceptions.RentalHistoryNotFoundException;
+import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
+import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,10 +25,26 @@ public class ActiveRentalDao {
     }
 
     public ActiveRental getActiveRental(String activeID){
+        if(activeID == null){
+            metricsPublisher.addCount(MetricsConstants.GET_ACTIVE_RENTAL_HISTORY_NOT_FOUND_COUNT,1);
+            throw new RentalHistoryNotFoundException("could not find an active rental history with id: " + activeID );
+        }
         ActiveRental selectedActiveRental = this.dynamoDbMapper.load(ActiveRental.class, activeID);
+        metricsPublisher.addCount(MetricsConstants.GET_ACTIVE_RENTAL_HISTORY_NOT_FOUND_COUNT,0);
         return  selectedActiveRental;
     }
 
-    
+    public ActiveRental saveActiveRental(boolean isNew, String id, String rentalID){
+
+
+        ActiveRental selectedActiveRental = new ActiveRental();
+        if(isNew){
+            selectedActiveRental.setRentalID(PawDorableServiceUtils.generateId());
+        }
+
+        selectedActiveRental.setRentalHistory(rentalID);
+
+        return selectedActiveRental;
+    }
 
 }

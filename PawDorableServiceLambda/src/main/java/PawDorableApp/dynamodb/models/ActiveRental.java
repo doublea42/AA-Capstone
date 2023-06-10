@@ -12,7 +12,7 @@ import java.util.Set;
 @DynamoDBTable(tableName = "ActiveRental")
 public class ActiveRental {
     private String rentalID;
-    private Set<String> rentalHistory;
+    private String rentalHistory;
 
     @DynamoDBHashKey(attributeName = "rentalID")
     public String getRentalID() {
@@ -20,7 +20,7 @@ public class ActiveRental {
     }
 
     @DynamoDBAttribute(attributeName = "rentalHistory")
-    public Set<String> getRentalHistory() {
+    public String getRentalHistory() {
         return rentalHistory;
     }
 
@@ -28,7 +28,7 @@ public class ActiveRental {
         this.rentalID = rentalID;
     }
 
-    public void setRentalHistory(Set<String> rentalHistory) {
+    public void setRentalHistory(String rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
 

@@ -8,7 +8,11 @@ public class MetricsConstants {
     public static final String UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT = "UpdateProfile.ProfileInvalidAttributeException.Count";
     public static final String GET_PET_PET_NOT_FOUND_COUNT = "GetPet.PetNotFoundException.Count";
     public static final String UPDATE_PET_INVALID_ATTRIBUTE_VALUE = "UpdatePet.PetInvalidAttributeException.Count";
-
     public static final String GET_RENTAL_HISTORY_NOT_FOUND_COUNT = "getRentalHistory.rentalHistoryNotFoundException.count";
+    public static final String UPDATE_RENTAL_HISTORY_INVALID_ATTRIBUTE_VALUE = "UpdateRentalHistory.PetInvalidAttributeException.Count";
+
+    public static final String GET_ACTIVE_RENTAL_HISTORY_NOT_FOUND_COUNT = "getActiveRentalHistory.ActiveRentalHistoryNotFoundException.count";
+    public static final String UPDATE_ACTIVE_RENTAL_HISTORY_INVALID_ATTRIBUTE_VALUE = "UpdateActiveRentalHistory.PetInvalidAttributeException.Count";
+
 
 }
