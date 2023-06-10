@@ -11,12 +11,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 
-public class GetPetAcivity {
+public class GetPetActivity {
     private final Logger log = LogManager.getLogger();
     private final PetDao petDao;
 
     @Inject
-    public GetPetAcivity(PetDao petDao) {
+    public GetPetActivity(PetDao petDao) {
         this.petDao = petDao;
     }
 

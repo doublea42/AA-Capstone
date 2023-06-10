@@ -4,9 +4,11 @@ package PawDorableApp.converter;
 import PawDorableApp.dynamodb.models.ActiveRental;
 import PawDorableApp.dynamodb.models.Pet;
 import PawDorableApp.dynamodb.models.Profile;
+import PawDorableApp.dynamodb.models.RentalHistory;
 import PawDorableApp.models.ActiveRentalModel;
 import PawDorableApp.models.PetModel;
 import PawDorableApp.models.ProfileModel;
+import PawDorableApp.models.RentalHistoryModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,6 +47,16 @@ public class ModelConverter {
         return ActiveRentalModel.builder()
                 .withRentalID(activeRental.getRentalID())
                 .withRentalHistory(activeRental.getRentalHistory())
+                .build();
+    }
+
+    public RentalHistoryModel toRentalHistoryModel(RentalHistory rental) {
+        return RentalHistoryModel.builder()
+                .withHistoryID(rental.getHistoryID())
+                .withPetID(rental.getPetID())
+                .withProfileID(rental.getProfileID())
+                .withTimesRented(rental.getTimesRented())
+                .withScore(rental.getScore())
                 .build();
     }
 
