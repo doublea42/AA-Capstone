@@ -1,9 +1,6 @@
 package PawDorableApp.dependency;
 
-import PawDorableApp.activity.CreatePetActivity;
-import PawDorableApp.activity.CreateProfileActivity;
-import PawDorableApp.activity.GetProfileActivity;
-import PawDorableApp.activity.UpdateProfileActivity;
+import PawDorableApp.activity.*;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -15,4 +12,5 @@ public interface ServiceComponent {
     GetProfileActivity provideGetProfileActivity();
     UpdateProfileActivity provideUpdateProfileActivity();
     CreatePetActivity provideCreatePetActivity();
+    CreateActiveRentalActivity provideCreateActiveRentalActivity();
 }
