@@ -33,6 +33,7 @@ public class GetProfileActivity {
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(selectedProfile);
 
+        GetProfileResult.builder();
         return GetProfileResult.builder()
                 .withProfile(profileModel)
                 .build();

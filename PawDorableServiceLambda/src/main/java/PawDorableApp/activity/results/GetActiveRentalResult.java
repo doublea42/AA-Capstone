@@ -20,13 +20,17 @@ public class GetActiveRentalResult {
                 "activeRental=" + activeRental +
                 '}';
     }
-    public Builder builder(){return new Builder();}
+
+    public static Builder builder(){ return  new Builder();}
+
     public static class Builder{
         private ActiveRentalModel activeRentalModel;
         public Builder withActiveRentalModel(ActiveRentalModel activeRental){
-            this.activeRentalModel =activeRental;
+            this.activeRentalModel = activeRental;
             return this;
         }
-        public GetActiveRentalResult build(){return new GetActiveRentalResult(activeRentalModel);}
+        public GetActiveRentalResult build(){
+            return new GetActiveRentalResult(activeRentalModel);
+        }
     }
 }
