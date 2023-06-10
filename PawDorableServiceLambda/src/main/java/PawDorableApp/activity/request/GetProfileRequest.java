@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 @JsonDeserialize(builder = GetProfileRequest.Builder.class)
 public class GetProfileRequest {
-    private final Logger log = LogManager.getLogger();
+//    private final Logger log = LogManager.getLogger();
 
     private final String emailAddress;
 
