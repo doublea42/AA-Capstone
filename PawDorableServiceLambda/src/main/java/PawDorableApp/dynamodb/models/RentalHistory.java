@@ -7,7 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.Objects;
 
-@DynamoDBTable(tableName = "RentalHistory")
+@DynamoDBTable(tableName = "rentalHistory")
 public class RentalHistory {
     private String historyID;
     private String petID;

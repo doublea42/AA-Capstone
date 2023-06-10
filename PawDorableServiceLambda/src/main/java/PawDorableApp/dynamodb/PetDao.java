@@ -35,11 +35,11 @@ public class PetDao {
     public Pet getPet(String petID){
         Pet selectedPet = this.dynamoDbMapper.load(Pet.class ,petID);
         if(petID == null){
-            metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 1);
+            metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 1);
             throw new PetNotFoundException("could not find Pet with id " + petID);
         }
 
-        metricsPublisher.addCount(MetricsConstants.GETPET_PETNOTFOUND_COUNT, 0);
+        metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
         return selectedPet;
     }
 
@@ -61,7 +61,7 @@ public class PetDao {
 
 
 
-           metricsPublisher.addCount(MetricsConstants.UPDATEPET_INVALIDATTRIBUTEVALUE ,1);
+           metricsPublisher.addCount(MetricsConstants.UPDATE_PET_INVALID_ATTRIBUTE_VALUE ,1);
            throw new PetInvalidValuesException("could not update pet with current values");
 
        }

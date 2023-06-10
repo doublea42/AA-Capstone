@@ -1,5 +1,6 @@
 package PawDorableApp.dynamodb;
 
+import PawDorableApp.dynamodb.models.ActiveRental;
 import PawDorableApp.metrics.MetricsPublisher;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.apache.logging.log4j.LogManager;
@@ -19,4 +20,12 @@ public class ActiveRentalDao {
         this.dynamoDbMapper = dynamoDbMapper;
         this.metricsPublisher = metricsPublisher;
     }
+
+    public ActiveRental getActiveRental(String activeID){
+        ActiveRental selectedActiveRental = this.dynamoDbMapper.load(ActiveRental.class, activeID);
+        return  selectedActiveRental;
+    }
+
+    
+
 }
