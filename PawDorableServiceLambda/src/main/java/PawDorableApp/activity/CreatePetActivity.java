@@ -30,34 +30,19 @@ public class CreatePetActivity {
 
 
     public CreatePetResult handleRequest(final CreatePetRequest createPetRequest){
-        log.info("Received CreateRequest{}", createPetRequest);
-
-        if(!PawDorableServiceUtils.isValidString(createPetRequest.getName())){
+        if(PawDorableServiceUtils.invalidString(createPetRequest.getName())){
             throw new PetInvalidValuesException("Your Name cannot contain illegal characters");
         }
-//        log.info("here <-----------------------{}-----------", createPetRequest);
-        Pet newPet = petDao.savePet(true,"", createPetRequest.getKindOfPet(), createPetRequest.getName(),
-                createPetRequest.getOwnerEmail(), createPetRequest.getAge(), createPetRequest.getGender(),
-                null, createPetRequest.getAvailable());
+        String ownerID = createPetRequest.getOwnerEmail();
 
+        Pet newPet = petDao.saveNewPet(createPetRequest.getKindOfPet(), createPetRequest.getName(), ownerID,
+                createPetRequest.getAge(), createPetRequest.getGender(), createPetRequest.getAvailable());
 
-        log.info("here <------------------------------------");
-        Profile tempPetOwner = profileDao.getPofile(createPetRequest.getOwnerEmail());
-        log.info("here <------------------{}------------------", tempPetOwner);
+        profileDao.addProfilePets(ownerID, newPet.getID());
 
-        Set<String> newPetList = new HashSet<>();
-        newPetList.add(newPet.getID());
-        log.info("here <------------------------------------");
-        profileDao.saveProfile(false, tempPetOwner.getID(), tempPetOwner.getEmailAddress(),
-                tempPetOwner.getFirstName(), tempPetOwner.getLastName(), String.valueOf(tempPetOwner.getAge()),
-                newPetList, tempPetOwner.getRental(),
-                tempPetOwner.getRentalHistory(), tempPetOwner.getFavoriteRental());
+        PetModel petmodel = new ModelConverter().toPetModel(newPet);
 
-        PetModel petModel = new ModelConverter().toPetModel(newPet);
-        log.info("here <------------------------------------");
-
-
-        return CreatePetResult.builder().withPet(petModel).build();
+        return CreatePetResult.builder().withPet(petmodel).build();
     }
 
 

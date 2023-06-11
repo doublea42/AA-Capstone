@@ -8,7 +8,6 @@ import PawDorableApp.dynamodb.PetDao;
 import PawDorableApp.dynamodb.ProfileDao;
 import PawDorableApp.dynamodb.RentalHistoryDao;
 import PawDorableApp.dynamodb.models.ActiveRental;
-import PawDorableApp.dynamodb.models.Profile;
 import PawDorableApp.dynamodb.models.RentalHistory;
 import PawDorableApp.models.ActiveRentalModel;
 import org.apache.logging.log4j.LogManager;
@@ -34,8 +33,14 @@ public class CreateActiveRentalActivity {
     public CreateActiveRentalResult handleRequest(final CreateRentalHistoryRequest createRequest){
         log.info("Received CreateActiveRentalRequest{}",createRequest);
 
-        RentalHistory newRentalHistory = rentalDao.saveRentalHistory(true, "", createRequest.getPetID(), createRequest.getProfileID(), 0.0);
-        ActiveRental newActiveRental = activeDao.saveActiveRental(true,"", newRentalHistory.getHistoryID());
+        String petID = createRequest.getPetID();
+        String profileID = createRequest.getProfileID();
+
+        RentalHistory newRentalHistory = rentalDao.saveNewRentalHistory(petID, profileID);
+
+        profileDao.addProfileRental(profileID, petID);
+
+        ActiveRental newActiveRental = activeDao.saveNewActiveRental(newRentalHistory.getHistoryID());
 
         ActiveRentalModel activeRentalModel = new ModelConverter().toActiveRentalModel(newActiveRental);
         return CreateActiveRentalResult.builder().withActiveRental(activeRentalModel).build();

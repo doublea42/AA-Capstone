@@ -34,14 +34,10 @@ public class ActiveRentalDao {
         return  selectedActiveRental;
     }
 
-    public ActiveRental saveActiveRental(boolean isNew, String id, String rentalID){
-
+    public ActiveRental saveNewActiveRental(String rentalID){
 
         ActiveRental selectedActiveRental = new ActiveRental();
-        if(isNew){
-            selectedActiveRental.setRentalID(PawDorableServiceUtils.generateId());
-        }
-
+        selectedActiveRental.setRentalID(PawDorableServiceUtils.generateId());
         selectedActiveRental.setRentalHistory(rentalID);
 
         return selectedActiveRental;

@@ -20,12 +20,9 @@ public class UpdatePetActivity {
 
     public UpdatePetResult handleRequest(final UpdatePetRequest updateRequest){
 
-        Pet oldPet = petDao.getPet(updateRequest.getID());
+        Pet selectedPet = petDao.updateAvailablePet(updateRequest.getID(), updateRequest.getAvailable());
 
-        Pet updatePet = petDao.savePet(false, updateRequest.getID(), oldPet.getKindOfPet().toString(), oldPet.getName(), oldPet.getOwnerEmail(),
-                updateRequest.getAge(), oldPet.getGender().toString(),null,updateRequest.getAvailable());
-
-        PetModel petModel = new ModelConverter().toPetModel(updatePet);
+        PetModel petModel = new ModelConverter().toPetModel(selectedPet);
         return UpdatePetResult.builder().withPetModel(petModel).build();
     }
 }

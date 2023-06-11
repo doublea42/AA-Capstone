@@ -25,7 +25,7 @@ public class GetProfileActivity {
     public GetProfileResult handleRequest(final GetProfileRequest getProfileRequest){
         log.info("Received GetProfileRequest{}", getProfileRequest);
 
-        if(!PawDorableServiceUtils.isValidString(getProfileRequest.getEmailAddress())){
+        if(PawDorableServiceUtils.invalidString(getProfileRequest.getEmailAddress())){
             throw new ProfileInvalidValuesException("Your email cannot contain illegal characters");
         }
 

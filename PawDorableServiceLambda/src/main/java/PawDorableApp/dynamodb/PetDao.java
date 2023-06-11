@@ -9,6 +9,7 @@ import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,67 +44,67 @@ public class PetDao {
         return selectedPet;
     }
 
-    public Pet savePet(boolean isNew, String ID, String kindOfPet, String name,
-                       String ownerEmail, String age, String gender,
-                       Set<String> rentalHistory, String available){
+    public Pet saveNewPet(String kindOfPet, String name, String ownerEmail, String age,String gender,String available){
 
         KindOfPet kind = PawDorableServiceUtils.petEnum(kindOfPet);
+        int petAge = Integer.parseInt(age);
         Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
         boolean isPetAvailable = Boolean.parseBoolean(available);
 
 
-//        log.info("here <---------{}---------{}------------------",kind, petsGender);
-
-
         if(kind == null || name == null || name.isEmpty()
-               || ownerEmail == null || ownerEmail.isEmpty()
-               || age == null || age.isEmpty()
-               || petsGender == null){
+                || ownerEmail == null || ownerEmail.isEmpty()
+                || PawDorableServiceUtils.invalidAge(petAge)
+                || petsGender == null){
 
 
 
-           metricsPublisher.addCount(MetricsConstants.UPDATE_PET_INVALID_ATTRIBUTE_VALUE ,1);
-           throw new PetInvalidValuesException("could not update pet with current values");
+            metricsPublisher.addCount(MetricsConstants.UPDATE_PET_INVALID_ATTRIBUTE_VALUE ,1);
+            throw new PetInvalidValuesException("could not update pet with current values");
 
-       }
+        }
 
         Pet selectedPet = new Pet();
 
-       if(isNew){
-           selectedPet.setID(PawDorableServiceUtils.generateId());
-//           selectedPet.setRentalHistory(new HashSet<>());
-       }
-       else{
-           Pet tempPet = this.getPet(ID);
+        String newID = PawDorableServiceUtils.generateId();
+        while(this.getPet(newID) != null){
+            newID = PawDorableServiceUtils.generateId();
+        }
 
-           if(!rentalHistory.isEmpty()){
-               if(tempPet.getRentalHistory() == null){
-                   selectedPet.setRentalHistory(rentalHistory);
-               }
-               Set<String> history = tempPet.getRentalHistory();
-               history.addAll(rentalHistory);
-               selectedPet.setRentalHistory(history);
-           }
-           else{
-               if(tempPet.getRentalHistory() != null){
-                   selectedPet.setRentalHistory(tempPet.getRentalHistory());
-               }
-               selectedPet.setID(ID);
-           }
-       }
+        selectedPet.setRentalHistory(new HashSet<>());
 
-        selectedPet.setOwnerEmail(ownerEmail);
+        selectedPet.setID(newID);
         selectedPet.setKindOfPet(kind);
         selectedPet.setName(name);
-        selectedPet.setAge(Integer.parseInt(age));
+        selectedPet.setOwnerEmail(ownerEmail);
+        selectedPet.setAge(petAge);
         selectedPet.setGender(petsGender);
         selectedPet.setAvailable(isPetAvailable);
 
-        log.info("selected pet --------------------> {}", selectedPet);
+        dynamoDbMapper.save(selectedPet);
+        return selectedPet;
+    }
+
+
+    public Pet updateAvailablePet(String ID, String available){
+
+        boolean isPetAvailable = Boolean.parseBoolean(available);
+
+        Pet selectedPet = this.getPet(ID);
+        selectedPet.setAvailable(isPetAvailable);
 
         dynamoDbMapper.save(selectedPet);
-        log.info("here <------------------------------------");
+        return selectedPet;
+    }
 
+    public Pet addRentalHistory (String ID, String rentalH) {
+        Pet selectedPet = this.getPet(ID);
+
+        Set<String> tempList = selectedPet.getRentalHistory();
+        tempList.add(rentalH);
+        selectedPet.setRentalHistory(tempList);
+
+        dynamoDbMapper.save(selectedPet);
         return selectedPet;
     }
 

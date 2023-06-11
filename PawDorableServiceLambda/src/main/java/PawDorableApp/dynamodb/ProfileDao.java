@@ -37,16 +37,6 @@ public class ProfileDao {
         metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
         return selectedProfile;
     }
-    public Profile getProfileById(String id){
-        Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,id);
-        if(id == null){
-            metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
-            throw new ProfileNotFoundException("could not find Profile with email.");
-        }
-
-        metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
-        return selectedProfile;
-    }
 
     public Profile saveNewProfile(String email, String first, String last, String age){
 
@@ -85,7 +75,7 @@ public class ProfileDao {
     }
 
     public Profile addProfilePets(String profileID, String newPet){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         tempList.add(newPet);
         selectedProfile.setMyPets(tempList);
@@ -93,7 +83,7 @@ public class ProfileDao {
         return selectedProfile;
     }
     public Profile addProfileRental(String profileID, String newRent){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
         tempList.add(newRent);
         selectedProfile.setRental(tempList);
@@ -101,7 +91,7 @@ public class ProfileDao {
         return selectedProfile;
     }
     public Profile addProfileRentalHistory(String profileID, String newRentalHistory){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> rentalHistory = selectedProfile.getRentalHistory();
         rentalHistory.add(newRentalHistory);
         selectedProfile.setRentalHistory(rentalHistory);
@@ -109,7 +99,7 @@ public class ProfileDao {
         return selectedProfile;
     }
     public Profile addProfileFavorite(String profileID, String newPet){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getFavoriteRental();
         tempList.add(newPet);
         selectedProfile.setFavoriteRental(tempList);
@@ -118,7 +108,7 @@ public class ProfileDao {
     }
 
     public Profile deleteProfilePet(String profileID, String petID){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         tempList.remove(petID);
         selectedProfile.setMyPets(tempList);
@@ -126,7 +116,7 @@ public class ProfileDao {
         return selectedProfile;
     }
     public Profile deleteProfilerRental(String profileID, String petID){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
         tempList.remove(petID);
         selectedProfile.setRental(tempList);
@@ -134,7 +124,7 @@ public class ProfileDao {
         return selectedProfile;
     }
     public Profile deleteProfileFav(String profileID, String petID){
-        Profile selectedProfile = this.getProfileById(profileID);
+        Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getFavoriteRental();
         tempList.remove(petID);
         selectedProfile.setFavoriteRental(tempList);

@@ -35,32 +35,37 @@ public class RentalHistoryDao {
         return selectedRentalHistory;
     }
 
-    public RentalHistory saveRentalHistory(boolean isNew, String id, String petID, String profileID, Double score){
+    public RentalHistory saveNewRentalHistory(String petID, String profileID){
 
         RentalHistory selectedRentalHistory = new RentalHistory();
 
-        if(isNew){
-            selectedRentalHistory.setHistoryID(PawDorableServiceUtils.generateId());
-            selectedRentalHistory.setTimesRented(1);
-            selectedRentalHistory.setScore(score);
-        }
-
-        RentalHistory tempRentalHistory = this.getRentalHistory(id);
-        int oldTimesRented = tempRentalHistory.getTimesRented();
-        Double newScore = updateScore(oldTimesRented, tempRentalHistory.getScore(), score);
-
-        selectedRentalHistory.setHistoryID(id);
+        selectedRentalHistory.setHistoryID(PawDorableServiceUtils.generateId());
         selectedRentalHistory.setPetID(petID);
         selectedRentalHistory.setProfileID(profileID);
-        selectedRentalHistory.setTimesRented(oldTimesRented + 1);
-        selectedRentalHistory.setScore(newScore);
+        selectedRentalHistory.setTimesRented(1);
+        selectedRentalHistory.setScore(1.0);
 
         dynamoDbMapper.save(selectedRentalHistory);
-
         return selectedRentalHistory;
     }
 
-    private Double updateScore(int times, Double score, Double newScore){
+    public RentalHistory UpdateRentalHistory(String ID, String score){
+
+        RentalHistory selectedRentalHistory = this.getRentalHistory(ID);
+        int newScore = Integer.parseInt(score);
+        int timesRented = selectedRentalHistory.getTimesRented();
+
+        Double updateScore = updateScore(timesRented, selectedRentalHistory.getScore(),newScore);
+        selectedRentalHistory.setTimesRented(timesRented + 1);
+        selectedRentalHistory.setScore(updateScore);
+
+        dynamoDbMapper.save(selectedRentalHistory);
+        return selectedRentalHistory;
+    }
+
+
+
+    private Double updateScore(int times, Double score, int newScore){
         return((score * times) + newScore) / (times + 1);
     }
 

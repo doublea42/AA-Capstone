@@ -24,9 +24,9 @@ public class UpdateProfileActivity {
     }
 
     public UpdateProfileResult handleRequest(final UpdateProfileRequest updateProfileRequest){
-        if(!PawDorableServiceUtils.isValidString(updateProfileRequest.getFirstName())
-                || !PawDorableServiceUtils.isValidString(updateProfileRequest.getLastName())
-                || !PawDorableServiceUtils.validAge(Integer.parseInt(updateProfileRequest.getAge()))){
+        if(PawDorableServiceUtils.invalidString(updateProfileRequest.getFirstName())
+                || PawDorableServiceUtils.invalidString(updateProfileRequest.getLastName())
+                || PawDorableServiceUtils.invalidAge(Integer.parseInt(updateProfileRequest.getAge()))){
             throw new ProfileInvalidValuesException("Your Name cannot contain illegal characters");
         }
 
