@@ -38,7 +38,7 @@ public class CreatePetActivity {
 //        log.info("here <-----------------------{}-----------", createPetRequest);
         Pet newPet = petDao.savePet(true,"", createPetRequest.getKindOfPet(), createPetRequest.getName(),
                 createPetRequest.getOwnerEmail(), createPetRequest.getAge(), createPetRequest.getGender(),
-                null, Boolean.parseBoolean(createPetRequest.getAvailable()));
+                null, createPetRequest.getAvailable());
 
 
         log.info("here <------------------------------------");

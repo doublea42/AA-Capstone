@@ -5,12 +5,18 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 @JsonDeserialize(builder = UpdatePetRequest.Builder.class)
 public class UpdatePetRequest {
+    private final String ID;
     private final  String age;
     private final String available;
 
-    public UpdatePetRequest(String age, String available) {
+    public UpdatePetRequest(String ID, String age, String available) {
+        this.ID = ID;
         this.age = age;
         this.available = available;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getAge() {
@@ -24,7 +30,8 @@ public class UpdatePetRequest {
     @Override
     public String toString() {
         return "UpdatePetRequest{" +
-                "age='" + age + '\'' +
+                "ID='" + ID + '\'' +
+                ", age='" + age + '\'' +
                 ", available='" + available + '\'' +
                 '}';
     }
@@ -32,8 +39,13 @@ public class UpdatePetRequest {
     public static Builder builder(){return new Builder();}
     @JsonPOJOBuilder
     public static class Builder{
+        private  String ID;
         private String age;
         private String available;
+        public Builder withID(String ID){
+            this.ID = ID;
+            return this;
+        }
         public Builder withAge(String age){
             this.age = age;
             return this;
@@ -42,6 +54,6 @@ public class UpdatePetRequest {
             this.available = available;
             return this;
         }
-        public UpdatePetRequest build(){return new UpdatePetRequest(age,available);}
+        public UpdatePetRequest build(){return new UpdatePetRequest(ID, age, available);}
     }
 }

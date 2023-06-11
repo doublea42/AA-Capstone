@@ -36,7 +36,7 @@ public class PetDao {
         Pet selectedPet = this.dynamoDbMapper.load(Pet.class ,petID);
         if(petID == null){
             metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 1);
-            throw new PetNotFoundException("could not find Pet with id " + petID);
+            throw new PetNotFoundException("could not find Pet with id");
         }
 
         metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
@@ -45,10 +45,11 @@ public class PetDao {
 
     public Pet savePet(boolean isNew, String ID, String kindOfPet, String name,
                        String ownerEmail, String age, String gender,
-                       Set<String> rentalHistory, boolean available){
+                       Set<String> rentalHistory, String available){
 
         KindOfPet kind = PawDorableServiceUtils.petEnum(kindOfPet);
         Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
+        boolean isPetAvailable = Boolean.parseBoolean(available);
 
 
 //        log.info("here <---------{}---------{}------------------",kind, petsGender);
@@ -96,7 +97,7 @@ public class PetDao {
         selectedPet.setName(name);
         selectedPet.setAge(Integer.parseInt(age));
         selectedPet.setGender(petsGender);
-        selectedPet.setAvailable(available);
+        selectedPet.setAvailable(isPetAvailable);
 
         log.info("selected pet --------------------> {}", selectedPet);
 
