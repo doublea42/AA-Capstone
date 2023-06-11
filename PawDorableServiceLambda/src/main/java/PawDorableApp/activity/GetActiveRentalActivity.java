@@ -2,7 +2,6 @@ package PawDorableApp.activity;
 
 import PawDorableApp.activity.request.GetActiveRentalRequest;
 import PawDorableApp.activity.results.GetActiveRentalResult;
-import PawDorableApp.activity.results.GetProfileResult;
 import PawDorableApp.converter.ModelConverter;
 import PawDorableApp.dynamodb.ActiveRentalDao;
 import PawDorableApp.dynamodb.models.ActiveRental;

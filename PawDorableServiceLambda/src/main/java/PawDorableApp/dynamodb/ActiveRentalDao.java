@@ -43,4 +43,15 @@ public class ActiveRentalDao {
         return selectedActiveRental;
     }
 
+    public Boolean removeActiveRental(String ID){
+        ActiveRental tempActive = this.getActiveRental(ID);
+        tempActive.setRentalHistory(null);
+        tempActive.setRentalID(null);
+
+        if(this.getActiveRental(ID) == null){
+            return true;
+        }
+        return false;
+    }
+
 }
