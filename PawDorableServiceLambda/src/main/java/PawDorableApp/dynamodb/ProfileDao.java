@@ -12,9 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Singleton
@@ -34,16 +32,24 @@ public class ProfileDao {
         Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,email);
         if(email == null){
             metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
-            throw new ProfileNotFoundException("could not find Profile with email " + email);
+            throw new ProfileNotFoundException("could not find Profile with email.");
+        }
+
+        metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
+        return selectedProfile;
+    }
+    public Profile getProfileById(String id){
+        Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,id);
+        if(id == null){
+            metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
+            throw new ProfileNotFoundException("could not find Profile with email.");
         }
 
         metricsPublisher.addCount(MetricsConstants.GET_PET_PET_NOT_FOUND_COUNT, 0);
         return selectedProfile;
     }
 
-    public Profile saveProfile(boolean isNew, String id, String email, String first, String last,
-                               String age, Set<String> myPets, Set<String> rental,
-                               Set<String> rentalHistory, Set<String> favorite){
+    public Profile saveNewProfile(String email, String first, String last, String age){
 
 
         if(email == null || email.isEmpty() || first == null || first.isEmpty()
@@ -54,79 +60,86 @@ public class ProfileDao {
 
         Profile selectedProfile = new Profile();
 
-        if(isNew){
-            selectedProfile.setID(PawDorableServiceUtils.generateId());
-        }
-        else{
+        selectedProfile.setEmailAddress(email);
+        selectedProfile.setID(PawDorableServiceUtils.generateId());
+        selectedProfile.setFirstName(first);
+        selectedProfile.setLastName(last);
+        selectedProfile.setAge(Integer.parseInt(age));
+        selectedProfile.setMyPets(new HashSet<>());
+        selectedProfile.setRental(new HashSet<>());
+        selectedProfile.setRentalHistory(new HashSet<>());
+        selectedProfile.setFavoriteRental(new HashSet<>());
 
-            Profile tempProfile = this.getPofile(email);
 
-            if(!myPets.isEmpty()){
-                if(tempProfile.getMyPets() == null){
-                    selectedProfile.setMyPets(myPets);
-                }
-                else{
-                    Set<String> tempList = tempProfile.getMyPets();
-                    tempList.addAll(myPets);
-                    selectedProfile.setMyPets(tempList);
-                }
-            }else{
-                if(tempProfile.getMyPets() != null){
-                    selectedProfile.setMyPets(tempProfile.getMyPets());
-                }
-            }
-            if(!rental.isEmpty()){
-                if(tempProfile.getRental() == null){
-                    selectedProfile.setRental(rental);
-                }
-                else{
-                    Set<String> tempList = tempProfile.getRental();
-                    tempList.addAll(rental);
-                    selectedProfile.setRental(tempList);
-                }
-            }else{
-                if(tempProfile.getRental() != null){
-                    selectedProfile.setRental(tempProfile.getRental());
-                }
-            }
-            if(!rentalHistory.isEmpty()){
-                if(tempProfile.getRentalHistory() == null){
-                    selectedProfile.setRentalHistory(rentalHistory);
-                }
-                else{
-                    Set<String> tempList = tempProfile.getRentalHistory();
-                    tempList.addAll(rentalHistory);
-                    selectedProfile.setRentalHistory(tempList);
-                }
-            }else{
-                if(tempProfile.getRentalHistory() != null){
-                    selectedProfile.setRentalHistory(tempProfile.getRentalHistory());
-                }
-            }
-            if(!favorite.isEmpty()){
-                if(tempProfile.getFavoriteRental() == null){
-                    selectedProfile.setFavoriteRental(favorite);
-                }
-                else{
-                    Set<String> tempList = tempProfile.getFavoriteRental();
-                    tempList.addAll(favorite);
-                    selectedProfile.setFavoriteRental(tempList);
-                }
-            }else{
-                if(tempProfile.getFavoriteRental() != null){
-                    selectedProfile.setFavoriteRental(tempProfile.getFavoriteRental());
-                }
-            }
-           selectedProfile.setID(id);
-        }
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
 
+    public Profile updateProfile(String email, String first, String last, String age){
+        Profile selectedProfile = this.getPofile(email);
 
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
         selectedProfile.setAge(Integer.parseInt(age));
-        selectedProfile.setEmailAddress(email);
 
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
 
+    public Profile addProfilePets(String profileID, String newPet){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getMyPets();
+        tempList.add(newPet);
+        selectedProfile.setMyPets(tempList);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+    public Profile addProfileRental(String profileID, String newRent){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getRental();
+        tempList.add(newRent);
+        selectedProfile.setRental(tempList);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+    public Profile addProfileRentalHistory(String profileID, String newRentalHistory){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> rentalHistory = selectedProfile.getRentalHistory();
+        rentalHistory.add(newRentalHistory);
+        selectedProfile.setRentalHistory(rentalHistory);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+    public Profile addProfileFavorite(String profileID, String newPet){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getFavoriteRental();
+        tempList.add(newPet);
+        selectedProfile.setFavoriteRental(tempList);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+
+    public Profile deleteProfilePet(String profileID, String petID){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getMyPets();
+        tempList.remove(petID);
+        selectedProfile.setMyPets(tempList);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+    public Profile deleteProfilerRental(String profileID, String petID){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getRental();
+        tempList.remove(petID);
+        selectedProfile.setRental(tempList);
+        dynamoDbMapper.save(selectedProfile);
+        return selectedProfile;
+    }
+    public Profile deleteProfileFav(String profileID, String petID){
+        Profile selectedProfile = this.getProfileById(profileID);
+        Set<String> tempList = selectedProfile.getFavoriteRental();
+        tempList.remove(petID);
+        selectedProfile.setFavoriteRental(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }
