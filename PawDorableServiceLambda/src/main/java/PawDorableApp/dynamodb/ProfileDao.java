@@ -5,7 +5,6 @@ import PawDorableApp.exceptions.ProfileInvalidValuesException;
 import PawDorableApp.exceptions.ProfileNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
-import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -61,7 +60,6 @@ public class ProfileDao {
         Profile selectedProfile = new Profile();
 
         selectedProfile.setEmailAddress(email);
-        selectedProfile.setID(PawDorableServiceUtils.generateId());
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
         selectedProfile.setAge(Integer.parseInt(age));

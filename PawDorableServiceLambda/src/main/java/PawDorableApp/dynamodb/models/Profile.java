@@ -13,7 +13,6 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 public class Profile {
 
     private  String emailAddress;
-    private String ID;
     private String firstName;
     private String lastName;
     private int age;
@@ -25,15 +24,6 @@ public class Profile {
     @DynamoDBHashKey(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
-    }
-
-    @DynamoDBAttribute(attributeName = "ID")
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -105,13 +95,12 @@ public class Profile {
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
         return age == profile.age && emailAddress.equals(profile.emailAddress)
-                && ID.equals(profile.ID) && firstName.equals(profile.firstName)
                 && lastName.equals(profile.lastName)
                 && Objects.equals(myPets, profile.myPets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailAddress, ID, firstName, lastName, age, myPets);
+        return Objects.hash(emailAddress, firstName, lastName, age, myPets);
     }
 }

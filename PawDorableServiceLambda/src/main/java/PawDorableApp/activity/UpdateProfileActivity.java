@@ -30,12 +30,8 @@ public class UpdateProfileActivity {
             throw new ProfileInvalidValuesException("Your Name cannot contain illegal characters");
         }
 
-
-        Profile oldProfile = profileDao.getPofile(updateProfileRequest.getEmailAddress());
-
-        Profile updatedProfile = profileDao.saveProfile(false, oldProfile.getID(), oldProfile.getEmailAddress()
-                , updateProfileRequest.getFirstName(), updateProfileRequest.getLastName(), updateProfileRequest.getAge(),
-                oldProfile.getMyPets(),oldProfile.getRental(), oldProfile.getRentalHistory(), oldProfile.getFavoriteRental());
+        Profile updatedProfile = profileDao.updateProfile(updateProfileRequest.getEmailAddress(), updateProfileRequest.getFirstName(),
+                updateProfileRequest.getLastName(), updateProfileRequest.getAge());
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(updatedProfile);
         return UpdateProfileResult.builder().withProfile(profileModel).build();

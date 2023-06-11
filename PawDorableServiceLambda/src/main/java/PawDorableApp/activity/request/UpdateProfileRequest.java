@@ -11,9 +11,7 @@ public class UpdateProfileRequest {
 
     private final String emailAddress;
     private final String firstName;
-
     private final String lastName;
-
     private final String age;
 
     public UpdateProfileRequest(String emailAddress, String firstName, String lastName, String age) {

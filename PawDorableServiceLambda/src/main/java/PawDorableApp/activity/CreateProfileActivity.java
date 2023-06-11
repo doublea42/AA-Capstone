@@ -34,11 +34,11 @@ public class CreateProfileActivity {
             throw new ProfileInvalidValuesException("Your age is out range");
         }
 
-        Profile newProfile = profileDao.saveProfile(true,"", createProfileRequest.getEmailAddress(),
-                createProfileRequest.getFirstName(), createProfileRequest.getLastName(), createProfileRequest.getAge(),
-               null, null, null, null);
+        Profile newProfile = profileDao.saveNewProfile(createProfileRequest.getEmailAddress(),
+                createProfileRequest.getFirstName(), createProfileRequest.getLastName(), createProfileRequest.getAge());
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
+
         return CreateProfileResult.builder()
                 .withProfile(profileModel)
                 .build();

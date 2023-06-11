@@ -7,7 +7,6 @@ import java.util.Set;
 public class ProfileModel {
 
     private final String emailAddress;
-    private final String ID;
     private final String firstName;
     private final String lastName;
     private final int age;
@@ -16,13 +15,12 @@ public class ProfileModel {
     private final Set<String> rentalHistory;
     private final Set<String> favoriteRental;
 
-    public ProfileModel(String emailAddress, String ID, String firstName,
+    public ProfileModel(String emailAddress, String firstName,
                         String lastName, int age, Set<String> myPets,
                         Set<String> rental, Set<String> rentalHistory,
                         Set<String> favoriteRental) {
 
         this.emailAddress = emailAddress;
-        this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -34,10 +32,6 @@ public class ProfileModel {
 
     public String getEmailAddress() {
         return emailAddress;
-    }
-
-    public String getID() {
-        return ID;
     }
 
     public String getFirstName() {
@@ -75,7 +69,6 @@ public class ProfileModel {
         ProfileModel that = (ProfileModel) o;
         return age == that.age
                 && Objects.equals(emailAddress, that.emailAddress)
-                && Objects.equals(ID, that.ID)
                 && Objects.equals(firstName, that.firstName)
                 && Objects.equals(lastName, that.lastName)
                 && Objects.equals(myPets, that.myPets);
@@ -83,7 +76,7 @@ public class ProfileModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailAddress, ID, firstName, lastName, age, myPets);
+        return Objects.hash(emailAddress, firstName, lastName, age, myPets);
     }
 
     public static Builder builder(){
@@ -93,7 +86,6 @@ public class ProfileModel {
     public static class Builder{
 
         private  String emailAddress;
-        private String ID;
         private String firstName;
         private String lastName;
         private int age;
@@ -104,10 +96,6 @@ public class ProfileModel {
 
         public Builder withEmailAddress(String emailAddress){
             this.emailAddress = emailAddress;
-            return this;
-        }
-        public Builder withID(String ID){
-            this.ID = ID;
             return this;
         }
         public Builder withFirstName(String first){
@@ -140,7 +128,7 @@ public class ProfileModel {
         }
 
         public ProfileModel build(){
-            return new ProfileModel(emailAddress,ID,firstName,lastName,age,
+            return new ProfileModel(emailAddress,firstName,lastName,age,
                     myPets,rental,rentalHistory,favoriteRental);
         }
     }

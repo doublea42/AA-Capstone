@@ -4,7 +4,6 @@
       "PutRequest": {
         "Item": {
           "emailAddress": {"S": "jhon@notARealMail.com"},
-          "ID": {"S": "HEYH6"},
           "firstName": {"S": "Jhon"},
           "lastName": {"S": "Smith"},
           "age": {"N": "35"}
@@ -15,7 +14,6 @@
       "PutRequest": {
         "Item": {
           "emailAddress": {"S": "Dylan@notARealMail.com"},
-          "ID": {"S": "356ASD"},
           "firstName": {"S": "Dylan"},
           "lastName": {"S": "Kent"},
           "age": {"N": "35"}
@@ -26,7 +24,6 @@
       "PutRequest": {
         "Item": {
           "emailAddress": {"S": "Tori@notARealMail.com"},
-          "ID": {"S": "OS42S"},
           "firstName": {"S": "Tori"},
           "lastName": {"S": "Ward"},
           "age": {"N": "35"}
@@ -37,7 +34,6 @@
       "PutRequest": {
         "Item": {
           "emailAddress": {"S": "Pamela@notARealMail.com"},
-          "ID": {"S": "6SZM5"},
           "firstName": {"S": "Pamela"},
           "lastName": {"S": "Wells"},
           "age": {"N": "63"}
@@ -48,7 +44,6 @@
       "PutRequest": {
         "Item": {
           "emailAddress": {"S": "Amirah@notARealMail.com"},
-          "ID": {"S": "S4JRC"},
           "firstName": {"S": "Amirah "},
           "lastName": {"S": "Downs"},
           "age": {"N": "91"}

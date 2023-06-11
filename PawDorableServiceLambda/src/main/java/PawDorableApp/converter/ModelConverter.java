@@ -18,7 +18,6 @@ public class ModelConverter {
     public ProfileModel toProfileModel(Profile profile){
 
         return ProfileModel.builder()
-                .withID(profile.getID())
                 .withEmailAddress(profile.getEmailAddress())
                 .withFirstName(profile.getFirstName())
                 .withLastName(profile.getLastName())
