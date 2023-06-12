@@ -18,7 +18,7 @@ public class RemoveActiveRentalActivity {
     private final ProfileDao profileDao;
 
     @Inject
-    RemoveActiveRentalActivity(ActiveRentalDao activeDao, RentalHistoryDao rentalDao, PetDao petDao, ProfileDao profileDao) {
+    public RemoveActiveRentalActivity(ActiveRentalDao activeDao, RentalHistoryDao rentalDao, PetDao petDao, ProfileDao profileDao) {
         this.activeDao = activeDao;
         this.rentalDao = rentalDao;
         this.petDao = petDao;
@@ -29,9 +29,15 @@ public class RemoveActiveRentalActivity {
 
         ActiveRental rentalEnded = activeDao.getActiveRental(getRequest.getRentalID());
         RentalHistory updateRentalHistory = rentalDao.UpdateRentalHistory(rentalEnded.getRentalHistory(), getRequest.getScore());
+
         String historyID = updateRentalHistory.getHistoryID();
-        petDao.addRentalHistory(updateRentalHistory.getPetID(), historyID);
-        profileDao.addProfileRentalHistory(updateRentalHistory.getProfileID(), historyID);
+        double newScore = updateRentalHistory.getScore();
+        String petID = updateRentalHistory.getPetID();
+
+        petDao.addRentalHistory(petID, historyID);
+        String profileID = updateRentalHistory.getProfileID();
+        profileDao.addProfileRentalHistory(profileID, historyID, newScore);
+        profileDao.deleteProfilerRental(profileID, petID);
 
         boolean result = activeDao.removeActiveRental(rentalEnded.getRentalID());
 

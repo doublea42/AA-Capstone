@@ -90,22 +90,30 @@ public class ProfileDao {
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }
-    public Profile addProfileRentalHistory(String profileID, String newRentalHistory){
+    public Profile addProfileRentalHistory(String profileID, String newRentalHistory, double score){
+
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> rentalHistory = selectedProfile.getRentalHistory();
+
         rentalHistory.add(newRentalHistory);
         selectedProfile.setRentalHistory(rentalHistory);
+
+        Set<String> tempFavList = selectedProfile.getFavoriteRental();
+        boolean isFavorite = tempFavList.contains(newRentalHistory);
+
+        if(isFavorite && score < 4.0){
+            tempFavList.remove(newRentalHistory);
+            selectedProfile.setFavoriteRental(tempFavList);
+        }
+        else if(!isFavorite && score > 3.9){
+            tempFavList.add(newRentalHistory);
+            selectedProfile.setFavoriteRental(tempFavList);
+        }
+
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }
-    public Profile addProfileFavorite(String profileID, String newPet){
-        Profile selectedProfile = this.getPofile(profileID);
-        Set<String> tempList = selectedProfile.getFavoriteRental();
-        tempList.add(newPet);
-        selectedProfile.setFavoriteRental(tempList);
-        dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
-    }
+
 
     public Profile deleteProfilePet(String profileID, String petID){
         Profile selectedProfile = this.getPofile(profileID);
@@ -120,14 +128,6 @@ public class ProfileDao {
         Set<String> tempList = selectedProfile.getRental();
         tempList.remove(petID);
         selectedProfile.setRental(tempList);
-        dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
-    }
-    public Profile deleteProfileFav(String profileID, String petID){
-        Profile selectedProfile = this.getPofile(profileID);
-        Set<String> tempList = selectedProfile.getFavoriteRental();
-        tempList.remove(petID);
-        selectedProfile.setFavoriteRental(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
     }

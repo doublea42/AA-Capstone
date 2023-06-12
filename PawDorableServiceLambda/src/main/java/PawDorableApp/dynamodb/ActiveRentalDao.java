@@ -43,15 +43,10 @@ public class ActiveRentalDao {
         return selectedActiveRental;
     }
 
-    public Boolean removeActiveRental(String ID){
-        ActiveRental tempActive = this.getActiveRental(ID);
-        tempActive.setRentalHistory(null);
-        tempActive.setRentalID(null);
-
-        if(this.getActiveRental(ID) == null){
-            return true;
-        }
-        return false;
+    public Boolean removeActiveRental(String activeRentalID){
+        ActiveRental tempActive = this.getActiveRental(activeRentalID);
+        dynamoDbMapper.delete(tempActive);
+        return this.getActiveRental(activeRentalID) == null;
     }
 
 }

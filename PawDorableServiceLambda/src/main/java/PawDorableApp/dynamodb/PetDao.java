@@ -9,15 +9,12 @@ import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Singleton
@@ -86,19 +83,19 @@ public class PetDao {
     }
 
 
-    public Pet updateAvailablePet(String ID, String available){
+    public Pet updateAvailablePet(String petID, String available){
 
         boolean isPetAvailable = Boolean.parseBoolean(available);
 
-        Pet selectedPet = this.getPet(ID);
+        Pet selectedPet = this.getPet(petID);
         selectedPet.setAvailable(isPetAvailable);
 
         dynamoDbMapper.save(selectedPet);
         return selectedPet;
     }
 
-    public Pet addRentalHistory (String ID, String rentalH) {
-        Pet selectedPet = this.getPet(ID);
+    public Pet addRentalHistory (String petID, String rentalH) {
+        Pet selectedPet = this.getPet(petID);
 
         Set<String> tempList = selectedPet.getRentalHistory();
         tempList.add(rentalH);
@@ -106,6 +103,13 @@ public class PetDao {
 
         dynamoDbMapper.save(selectedPet);
         return selectedPet;
+    }
+
+    public Boolean removePet(String petID){
+
+        Pet selectedPet = this.getPet(petID);
+        dynamoDbMapper.delete(selectedPet);
+        return this.getPet(petID) == null;
     }
 
 
