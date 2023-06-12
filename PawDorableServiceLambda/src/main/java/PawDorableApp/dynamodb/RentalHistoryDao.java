@@ -39,7 +39,7 @@ public class RentalHistoryDao {
 
         RentalHistory selectedRentalHistory = new RentalHistory();
 
-        selectedRentalHistory.setHistoryID(PawDorableServiceUtils.generateId());
+        selectedRentalHistory.setHistoryID("RH_" + PawDorableServiceUtils.generateId());
         selectedRentalHistory.setPetID(petID);
         selectedRentalHistory.setProfileID(profileID);
         selectedRentalHistory.setTimesRented(1);

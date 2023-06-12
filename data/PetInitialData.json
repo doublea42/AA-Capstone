@@ -3,7 +3,13 @@
     {
       "PutRequest": {
         "Item": {
-          "ID": {"S": "HEYH6"},
+          "ID": {"S": "PET_HEYH6"},
+          "kindOfPet": {"KindOfPet": "DOG"},
+          "name": {"S": "pony"},
+          "ownerEmail": {"S": "jhon@notARealMail.com"},
+          "age": {"S": "3"},
+          "gender": {"gender": "MALE"},
+          "available": {"boolean": ""}
         }
       }
     }

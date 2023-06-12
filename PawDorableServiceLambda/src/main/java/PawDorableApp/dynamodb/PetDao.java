@@ -63,7 +63,7 @@ public class PetDao {
 
         Pet selectedPet = new Pet();
 
-        String newID = PawDorableServiceUtils.generateId();
+        String newID = "PET_" + PawDorableServiceUtils.generateId();
         while(this.getPet(newID) != null){
             newID = PawDorableServiceUtils.generateId();
         }

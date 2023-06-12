@@ -37,7 +37,7 @@ public class ActiveRentalDao {
     public ActiveRental saveNewActiveRental(String rentalID){
 
         ActiveRental selectedActiveRental = new ActiveRental();
-        selectedActiveRental.setRentalID(PawDorableServiceUtils.generateId());
+        selectedActiveRental.setRentalID("AR_" + PawDorableServiceUtils.generateId());
         selectedActiveRental.setRentalHistory(rentalID);
 
         return selectedActiveRental;
