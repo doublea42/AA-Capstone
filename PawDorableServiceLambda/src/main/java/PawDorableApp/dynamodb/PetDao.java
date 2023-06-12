@@ -51,10 +51,12 @@ public class PetDao {
 
         if(kind == null || name == null || name.isEmpty()
                 || ownerEmail == null || ownerEmail.isEmpty()
-                || PawDorableServiceUtils.invalidAge(petAge)
+                || petAge > 10 || petAge < 2
                 || petsGender == null){
 
 
+            log.info("PetDao values  ---- > kind: {} name: {}, ownerEmail: {}, age: {}, gender: {}",
+                    kind, name, ownerEmail, petAge,petsGender);
 
             metricsPublisher.addCount(MetricsConstants.UPDATE_PET_INVALID_ATTRIBUTE_VALUE ,1);
             throw new PetInvalidValuesException("could not update pet with current values");
@@ -68,7 +70,10 @@ public class PetDao {
             newID = PawDorableServiceUtils.generateId();
         }
 
-        selectedPet.setRentalHistory(new HashSet<>());
+        Set<String> rentalHistory = new HashSet<>();
+        rentalHistory.add("0");
+
+        selectedPet.setRentalHistory(rentalHistory);
 
         selectedPet.setID(newID);
         selectedPet.setKindOfPet(kind);
@@ -98,8 +103,11 @@ public class PetDao {
         Pet selectedPet = this.getPet(petID);
 
         Set<String> tempList = selectedPet.getRentalHistory();
-        tempList.add(rentalH);
+        if(tempList.size() == 1){
+            tempList.remove("0");
+        }
         selectedPet.setRentalHistory(tempList);
+        tempList.add(rentalH);
 
         dynamoDbMapper.save(selectedPet);
         return selectedPet;

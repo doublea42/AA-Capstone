@@ -53,10 +53,21 @@ public class ProfileDao {
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
         selectedProfile.setAge(Integer.parseInt(age));
-        selectedProfile.setMyPets(new HashSet<>());
-        selectedProfile.setRental(new HashSet<>());
-        selectedProfile.setRentalHistory(new HashSet<>());
-        selectedProfile.setFavoriteRental(new HashSet<>());
+
+        Set<String> myPets = new HashSet<>();
+        Set<String> rental = new HashSet<>();
+        Set<String> rentalHistory = new HashSet<>();
+        Set<String> activeRental = new HashSet<>();
+        myPets.add("0");
+        rental.add("0");
+        rentalHistory.add("0");
+        activeRental.add("0");
+
+
+        selectedProfile.setMyPets(myPets);
+        selectedProfile.setRental(rental);
+        selectedProfile.setRentalHistory(rentalHistory);
+        selectedProfile.setFavoriteRental(activeRental);
 
 
         dynamoDbMapper.save(selectedProfile);
@@ -74,17 +85,18 @@ public class ProfileDao {
         return selectedProfile;
     }
 
-    public Profile addProfilePets(String profileID, String newPet){
+    public void addProfilePets(String profileID, String newPet){
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
+        this.checkempty(tempList);
         tempList.add(newPet);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
     }
     public Profile addProfileRental(String profileID, String newRent){
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
+        this.checkempty(tempList);
         tempList.add(newRent);
         selectedProfile.setRental(tempList);
         dynamoDbMapper.save(selectedProfile);
@@ -94,6 +106,7 @@ public class ProfileDao {
 
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> rentalHistory = selectedProfile.getRentalHistory();
+        this.checkempty(rentalHistory);
 
         rentalHistory.add(newRentalHistory);
         selectedProfile.setRentalHistory(rentalHistory);
@@ -103,9 +116,11 @@ public class ProfileDao {
 
         if(isFavorite && score < 4.0){
             tempFavList.remove(newRentalHistory);
+            this.checkempty(tempFavList);
             selectedProfile.setFavoriteRental(tempFavList);
         }
         else if(!isFavorite && score > 3.9){
+            this.checkempty(tempFavList);
             tempFavList.add(newRentalHistory);
             selectedProfile.setFavoriteRental(tempFavList);
         }
@@ -119,6 +134,7 @@ public class ProfileDao {
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         tempList.remove(petID);
+        this.checkempty(tempList);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
@@ -127,6 +143,7 @@ public class ProfileDao {
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
         tempList.remove(petID);
+        this.checkempty(tempList);
         selectedProfile.setRental(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
@@ -134,6 +151,14 @@ public class ProfileDao {
 
     private Boolean ageCheck(String age){
         return Integer.parseInt(age) > 18 || Integer.parseInt(age) < 100;
+    }
+    private void checkempty(Set<String> tempList){
+        if(tempList.size() == 1){
+            tempList.remove("0");
+        }
+        if(tempList.size() == 0){
+            tempList.add("0");
+        }
     }
 
 }
