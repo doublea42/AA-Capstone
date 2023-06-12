@@ -13,7 +13,7 @@ public class PetModel {
     private final int age;
     private final Gender gender;
     private final Set<String> rentalHistory;
-    private final boolean available;
+    private final Boolean available;
 
     public PetModel(String ID, KindOfPet kindOfPet, String name,
                     String ownerID, int age, Gender gender,
@@ -90,7 +90,7 @@ public class PetModel {
         private int age;
         private Gender gender;
         private Set<String> rentalHistory;
-        private boolean available;
+        private Boolean available;
 
         public Builder withID(String id){
             this.ID = id;

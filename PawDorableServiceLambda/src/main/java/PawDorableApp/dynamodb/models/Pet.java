@@ -4,9 +4,7 @@ package PawDorableApp.dynamodb.models;
 
 import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +19,7 @@ public class Pet {
     private int age;
     private Gender gender;
     private Set<String> rentalHistory;
-    private boolean available;
+    private Boolean available;
 
     @DynamoDBHashKey(attributeName = "ID")
     public String getID() {
@@ -31,6 +29,7 @@ public class Pet {
     public void setID(String ID) {
         this.ID = ID;
     }
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "kindOfPet")
     public KindOfPet getKindOfPet() {
         return kindOfPet;
@@ -67,6 +66,7 @@ public class Pet {
         this.age = age;
     }
 
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "gender")
     public Gender getGender() {
         return gender;
@@ -86,7 +86,7 @@ public class Pet {
     }
 
     @DynamoDBAttribute(attributeName = "available")
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 

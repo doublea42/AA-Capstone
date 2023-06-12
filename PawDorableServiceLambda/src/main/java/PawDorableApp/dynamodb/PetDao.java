@@ -46,7 +46,7 @@ public class PetDao {
         KindOfPet kind = PawDorableServiceUtils.petEnum(kindOfPet);
         int petAge = Integer.parseInt(age);
         Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
-        boolean isPetAvailable = Boolean.parseBoolean(available);
+        Boolean isPetAvailable = Boolean.parseBoolean(available);
 
 
         if(kind == null || name == null || name.isEmpty()
@@ -90,7 +90,7 @@ public class PetDao {
 
     public Pet updateAvailablePet(String petID, String available){
 
-        boolean isPetAvailable = Boolean.parseBoolean(available);
+        Boolean isPetAvailable = Boolean.parseBoolean(available);
 
         Pet selectedPet = this.getPet(petID);
         selectedPet.setAvailable(isPetAvailable);
