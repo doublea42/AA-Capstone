@@ -85,6 +85,7 @@ public class Pet {
         this.rentalHistory = rentalHistory;
     }
 
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     @DynamoDBAttribute(attributeName = "available")
     public Boolean isAvailable() {
         return available;

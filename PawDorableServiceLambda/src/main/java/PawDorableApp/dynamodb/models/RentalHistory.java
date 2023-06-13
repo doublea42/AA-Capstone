@@ -24,7 +24,6 @@ public class RentalHistory {
     public String getPetID() {
         return petID;
     }
-
     @DynamoDBAttribute(attributeName = "profileID")
     public String getProfileID() {
         return profileID;

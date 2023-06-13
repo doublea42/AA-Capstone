@@ -1,5 +1,6 @@
 package PawDorableApp.activity;
 
+import PawDorableApp.activity.request.CreateActiveRentalRequest;
 import PawDorableApp.activity.request.CreateRentalHistoryRequest;
 import PawDorableApp.activity.results.CreateActiveRentalResult;
 import PawDorableApp.converter.ModelConverter;
@@ -20,23 +21,22 @@ public class CreateActiveRentalActivity {
     private final ActiveRentalDao activeDao;
     private final RentalHistoryDao rentalDao;
     private final ProfileDao profileDao;
-    private final PawDorableApp.dynamodb.PetDao petDao;
 
     @Inject
-    public CreateActiveRentalActivity(ActiveRentalDao activeDao, RentalHistoryDao rentalDao, ProfileDao profileDao, PetDao petDao) {
+    public CreateActiveRentalActivity(ActiveRentalDao activeDao, RentalHistoryDao rentalDao,
+                                      ProfileDao profileDao) {
         this.activeDao = activeDao;
         this.rentalDao = rentalDao;
         this.profileDao = profileDao;
-        this.petDao = petDao;
     }
 
-    public CreateActiveRentalResult handleRequest(final CreateRentalHistoryRequest createRequest){
+    public CreateActiveRentalResult handleRequest(final CreateActiveRentalRequest createRequest){
         log.info("Received CreateActiveRentalRequest{}",createRequest);
 
         String petID = createRequest.getPetID();
         String profileID = createRequest.getProfileID();
 
-        RentalHistory newRentalHistory = rentalDao.saveNewRentalHistory(petID, profileID);
+        RentalHistory newRentalHistory = rentalDao.saveRentalHistory(petID, profileID);
 
         profileDao.addProfileRental(profileID, petID);
 

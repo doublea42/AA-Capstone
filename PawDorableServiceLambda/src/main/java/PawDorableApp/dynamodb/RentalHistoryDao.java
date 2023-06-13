@@ -6,11 +6,13 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.Map;
 
 @Singleton
 public class RentalHistoryDao {
@@ -33,6 +35,18 @@ public class RentalHistoryDao {
         RentalHistory selectedRentalHistory = this.dynamoDbMapper.load(RentalHistory.class, historyID);
         metricsPublisher.addCount(MetricsConstants.GET_RENTAL_HISTORY_NOT_FOUND_COUNT,0);
         return selectedRentalHistory;
+    }
+
+    public RentalHistory saveRentalHistory(String petID, String profileID){
+
+//        RentalHistory tempRentalHistory = new RentalHistory();
+//        tempRentalHistory.setPetID(petID);
+//        tempRentalHistory.setProfileID(profileID);
+//        DynamoDBQueryExpression<RentalHistory> queryExpression = new DynamoDBQueryExpression<RentalHistory>()
+//                .withExpressionAttributeValues().withExpressionAttributeValues(profileID);
+
+        return this.saveNewRentalHistory(petID, profileID);
+
     }
 
     public RentalHistory saveNewRentalHistory(String petID, String profileID){
