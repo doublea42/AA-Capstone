@@ -88,7 +88,7 @@ public class ProfileDao {
     public void addProfilePets(String profileID, String newPet){
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
-        this.checkempty(tempList);
+        this.checkEmpty(tempList);
         tempList.add(newPet);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
@@ -96,7 +96,7 @@ public class ProfileDao {
     public Profile addProfileRental(String profileID, String newRent){
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
-        this.checkempty(tempList);
+        this.checkEmpty(tempList);
         tempList.add(newRent);
         selectedProfile.setRental(tempList);
         dynamoDbMapper.save(selectedProfile);
@@ -106,7 +106,7 @@ public class ProfileDao {
 
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> rentalHistory = selectedProfile.getRentalHistory();
-        this.checkempty(rentalHistory);
+        this.checkEmpty(rentalHistory);
 
         rentalHistory.add(newRentalHistory);
         selectedProfile.setRentalHistory(rentalHistory);
@@ -116,11 +116,11 @@ public class ProfileDao {
 
         if(isFavorite && score < 4.0){
             tempFavList.remove(newRentalHistory);
-            this.checkempty(tempFavList);
+            this.checkEmpty(tempFavList);
             selectedProfile.setFavoriteRental(tempFavList);
         }
         else if(!isFavorite && score > 3.9){
-            this.checkempty(tempFavList);
+            this.checkEmpty(tempFavList);
             tempFavList.add(newRentalHistory);
             selectedProfile.setFavoriteRental(tempFavList);
         }
@@ -134,7 +134,7 @@ public class ProfileDao {
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         tempList.remove(petID);
-        this.checkempty(tempList);
+        this.checkEmpty(tempList);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
@@ -143,7 +143,7 @@ public class ProfileDao {
         Profile selectedProfile = this.getPofile(profileID);
         Set<String> tempList = selectedProfile.getRental();
         tempList.remove(petID);
-        this.checkempty(tempList);
+        this.checkEmpty(tempList);
         selectedProfile.setRental(tempList);
         dynamoDbMapper.save(selectedProfile);
         return selectedProfile;
@@ -152,11 +152,11 @@ public class ProfileDao {
     private Boolean ageCheck(String age){
         return Integer.parseInt(age) > 18 || Integer.parseInt(age) < 100;
     }
-    private void checkempty(Set<String> tempList){
+    private void checkEmpty(Set<String> tempList){
         if(tempList.size() == 1){
             tempList.remove("0");
         }
-        if(tempList.size() == 0){
+        if(tempList.isEmpty()){
             tempList.add("0");
         }
     }

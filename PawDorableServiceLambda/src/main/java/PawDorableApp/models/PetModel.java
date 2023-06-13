@@ -17,7 +17,7 @@ public class PetModel {
 
     public PetModel(String ID, KindOfPet kindOfPet, String name,
                     String ownerID, int age, Gender gender,
-                    Set<String> rentalHistory, boolean available) {
+                    Set<String> rentalHistory, Boolean available) {
         this.ID = ID;
         this.kindOfPet = kindOfPet;
         this.name = name;
@@ -56,7 +56,7 @@ public class PetModel {
         return rentalHistory;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
@@ -120,7 +120,7 @@ public class PetModel {
             this.rentalHistory = rentalHistory;
             return this;
         }
-        public Builder withAvailable(boolean available){
+        public Builder withAvailable(Boolean available){
             this.available = available;
             return this;
         }

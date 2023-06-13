@@ -2,6 +2,7 @@ package PawDorableApp.lambda;
 
 
 import PawDorableApp.activity.request.GetPetRequest;
+import PawDorableApp.activity.request.UpdateProfileRequest;
 import PawDorableApp.activity.results.GetPetResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -18,8 +19,16 @@ public class GetPetLambda extends LambdaActivityRunner<GetPetRequest, GetPetResu
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetPetRequest> input, Context context) {
         return super.runActivity(
-                () -> input.fromPath(path -> GetPetRequest.builder()
-                        .withID(path.get("ID")).build()),
+                () ->
+//                {
+//                  GetPetRequest unauthenticatedRequest = input.fromBody(GetPetRequest.class);
+//                    return GetPetRequest.builder()
+//                            .withID(unauthenticatedRequest.getID())
+//                            .build();
+                    GetPetRequest.builder()
+                            .withID(input.fromBody(GetPetRequest.class).getID())
+                            .build()
+                ,
                 (request,serviceComponent) ->
                 {
                     try {

@@ -319,7 +319,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /Pet/{id}
+            Path:  /Pet/
             Method: get
 
 

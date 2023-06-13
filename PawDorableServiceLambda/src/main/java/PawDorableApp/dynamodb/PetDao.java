@@ -46,7 +46,9 @@ public class PetDao {
         KindOfPet kind = PawDorableServiceUtils.petEnum(kindOfPet);
         int petAge = Integer.parseInt(age);
         Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
-        Boolean isPetAvailable = Boolean.parseBoolean(available);
+        Boolean isPetAvailable = this.isAvailableCheck(available);
+
+//        log.info("isPetAvailable ----------> {} class -----> type {}  ", isPetAvailable, isPetAvailable.getClass());
 
 
         if(kind == null || name == null || name.isEmpty()
@@ -90,7 +92,7 @@ public class PetDao {
 
     public Pet updateAvailablePet(String petID, String available){
 
-        Boolean isPetAvailable = Boolean.parseBoolean(available);
+        Boolean isPetAvailable = this.isAvailableCheck(available);
 
         Pet selectedPet = this.getPet(petID);
         selectedPet.setAvailable(isPetAvailable);
@@ -99,7 +101,7 @@ public class PetDao {
         return selectedPet;
     }
 
-    public Pet addRentalHistory (String petID, String rentalH) {
+    public void addRentalHistory (String petID, String rentalH) {
         Pet selectedPet = this.getPet(petID);
 
         Set<String> tempList = selectedPet.getRentalHistory();
@@ -110,7 +112,6 @@ public class PetDao {
         tempList.add(rentalH);
 
         dynamoDbMapper.save(selectedPet);
-        return selectedPet;
     }
 
     public Boolean removePet(String petID){
@@ -120,6 +121,11 @@ public class PetDao {
         return this.getPet(petID) == null;
     }
 
-
+    private Boolean isAvailableCheck(String check){
+        if(check.toLowerCase().equals("true")){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 
 }
