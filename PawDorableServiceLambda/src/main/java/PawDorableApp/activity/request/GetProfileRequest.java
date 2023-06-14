@@ -38,11 +38,6 @@ public class GetProfileRequest {
             this.emailAddress = email;
             return this;
         }
-
         public GetProfileRequest build(){return new GetProfileRequest(emailAddress);}
-
     }
-
-
-
 }

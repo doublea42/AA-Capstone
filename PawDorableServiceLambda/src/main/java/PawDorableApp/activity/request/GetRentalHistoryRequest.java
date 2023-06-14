@@ -7,20 +7,20 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class GetRentalHistoryRequest {
 //    private final Logger log = LogManager.getLogger();
 
-    private final String id;
+    private final String ID;
 
     public GetRentalHistoryRequest(String historyID) {
-        this.id = historyID;
+        this.ID = historyID;
     }
 
-    public String getId() {
-        return id;
+    public String getID() {
+        return ID;
     }
 
     @Override
     public String toString() {
         return "GetRentalRequest{" +
-                "historyID='" + id + '\'' +
+                "historyID='" + ID + '\'' +
                 '}';
     }
 

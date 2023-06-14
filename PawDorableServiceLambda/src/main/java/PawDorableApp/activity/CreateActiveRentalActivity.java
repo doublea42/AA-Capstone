@@ -1,11 +1,9 @@
 package PawDorableApp.activity;
 
 import PawDorableApp.activity.request.CreateActiveRentalRequest;
-import PawDorableApp.activity.request.CreateRentalHistoryRequest;
 import PawDorableApp.activity.results.CreateActiveRentalResult;
 import PawDorableApp.converter.ModelConverter;
 import PawDorableApp.dynamodb.ActiveRentalDao;
-import PawDorableApp.dynamodb.PetDao;
 import PawDorableApp.dynamodb.ProfileDao;
 import PawDorableApp.dynamodb.RentalHistoryDao;
 import PawDorableApp.dynamodb.models.ActiveRental;
@@ -40,7 +38,7 @@ public class CreateActiveRentalActivity {
 
         profileDao.addProfileRental(profileID, petID);
 
-        ActiveRental newActiveRental = activeDao.saveNewActiveRental(newRentalHistory.getHistoryID());
+        ActiveRental newActiveRental = activeDao.saveNewActiveRental(newRentalHistory.getID());
 
         ActiveRentalModel activeRentalModel = new ModelConverter().toActiveRentalModel(newActiveRental);
         return CreateActiveRentalResult.builder().withActiveRental(activeRentalModel).build();

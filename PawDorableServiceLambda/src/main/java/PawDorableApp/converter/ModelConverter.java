@@ -44,14 +44,14 @@ public class ModelConverter {
 
     public ActiveRentalModel toActiveRentalModel(ActiveRental activeRental){
         return ActiveRentalModel.builder()
-                .withRentalID(activeRental.getRentalID())
+                .withRentalID(activeRental.getID())
                 .withRentalHistory(activeRental.getRentalHistory())
                 .build();
     }
 
     public RentalHistoryModel toRentalHistoryModel(RentalHistory rental) {
         return RentalHistoryModel.builder()
-                .withHistoryID(rental.getHistoryID())
+                .withHistoryID(rental.getID())
                 .withPetID(rental.getPetID())
                 .withProfileID(rental.getProfileID())
                 .withTimesRented(rental.getTimesRented())

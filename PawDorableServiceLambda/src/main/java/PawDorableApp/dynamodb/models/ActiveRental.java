@@ -5,18 +5,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @DynamoDBTable(tableName = "activeRental")
 public class ActiveRental {
-    private String rentalID;
+    private String ID;
     private String rentalHistory;
 
     @DynamoDBHashKey(attributeName = "ID")
-    public String getRentalID() {
-        return rentalID;
+    public String getID() {
+        return ID;
     }
 
     @DynamoDBAttribute(attributeName = "rentalHistory")
@@ -24,8 +22,8 @@ public class ActiveRental {
         return rentalHistory;
     }
 
-    public void setRentalID(String rentalID) {
-        this.rentalID = rentalID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public void setRentalHistory(String rentalHistory) {
@@ -41,12 +39,12 @@ public class ActiveRental {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ActiveRental that = (ActiveRental) o;
-        return Objects.equals(rentalID, that.rentalID)
+        return Objects.equals(ID, that.ID)
                 && Objects.equals(rentalHistory, that.rentalHistory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rentalID, rentalHistory);
+        return Objects.hash(ID, rentalHistory);
     }
 }

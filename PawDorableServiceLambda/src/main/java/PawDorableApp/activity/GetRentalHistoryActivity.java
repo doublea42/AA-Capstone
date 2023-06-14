@@ -19,7 +19,7 @@ public class GetRentalHistoryActivity {
 
     public GetRentalHistoryResult handleRequest(final GetRentalHistoryRequest getRequest){
 
-        RentalHistory selectedRental = rentalDao.getRentalHistory(getRequest.getId());
+        RentalHistory selectedRental = rentalDao.getRentalHistory(getRequest.getID());
 
         RentalHistoryModel rentalModel = new ModelConverter().toRentalHistoryModel(selectedRental);
 

@@ -23,7 +23,7 @@ public class GetRentalHistoryLambda extends LambdaActivityRunner<GetRentalHistor
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetRentalHistoryRequest> input, Context context) {
         return super.runActivity(
                 () -> GetRentalHistoryRequest.builder()
-                        .withHistoryID(input.fromBody(GetRentalHistoryRequest.class).getId())
+                        .withHistoryID(input.fromBody(GetRentalHistoryRequest.class).getID())
                         .build(),
         (request,serviceComponent) ->
         {

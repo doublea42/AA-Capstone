@@ -7,15 +7,15 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "rentalHistory")
 public class RentalHistory {
-    private String historyID;
+    private String ID;
     private String petID;
     private String profileID;
     private int timesRented;
     private double score;
 
-    @DynamoDBHashKey(attributeName = "id")
-    public String getHistoryID() {
-        return historyID;
+    @DynamoDBHashKey(attributeName = "ID")
+    public String getID() {
+        return ID;
     }
 
     @DynamoDBAttribute(attributeName = "petID")
@@ -38,8 +38,8 @@ public class RentalHistory {
         return score;
     }
 
-    public void setHistoryID(String historyID) {
-        this.historyID = historyID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public void setPetID(String petID) {
@@ -69,13 +69,13 @@ public class RentalHistory {
         RentalHistory that = (RentalHistory) o;
         return timesRented == that.timesRented
                 && Double.compare(that.score, score) == 0
-                && Objects.equals(historyID, that.historyID)
+                && Objects.equals(ID, that.ID)
                 && Objects.equals(petID, that.petID)
                 && Objects.equals(profileID, that.profileID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(historyID, petID, profileID, timesRented, score);
+        return Objects.hash(ID, petID, profileID, timesRented, score);
     }
 }

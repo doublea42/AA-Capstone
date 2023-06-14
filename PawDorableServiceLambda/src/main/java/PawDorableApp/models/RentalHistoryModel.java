@@ -3,7 +3,7 @@ package PawDorableApp.models;
 import java.util.Objects;
 
 public class RentalHistoryModel {
-    private final String historyID;
+    private final String ID;
     private final String petID;
     private final String profileID;
     private final int timesRented;
@@ -12,15 +12,15 @@ public class RentalHistoryModel {
     public RentalHistoryModel(String historyID, String petID,
                               String profileID, int timesRented,
                               double score) {
-        this.historyID = historyID;
+        this.ID = historyID;
         this.petID = petID;
         this.profileID = profileID;
         this.timesRented = timesRented;
         this.score = score;
     }
 
-    public String getHistoryID() {
-        return historyID;
+    public String getID() {
+        return ID;
     }
 
     public String getPetID() {
@@ -46,14 +46,14 @@ public class RentalHistoryModel {
         RentalHistoryModel that = (RentalHistoryModel) o;
         return timesRented == that.timesRented
                 && Double.compare(that.score, score) == 0
-                && Objects.equals(historyID, that.historyID)
+                && Objects.equals(ID, that.ID)
                 && Objects.equals(petID, that.petID)
                 && Objects.equals(profileID, that.profileID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(historyID, petID, profileID, timesRented, score);
+        return Objects.hash(ID, petID, profileID, timesRented, score);
     }
 
     public static Builder builder(){
@@ -61,14 +61,14 @@ public class RentalHistoryModel {
     }
 
     public static class Builder{
-        private String historyID;
+        private String ID;
         private String petID;
         private String profileID;
         private int timesRented;
         private double score;
 
         public Builder withHistoryID(String historyID){
-            this.historyID = historyID;
+            this.ID = historyID;
             return this;
         }
         public Builder withPetID(String petID){
@@ -89,7 +89,7 @@ public class RentalHistoryModel {
         }
 
         public RentalHistoryModel build(){
-            return new RentalHistoryModel(historyID,petID,profileID,timesRented,score);
+            return new RentalHistoryModel(ID,petID,profileID,timesRented,score);
         }
     }
 

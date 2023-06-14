@@ -359,7 +359,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:   /History/
+            Path:   /history/
             Method: get
 
 #  GetPlaylistLambda:

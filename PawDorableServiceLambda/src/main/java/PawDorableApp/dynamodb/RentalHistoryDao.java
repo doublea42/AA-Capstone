@@ -6,13 +6,11 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Map;
 
 @Singleton
 public class RentalHistoryDao {
@@ -53,7 +51,7 @@ public class RentalHistoryDao {
 
         RentalHistory selectedRentalHistory = new RentalHistory();
 
-        selectedRentalHistory.setHistoryID("RH_" + PawDorableServiceUtils.generateId());
+        selectedRentalHistory.setID("RH_" + PawDorableServiceUtils.generateId());
         selectedRentalHistory.setPetID(petID);
         selectedRentalHistory.setProfileID(profileID);
         selectedRentalHistory.setTimesRented(1);
