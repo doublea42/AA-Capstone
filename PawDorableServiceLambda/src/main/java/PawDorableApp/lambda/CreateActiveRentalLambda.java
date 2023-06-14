@@ -16,22 +16,23 @@ public class CreateActiveRentalLambda extends LambdaActivityRunner<CreateActiveR
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateActiveRentalRequest> input, Context context) {
-        return super.runActivity(
-                () -> {
-                    CreateActiveRentalRequest createRequest = input.fromBody(CreateActiveRentalRequest.class);
-                        return CreateActiveRentalRequest.builder()
-                                .withPetID(createRequest.getPetID())
-                                .withProfileID(createRequest.getProfileID())
-                                .build();
-                },
-                (request,serviceComponent) ->{
-                    try{
-                        return serviceComponent.provideCreateActiveRentalActivity().handleRequest(request);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        throw e;
-                    }
-                }
-        );
+        return null;
+//                super.runActivity(
+//                () -> {
+//                    CreateActiveRentalRequest createRequest = input.fromBody(CreateActiveRentalRequest.class);
+//                        return CreateActiveRentalRequest.builder()
+//                                .withPetID(createRequest.getPetID())
+//                                .withProfileID(createRequest.getProfileID())
+//                                .build();
+//                },
+//                (request,serviceComponent) ->{
+//                    try{
+//                        return serviceComponent.provideCreateActiveRentalActivity().handleRequest(request);
+//                    }catch(Exception e){
+//                        e.printStackTrace();
+//                        throw e;
+//                    }
+//                }
+//        );
     }
 }

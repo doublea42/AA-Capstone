@@ -1,7 +1,7 @@
 package PawDorableApp.activity;
 
-import PawDorableApp.activity.request.GetRentalRequest;
-import PawDorableApp.activity.results.GetRentalResult;
+import PawDorableApp.activity.request.GetRentalHistoryRequest;
+import PawDorableApp.activity.results.GetRentalHistoryResult;
 import PawDorableApp.converter.ModelConverter;
 import PawDorableApp.dynamodb.RentalHistoryDao;
 import PawDorableApp.dynamodb.models.RentalHistory;
@@ -17,13 +17,13 @@ public class GetRentalHistoryActivity {
         this.rentalDao = rentalDao;
     }
 
-    public GetRentalResult handleRequest(final GetRentalRequest getRequest){
+    public GetRentalHistoryResult handleRequest(final GetRentalHistoryRequest getRequest){
 
-        RentalHistory selectedRental = rentalDao.getRentalHistory(getRequest.getHistoryID());
+        RentalHistory selectedRental = rentalDao.getRentalHistory(getRequest.getId());
 
         RentalHistoryModel rentalModel = new ModelConverter().toRentalHistoryModel(selectedRental);
 
-        return GetRentalResult.builder()
+        return GetRentalHistoryResult.builder()
                 .withRentalModel(rentalModel)
                 .build();
     }

@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@DynamoDBTable(tableName = "ActiveRental")
+@DynamoDBTable(tableName = "activeRental")
 public class ActiveRental {
     private String rentalID;
     private String rentalHistory;
 
-    @DynamoDBHashKey(attributeName = "rentalID")
+    @DynamoDBHashKey(attributeName = "ID")
     public String getRentalID() {
         return rentalID;
     }

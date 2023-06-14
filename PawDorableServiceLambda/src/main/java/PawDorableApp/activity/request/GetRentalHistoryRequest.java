@@ -2,39 +2,37 @@ package PawDorableApp.activity.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-@JsonDeserialize(builder = GetRentalRequest.Builder.class)
-public class GetRentalRequest {
+@JsonDeserialize(builder = GetRentalHistoryRequest.Builder.class)
+public class GetRentalHistoryRequest {
 //    private final Logger log = LogManager.getLogger();
 
-    private final String historyID;
+    private final String id;
 
-    public GetRentalRequest(String historyID) {
-        this.historyID = historyID;
+    public GetRentalHistoryRequest(String historyID) {
+        this.id = historyID;
     }
 
-    public String getHistoryID() {
-        return historyID;
+    public String getId() {
+        return id;
     }
 
     @Override
     public String toString() {
         return "GetRentalRequest{" +
-                "historyID='" + historyID + '\'' +
+                "historyID='" + id + '\'' +
                 '}';
     }
 
     public static Builder builder(){return new Builder();}
     @JsonPOJOBuilder
     public static class Builder{
-        private String historyID;
+        private String id;
 
         public Builder withHistoryID(String id){
-            this.historyID = id;
+            this.id = id;
             return this;
         }
-        public GetRentalRequest build(){return new GetRentalRequest(historyID);}
+        public GetRentalHistoryRequest build(){return new GetRentalHistoryRequest(id);}
     }
 }

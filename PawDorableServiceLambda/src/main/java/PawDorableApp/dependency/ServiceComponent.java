@@ -14,7 +14,7 @@ public interface ServiceComponent {
 //    GetActiveRentalActivity provideGetActiveRentalActivity();
     GetPetActivity provideGetPetActivity();
     GetProfileActivity provideGetProfileActivity();
-//    GetRentalHistoryActivity provideGetRentalHistoryActivity();
+    GetRentalHistoryActivity provideGetRentalHistoryActivity();
 //    RemoveActiveRentalActivity provideRemoveActiveRentalActivity();
 //    RemovePetActivity provideRemovePetActivity();
 //    UpdatePetActivity provideUpdatePetActivity();

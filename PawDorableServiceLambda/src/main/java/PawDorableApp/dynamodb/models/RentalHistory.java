@@ -1,9 +1,7 @@
 package PawDorableApp.dynamodb.models;
 
 import PawDorableApp.utils.PawDorableServiceUtils;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.Objects;
 
@@ -15,7 +13,7 @@ public class RentalHistory {
     private int timesRented;
     private double score;
 
-    @DynamoDBHashKey(attributeName = "historyID")
+    @DynamoDBHashKey(attributeName = "id")
     public String getHistoryID() {
         return historyID;
     }
@@ -34,6 +32,7 @@ public class RentalHistory {
         return timesRented;
     }
 
+//    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.)
     @DynamoDBAttribute(attributeName = "score")
     public double getScore() {
         return score;
