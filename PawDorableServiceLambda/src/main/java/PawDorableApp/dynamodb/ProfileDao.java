@@ -58,10 +58,10 @@ public class ProfileDao {
         Set<String> rental = new HashSet<>();
         Set<String> rentalHistory = new HashSet<>();
         Set<String> activeRental = new HashSet<>();
-        myPets.add("0");
-        rental.add("0");
-        rentalHistory.add("0");
-        activeRental.add("0");
+        this.checkEmpty(myPets);
+        this.checkEmpty(rental);
+        this.checkEmpty(rentalHistory);
+        this.checkEmpty(activeRental);
 
 
         selectedProfile.setMyPets(myPets);
@@ -93,14 +93,19 @@ public class ProfileDao {
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
     }
-    public Profile addProfileRental(String profileID, String newRent){
+    public void addProfileRental(String profileID, String newRent){
         Profile selectedProfile = this.getPofile(profileID);
+        log.info("----------------------> profile check1 profile {} <-------------------------", selectedProfile);
+
         Set<String> tempList = selectedProfile.getRental();
+        log.info("----------------------> profile check2 list {} <-------------------------", tempList);
         this.checkEmpty(tempList);
         tempList.add(newRent);
+        log.info("----------------------> profile check3 list {} <-------------------------", tempList);
         selectedProfile.setRental(tempList);
+        log.info("----------------------> profile check4 profile {} <-------------------------", selectedProfile);
+
         dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
     }
     public Profile addProfileRentalHistory(String profileID, String newRentalHistory, double score){
 
@@ -153,11 +158,12 @@ public class ProfileDao {
         return Integer.parseInt(age) > 18 || Integer.parseInt(age) < 100;
     }
     private void checkEmpty(Set<String> tempList){
+        String temp = "0";
         if(tempList.size() == 1){
-            tempList.remove("0");
+            tempList.remove(temp);
         }
         if(tempList.isEmpty()){
-            tempList.add("0");
+            tempList.add(temp);
         }
     }
 

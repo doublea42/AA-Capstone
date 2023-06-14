@@ -34,13 +34,23 @@ public class CreateActiveRentalActivity {
         String petID = createRequest.getPetID();
         String profileID = createRequest.getProfileID();
 
+        log.info("----------------------> check1 <-------------------------");
+
         RentalHistory newRentalHistory = rentalDao.saveRentalHistory(petID, profileID);
+        log.info("----------------------> check2 <-------------------------");
+
 
         profileDao.addProfileRental(profileID, petID);
+        log.info("----------------------> check3 <-------------------------");
+
 
         ActiveRental newActiveRental = activeDao.saveNewActiveRental(newRentalHistory.getID());
+        log.info("----------------------> check4 <-------------------------");
+
 
         ActiveRentalModel activeRentalModel = new ModelConverter().toActiveRentalModel(newActiveRental);
+        log.info("----------------------> check5 <-------------------------");
+
         return CreateActiveRentalResult.builder().withActiveRental(activeRentalModel).build();
     }
 }

@@ -8,13 +8,13 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {DaoModule.class, MetricsModule.class})
 public interface ServiceComponent {
-    CreateActiveRentalActivity provideCreateActiveRentalActivity();
-    CreatePetActivity provideCreatePetActivity();
-    CreateProfileActivity provideCreateProfileActivity();
-//    GetActiveRentalActivity provideGetActiveRentalActivity();
     GetPetActivity provideGetPetActivity();
     GetProfileActivity provideGetProfileActivity();
     GetRentalHistoryActivity provideGetRentalHistoryActivity();
+    GetActiveRentalActivity provideGetActiveRentalActivity();
+    CreatePetActivity provideCreatePetActivity();
+    CreateProfileActivity provideCreateProfileActivity();
+    CreateActiveRentalActivity provideCreateActiveRentalActivity();
 //    RemoveActiveRentalActivity provideRemoveActiveRentalActivity();
 //    RemovePetActivity provideRemovePetActivity();
 //    UpdatePetActivity provideUpdatePetActivity();

@@ -10,7 +10,7 @@
           "myPets": {
             "SS": ["PET_0001"]
           },
-          "rental ": {
+          "rental": {
             "SS": ["PET_0002"]
           },
           "rentalHistory": {
@@ -32,7 +32,7 @@
           "myPets": {
             "SS": ["PET_0002"]
           },
-          "rental ": {
+          "rental": {
             "SS": ["PET_0003"]
           },
           "rentalHistory": {
@@ -54,7 +54,7 @@
           "myPets": {
             "SS": ["PET_0005"]
           },
-          "rental ": {
+          "rental": {
             "SS": ["PET_0004"]
           },
           "rentalHistory": {
@@ -76,7 +76,7 @@
           "myPets": {
             "SS": ["PET_0003"]
           },
-          "rental ": {
+          "rental": {
             "SS": ["PET_0005"]
           },
           "rentalHistory": {
@@ -98,7 +98,7 @@
           "myPets": {
             "SS": ["PET_0004","PET_0006","PET_0007"]
           },
-          "rental ": {
+          "rental": {
             "SS": ["PET_0001"]
           },
           "rentalHistory": {
