@@ -1,0 +1,44 @@
+{
+  "activeRental": [
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S":  "AR_RH_0001"},
+          "rentalHistory": {"S":  "RH_0001"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S":  "AR_RH_0002"},
+          "rentalHistory": {"S":  "RH_0002"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S":  "AR_RH_0003"},
+          "rentalHistory": {"S":  "RH_0003"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S":  "AR_RH_0004"},
+          "rentalHistory": {"S":  "RH_0004"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S":  "AR_RH_0005"},
+          "rentalHistory": {"S":  "RH_0005"}
+        }
+      }
+    }
+  ]
+}

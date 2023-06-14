@@ -26,19 +26,19 @@ public class CreateProfileActivity {
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest){
         log.info("Received CreateProfileRequest{}", createProfileRequest);
 
-        if(!PawDorableServiceUtils.isValidString(createProfileRequest.getFirstName())
-                || !PawDorableServiceUtils.isValidString(createProfileRequest.getLastName())){
+        if(PawDorableServiceUtils.invalidString(createProfileRequest.getFirstName())
+                || PawDorableServiceUtils.invalidString(createProfileRequest.getLastName())){
             throw new ProfileInvalidValuesException("Your Name cannot contain illegal characters");
         }
-        if(!PawDorableServiceUtils.validAge(Integer.parseInt(createProfileRequest.getAge()))){
+        if(PawDorableServiceUtils.invalidAge(Integer.parseInt(createProfileRequest.getAge()))){
             throw new ProfileInvalidValuesException("Your age is out range");
         }
 
-        Profile newProfile = profileDao.saveProfile(true,"", createProfileRequest.getEmailAddress(),
-                createProfileRequest.getFirstName(), createProfileRequest.getLastName(), createProfileRequest.getAge(),
-               null, null, null, null);
+        Profile newProfile = profileDao.saveNewProfile(createProfileRequest.getEmailAddress(),
+                createProfileRequest.getFirstName(), createProfileRequest.getLastName(), createProfileRequest.getAge());
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(newProfile);
+
         return CreateProfileResult.builder()
                 .withProfile(profileModel)
                 .build();

@@ -1,0 +1,116 @@
+{
+  "pet": [
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0001"},
+          "kindOfPet": {"S": "DOG"},
+          "name": {"S": "pony"},
+          "ownerEmail": {"S": "jhon@notARealMail.com"},
+          "age": {"N": "3"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0005"]
+          },
+          "available": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0002"},
+          "kindOfPet": {"S": "DOG"},
+          "name": {"S": "Georgie"},
+          "ownerEmail": {"S": "Dylan@notARealMail.com"},
+          "age": {"N": "4"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0001"]
+          },
+          "available": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0003"},
+          "kindOfPet": {"S": "CAT"},
+          "name": {"S": "Cherokee"},
+          "ownerEmail": {"S": "Pamela@notARealMail.com"},
+          "age": {"N": "5"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0002"]
+          },
+          "available": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0004"},
+          "kindOfPet": {"S": "CAT"},
+          "name": {"S": "Chocolate"},
+          "ownerEmail": {"S": "Amirah@notARealMail.com"},
+          "age": {"N": "6"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0003"]
+          },
+          "available": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0005"},
+          "kindOfPet": {"S": "CAT"},
+          "name": {"S": "Dutchess"},
+          "ownerEmail": {"S": "Tori@notARealMail.com"},
+          "age": {"N": "7"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0004"]
+          },
+          "available": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0006"},
+          "kindOfPet": {"S": "CAT"},
+          "name": {"S": "Misha"},
+          "ownerEmail": {"S": "Amirah@notARealMail.com"},
+          "age": {"N": "6"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["0"]
+          },
+          "available": {"BOOL": true}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "ID": {"S": "PET_0007"},
+          "kindOfPet": {"S": "CAT"},
+          "name": {"S": "Reilly"},
+          "ownerEmail": {"S": "Amirah@notARealMail.com"},
+          "age": {"N": "6"},
+          "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["0"]
+          },
+          "available": {"BOOL": true}
+        }
+      }
+    }
+  ]
+}

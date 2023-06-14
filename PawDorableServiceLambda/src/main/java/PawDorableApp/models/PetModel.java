@@ -2,25 +2,26 @@ package PawDorableApp.models;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class PetModel {
 
     private final String ID;
-    private final Enum<KindOfPet> kindOfPet;
+    private final KindOfPet kindOfPet;
     private final String name;
-    private final String ownerID;
+    private final String ownerEmail;
     private final int age;
-    private final Enum<Gender> gender;
-    private final List<String> rentalHistory;
-    private final boolean available;
+    private final Gender gender;
+    private final Set<String> rentalHistory;
+    private final Boolean available;
 
-    public PetModel(String ID, Enum<KindOfPet> kindOfPet, String name,
-                    String ownerID, int age, Enum<Gender> gender,
-                    List<String> rentalHistory, boolean available) {
+    public PetModel(String ID, KindOfPet kindOfPet, String name,
+                    String ownerID, int age, Gender gender,
+                    Set<String> rentalHistory, Boolean available) {
         this.ID = ID;
         this.kindOfPet = kindOfPet;
         this.name = name;
-        this.ownerID = ownerID;
+        this.ownerEmail = ownerID;
         this.age = age;
         this.gender = gender;
         this.rentalHistory = rentalHistory;
@@ -31,7 +32,7 @@ public class PetModel {
         return ID;
     }
 
-    public Enum<KindOfPet> getKindOfPet() {
+    public KindOfPet getKindOfPet() {
         return kindOfPet;
     }
 
@@ -39,8 +40,8 @@ public class PetModel {
         return name;
     }
 
-    public String getOwnerID() {
-        return ownerID;
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
     public int getAge() {
@@ -51,11 +52,11 @@ public class PetModel {
         return gender;
     }
 
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
@@ -69,33 +70,33 @@ public class PetModel {
                 && Objects.equals(ID, petModel.ID)
                 && Objects.equals(kindOfPet, petModel.kindOfPet)
                 && Objects.equals(name, petModel.name)
-                && Objects.equals(ownerID, petModel.ownerID)
+                && Objects.equals(ownerEmail, petModel.ownerEmail)
                 && Objects.equals(gender, petModel.gender)
                 && Objects.equals(rentalHistory, petModel.rentalHistory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, kindOfPet, name, ownerID, age, gender, rentalHistory, available);
+        return Objects.hash(ID, kindOfPet, name, ownerEmail, age, gender, rentalHistory, available);
     }
 
     public static Builder builder(){return  new Builder();}
 
     public static class Builder{
         private String ID;
-        private Enum<KindOfPet> kindOfPet;
+        private KindOfPet kindOfPet;
         private String petName;
-        private String ownerID;
+        private String ownerEmail;
         private int age;
-        private Enum<Gender> gender;
-        private List<String> rentalHistory;
-        private boolean available;
+        private Gender gender;
+        private Set<String> rentalHistory;
+        private Boolean available;
 
         public Builder withID(String id){
             this.ID = id;
             return this;
         }
-        public Builder withKindOfPet(Enum<KindOfPet> kind){
+        public Builder withKindOfPet(KindOfPet kind){
             this.kindOfPet = kind;
             return this;
         }
@@ -103,28 +104,28 @@ public class PetModel {
             this.petName = name;
             return this;
         }
-        public Builder withOwnerID(String owner){
-            this.ownerID = owner;
+        public Builder withOwnerEmail(String owner){
+            this.ownerEmail = owner;
             return this;
         }
         public Builder withAge(int age){
             this.age = age;
             return this;
         }
-        public Builder withGender(Enum<Gender> gender){
+        public Builder withGender(Gender gender){
             this.gender = gender;
             return this;
         }
-        public Builder withRentalHistory(List<String> rentalHistory){
+        public Builder withRentalHistory(Set<String> rentalHistory){
             this.rentalHistory = rentalHistory;
             return this;
         }
-        public Builder withAvailable(boolean available){
+        public Builder withAvailable(Boolean available){
             this.available = available;
             return this;
         }
         public PetModel build(){
-            return new PetModel(ID,kindOfPet,petName,ownerID,age,gender,rentalHistory,available);
+            return new PetModel(ID,kindOfPet,petName,ownerEmail,age,gender,rentalHistory,available);
         }
     }
 

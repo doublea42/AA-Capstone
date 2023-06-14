@@ -4,23 +4,22 @@ package PawDorableApp.dynamodb.models;
 
 import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-@DynamoDBTable(tableName = "Pet")
+@DynamoDBTable(tableName = "pet")
 public class Pet {
     private String ID;
-    private Enum<KindOfPet> kindOfPet;
+    private KindOfPet kindOfPet;
     private String name;
-    private String ownerID;
+    private String ownerEmail;
     private int age;
-    private Enum<Gender> gender;
-    private List<String> rentalHistory;
-    private boolean available;
+    private Gender gender;
+    private Set<String> rentalHistory;
+    private Boolean available;
 
     @DynamoDBHashKey(attributeName = "ID")
     public String getID() {
@@ -30,12 +29,13 @@ public class Pet {
     public void setID(String ID) {
         this.ID = ID;
     }
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "kindOfPet")
-    public Enum<KindOfPet> getKindOfPet() {
+    public KindOfPet getKindOfPet() {
         return kindOfPet;
     }
 
-    public void setKindOfPet(Enum<KindOfPet> kindOfPet) {
+    public void setKindOfPet(KindOfPet kindOfPet) {
         this.kindOfPet = kindOfPet;
     }
 
@@ -48,13 +48,13 @@ public class Pet {
         this.name = name;
     }
 
-    @DynamoDBAttribute(attributeName = "ownerID")
-    public String getOwnerID() {
-        return ownerID;
+    @DynamoDBAttribute(attributeName = "ownerEmail")
+    public String getOwnerEmail() {
+        return ownerEmail;
     }
 
-    public void setOwnerID(String ownerID) {
-        this.ownerID = ownerID;
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 
     @DynamoDBAttribute(attributeName = "age")
@@ -66,30 +66,32 @@ public class Pet {
         this.age = age;
     }
 
+    @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "gender")
-    public Enum<Gender> getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Enum<Gender> gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
     @DynamoDBAttribute(attributeName = "rentalHistory")
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
-    public void setRentalHistory(List<String> rentalHistory) {
+    public void setRentalHistory(Set<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
 
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     @DynamoDBAttribute(attributeName = "available")
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(Boolean available) {
         this.available = available;
     }
 
@@ -104,12 +106,12 @@ public class Pet {
                 && Objects.equals(ID, pet.ID)
                 && Objects.equals(kindOfPet, pet.kindOfPet)
                 && Objects.equals(name, pet.name)
-                && Objects.equals(ownerID, pet.ownerID)
+                && Objects.equals(ownerEmail, pet.ownerEmail)
                 && Objects.equals(gender, pet.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID, kindOfPet, name, ownerID, age, gender, available);
+        return Objects.hash(ID, kindOfPet, name, ownerEmail, age, gender, available);
     }
 }

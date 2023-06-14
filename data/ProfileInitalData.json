@@ -1,0 +1,115 @@
+{
+  "profile": [
+    {
+      "PutRequest": {
+        "Item": {
+          "emailAddress": {"S": "jhon@notARealMail.com"},
+          "firstName": {"S": "Jhon"},
+          "lastName": {"S": "Smith"},
+          "age": {"N": "35"},
+          "myPets": {
+            "SS": ["PET_0001"]
+          },
+          "rental": {
+            "SS": ["PET_0002"]
+          },
+          "rentalHistory": {
+            "SS": ["RH_0001"]
+          },
+          "favoriteRental": {
+            "SS": ["RH_0001"]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "emailAddress": {"S": "Dylan@notARealMail.com"},
+          "firstName": {"S": "Dylan"},
+          "lastName": {"S": "Kent"},
+          "age": {"N": "35"},
+          "myPets": {
+            "SS": ["PET_0002"]
+          },
+          "rental": {
+            "SS": ["PET_0003"]
+          },
+          "rentalHistory": {
+            "SS": ["RH_0002"]
+          },
+          "favoriteRental": {
+            "SS": ["RH_0002"]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "emailAddress": {"S": "Tori@notARealMail.com"},
+          "firstName": {"S": "Tori"},
+          "lastName": {"S": "Ward"},
+          "age": {"N": "35"},
+          "myPets": {
+            "SS": ["PET_0005"]
+          },
+          "rental": {
+            "SS": ["PET_0004"]
+          },
+          "rentalHistory": {
+            "SS": ["RH_0003"]
+          },
+          "favoriteRental": {
+            "SS": ["RH_0003"]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "emailAddress": {"S": "Pamela@notARealMail.com"},
+          "firstName": {"S": "Pamela"},
+          "lastName": {"S": "Wells"},
+          "age": {"N": "63"},
+          "myPets": {
+            "SS": ["PET_0003"]
+          },
+          "rental": {
+            "SS": ["PET_0005"]
+          },
+          "rentalHistory": {
+            "SS": ["RH_0004"]
+          },
+          "favoriteRental": {
+            "SS": ["RH_0004"]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "emailAddress": {"S": "Amirah@notARealMail.com"},
+          "firstName": {"S": "Amirah "},
+          "lastName": {"S": "Downs"},
+          "age": {"N": "91"},
+          "myPets": {
+            "SS": ["PET_0004","PET_0006","PET_0007"]
+          },
+          "rental": {
+            "SS": ["PET_0001"]
+          },
+          "rentalHistory": {
+            "SS": ["RH_0005"]
+          },
+          "favoriteRental": {
+            "SS": ["RH_0005"]
+          }
+        }
+      }
+    }
+  ]
+}
+

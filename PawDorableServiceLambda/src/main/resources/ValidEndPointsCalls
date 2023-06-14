@@ -1,0 +1,20 @@
+
+Create Profile
+
+curl -X POST http://127.0.0.1:3000/profile/create \
+-H 'Authorization: Bearer <token>' \
+-d '{"firstName": " ", "lastName": "", "age": ""}'
+
+Get Profile
+
+curl -X GET  http://127.0.0.1:3000/profile/{emailAddress} \
+-H 'Authorization: Bearer <token>'
+
+update Profile
+
+curl -X PUT http://127.0.0.1:3000/Profile/update/{emailAddress} \
+-H 'Authorization: Bearer <token> \
+-d '{"firstName": "", "lastName": "", "age": ""}'
+
+create Pet
+

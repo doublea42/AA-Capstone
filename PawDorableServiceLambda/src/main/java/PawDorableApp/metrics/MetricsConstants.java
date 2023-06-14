@@ -4,22 +4,15 @@ public class MetricsConstants {
     public static final String SERVICE = "Service";
     public static final String SERVICE_NAME = "PawDorableService";
     public static final String NAMESPACE_NAME = "U3/PawDorableService";
-    public static final String GETP_ROFILE_PROFILE_NOT_FOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
+    public static final String GET_PROFILE_PROFILE_NOT_FOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
     public static final String UPDATE_PROFILE_INVALID_ATTRIBUTE_COUNT = "UpdateProfile.ProfileInvalidAttributeException.Count";
-    public static final String GETPET_PETNOTFOUND_COUNT = "GetPet.PetNotFoundException.Count";
-    public static final String UPDATEPET_INVALIDATTRIBUTEVALUE = "UpdatePet.PetInvalidAttributeException.Count";
+    public static final String GET_PET_PET_NOT_FOUND_COUNT = "GetPet.PetNotFoundException.Count";
+    public static final String UPDATE_PET_INVALID_ATTRIBUTE_VALUE = "UpdatePet.PetInvalidAttributeException.Count";
+    public static final String GET_RENTAL_HISTORY_NOT_FOUND_COUNT = "getRentalHistory.rentalHistoryNotFoundException.count";
+    public static final String UPDATE_RENTAL_HISTORY_INVALID_ATTRIBUTE_VALUE = "UpdateRentalHistory.PetInvalidAttributeException.Count";
+
+    public static final String GET_ACTIVE_RENTAL_HISTORY_NOT_FOUND_COUNT = "getActiveRentalHistory.ActiveRentalHistoryNotFoundException.count";
+    public static final String UPDATE_ACTIVE_RENTAL_HISTORY_INVALID_ATTRIBUTE_VALUE = "UpdateActiveRentalHistory.PetInvalidAttributeException.Count";
 
 
-
-//    public static final String GETPROFILE_PROFILENOTFOUND_COUNT = "GetProfile.ProfileNotFoundException.Count";
-//    public static final String GETEVENT_EVENTNOTFOUND_COUNT = "GetEvent.EventNotFoundException.Count";
-//    public static final String UPDATEEVENT_INVALIDATTRIBUTEVALUE_COUNT =
-//            "UpdateEvent.InvalidAttributeValueException.Count";
-//    public static final String SERVICE = "Service";
-//    public static final String SERVICE_NAME = "PawDorableService";
-//    public static final String NAMESPACE_NAME = "U3/PawDorableService";
-//    public static final String UPDATEEVENT_INVALIDATTRIBUTECHANGE_COUNT =
-//            "UpdateEvent.InvalidAttributeValueException.Count";
-//    public static final String UPDATEPROFILE_INVALIDATTRIBUTECHANGE_COUNT = "UpdateProfile.InvalidAttributeChangeException.Count";
-//    public static final String UPDATEPROFILE_INVALIDATTRIBUTEVALUE_COUNT = "UpdateProfile.InvalidAttributeValueException.Count";
 }

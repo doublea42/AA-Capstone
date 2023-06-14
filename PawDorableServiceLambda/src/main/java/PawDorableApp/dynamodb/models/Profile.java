@@ -1,7 +1,7 @@
 package PawDorableApp.dynamodb.models;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
@@ -13,27 +13,17 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 public class Profile {
 
     private  String emailAddress;
-    private String ID;
     private String firstName;
     private String lastName;
     private int age;
-    private List<String> myPets;
-    private List<String> rental;
-    private List<String> rentalHistory;
-    private List<String> favoriteRental;
+    private Set<String> myPets;
+    private Set<String> rental;
+    private Set<String> rentalHistory;
+    private Set<String> favoriteRental;
 
     @DynamoDBHashKey(attributeName = "emailAddress")
     public String getEmailAddress() {
         return emailAddress;
-    }
-
-    @DynamoDBAttribute(attributeName = "ID")
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -64,35 +54,35 @@ public class Profile {
         this.age = age;
     }
     @DynamoDBAttribute(attributeName = "myPets")
-    public List<String> getMyPets() {
+    public Set<String> getMyPets() {
         return myPets;
     }
 
-    public void setMyPets(List<String> myPets) {
+    public void setMyPets(Set<String> myPets) {
         this.myPets = myPets;
     }
     @DynamoDBAttribute(attributeName = "rental")
-    public List<String> getRental() {
+    public Set<String> getRental() {
         return rental;
     }
 
-    public void setRental(List<String> rental) {
+    public void setRental(Set<String> rental) {
         this.rental = rental;
     }
     @DynamoDBAttribute(attributeName = "rentalHistory")
-    public List<String> getRentalHistory() {
+    public Set<String> getRentalHistory() {
         return rentalHistory;
     }
 
-    public void setRentalHistory(List<String> rentalHistory) {
+    public void setRentalHistory(Set<String> rentalHistory) {
         this.rentalHistory = rentalHistory;
     }
     @DynamoDBAttribute(attributeName = "favoriteRental")
-    public List<String> getFavoriteRental() {
+    public Set<String> getFavoriteRental() {
         return favoriteRental;
     }
 
-    public void setFavoriteRental(List<String> favoriteRental) {
+    public void setFavoriteRental(Set<String> favoriteRental) {
         this.favoriteRental = favoriteRental;
     }
 
@@ -105,13 +95,12 @@ public class Profile {
         if (o == null || getClass() != o.getClass()) return false;
         Profile profile = (Profile) o;
         return age == profile.age && emailAddress.equals(profile.emailAddress)
-                && ID.equals(profile.ID) && firstName.equals(profile.firstName)
                 && lastName.equals(profile.lastName)
                 && Objects.equals(myPets, profile.myPets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailAddress, ID, firstName, lastName, age, myPets);
+        return Objects.hash(emailAddress, firstName, lastName, age, myPets);
     }
 }

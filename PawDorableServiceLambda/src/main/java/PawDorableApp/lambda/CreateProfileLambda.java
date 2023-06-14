@@ -20,22 +20,32 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateProfileRequest> input, Context context) {
+//        log.info("create profile input --------> {}",input);
         return super.runActivity(
                 () -> {
-//                    log.info("--------------> lambda 1{} <------------------", input);
-                    CreateProfileRequest unauthenticatedRequest = input.fromBody(CreateProfileRequest.class);
-//                    log.info("--------------> lambda 2 request body <------------------", unauthenticatedRequest.toString());
-                    return input.fromUserClaims(claims ->
-                            CreateProfileRequest.builder()
-                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())
-//                                    .withEmail(claims.get("email"))
-                                    .withFirstName(unauthenticatedRequest.getFirstName())
-                                    .withLastName(unauthenticatedRequest.getLastName())
-                                    .withAge(unauthenticatedRequest.getAge())
-                                    .build());
+                    try {
+                        CreateProfileRequest unauthenticatedRequest = input.fromBody(CreateProfileRequest.class);
+                        return input.fromUserClaims(claims ->
+                                CreateProfileRequest.builder()
+//                                    .withEmailAddress(unauthenticatedRequest.getEmailAddress())
+                                        .withEmailAddress(claims.get("email"))
+                                        .withFirstName(unauthenticatedRequest.getFirstName())
+                                        .withLastName(unauthenticatedRequest.getLastName())
+                                        .withAge(unauthenticatedRequest.getAge())
+                                        .build());
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        throw e;
+                    }
                 },
-                (request,serviceComponent) ->
-                        serviceComponent.provideCreateProfileActivity().handleRequest(request)
+                (request,serviceComponent)-> {
+                    try{
+                        return serviceComponent.provideCreateProfileActivity().handleRequest(request);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        throw e;
+                    }
+                }
         );
     }
 }
