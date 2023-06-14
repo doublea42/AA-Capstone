@@ -6,11 +6,13 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 @Singleton
 public class RentalHistoryDao {
@@ -37,31 +39,30 @@ public class RentalHistoryDao {
 
     public RentalHistory saveRentalHistory(String petID, String profileID){
 
-//        RentalHistory tempRentalHistory = new RentalHistory();
-//        tempRentalHistory.setPetID(petID);
-//        tempRentalHistory.setProfileID(profileID);
-//        DynamoDBQueryExpression<RentalHistory> queryExpression = new DynamoDBQueryExpression<RentalHistory>()
-//                .withExpressionAttributeValues().withExpressionAttributeValues(profileID);
+        RentalHistory selectedRentalHistory = this.findRentalHistory(petID, profileID);
 
-        return this.saveNewRentalHistory(petID, profileID);
+        if(selectedRentalHistory == null){
+            selectedRentalHistory = this.saveNewRentalHistory(petID,profileID);
+        }
 
+        return selectedRentalHistory;
     }
 
-    public RentalHistory saveNewRentalHistory(String petID, String profileID){
+    private RentalHistory saveNewRentalHistory(String petID, String profileID){
 
         RentalHistory selectedRentalHistory = new RentalHistory();
 
         selectedRentalHistory.setID("RH_" + PawDorableServiceUtils.generateId());
         selectedRentalHistory.setPetID(petID);
         selectedRentalHistory.setProfileID(profileID);
-        selectedRentalHistory.setTimesRented(1);
+        selectedRentalHistory.setTimesRented(0);
         selectedRentalHistory.setScore(1.0);
 
         dynamoDbMapper.save(selectedRentalHistory);
         return selectedRentalHistory;
     }
 
-    public RentalHistory UpdateRentalHistory(String ID, String score){
+    public void UpdateRentalHistory(String ID, String score){
 
         RentalHistory selectedRentalHistory = this.getRentalHistory(ID);
         int newScore = Integer.parseInt(score);
@@ -72,6 +73,20 @@ public class RentalHistoryDao {
         selectedRentalHistory.setScore(updateScore);
 
         dynamoDbMapper.save(selectedRentalHistory);
+    }
+
+    public RentalHistory findRentalHistory(String petID, String profileID){
+
+        RentalHistory selectedRentalHistory = null;
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<RentalHistory> searchList = dynamoDbMapper.scan(RentalHistory.class, scanExpression);
+
+        for (RentalHistory tempRentalHistory : searchList){
+            if( petID.equals(tempRentalHistory.getPetID()) && profileID.equals(tempRentalHistory.getProfileID())){
+                selectedRentalHistory = tempRentalHistory;
+                break;
+            }
+        }
         return selectedRentalHistory;
     }
 

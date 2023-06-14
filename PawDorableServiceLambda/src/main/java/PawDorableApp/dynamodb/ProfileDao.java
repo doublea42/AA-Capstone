@@ -95,15 +95,11 @@ public class ProfileDao {
     }
     public void addProfileRental(String profileID, String newRent){
         Profile selectedProfile = this.getPofile(profileID);
-        log.info("----------------------> profile check1 profile {} <-------------------------", selectedProfile);
 
         Set<String> tempList = selectedProfile.getRental();
-        log.info("----------------------> profile check2 list {} <-------------------------", tempList);
         this.checkEmpty(tempList);
         tempList.add(newRent);
-        log.info("----------------------> profile check3 list {} <-------------------------", tempList);
         selectedProfile.setRental(tempList);
-        log.info("----------------------> profile check4 profile {} <-------------------------", selectedProfile);
 
         dynamoDbMapper.save(selectedProfile);
     }

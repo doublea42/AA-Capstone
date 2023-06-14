@@ -15,9 +15,9 @@ public interface ServiceComponent {
     CreatePetActivity provideCreatePetActivity();
     CreateProfileActivity provideCreateProfileActivity();
     CreateActiveRentalActivity provideCreateActiveRentalActivity();
-//    RemoveActiveRentalActivity provideRemoveActiveRentalActivity();
-//    RemovePetActivity provideRemovePetActivity();
-//    UpdatePetActivity provideUpdatePetActivity();
+    UpdatePetActivity provideUpdatePetActivity();
     UpdateProfileActivity provideUpdateProfileActivity();
+    RemovePetActivity provideRemovePetActivity();
+    RemoveActiveRentalActivity provideRemoveActiveRentalActivity();
 
 }

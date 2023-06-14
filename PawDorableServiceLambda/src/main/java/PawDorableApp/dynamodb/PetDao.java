@@ -2,6 +2,7 @@ package PawDorableApp.dynamodb;
 
 import PawDorableApp.dynamodb.models.Pet;
 import PawDorableApp.exceptions.PetInvalidValuesException;
+import PawDorableApp.exceptions.PetIsunavailableException;
 import PawDorableApp.exceptions.PetNotFoundException;
 import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
@@ -122,10 +123,16 @@ public class PetDao {
     }
 
     private Boolean isAvailableCheck(String check){
-        if(check.toLowerCase().equals("true")){
+        if(check.equalsIgnoreCase("true")){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
 
+    public Boolean isAvailable(String petID){
+        if(this.getPet(petID).isAvailable()){
+            return Boolean.TRUE;
+        }
+        throw new PetIsunavailableException("Pet is unavailable");
+    }
 }

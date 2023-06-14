@@ -9,6 +9,9 @@
           "ownerEmail": {"S": "jhon@notARealMail.com"},
           "age": {"N": "3"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0005"]
+          },
           "available": {"BOOL": false}
         }
       }
@@ -22,6 +25,9 @@
           "ownerEmail": {"S": "Dylan@notARealMail.com"},
           "age": {"N": "4"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0001"]
+          },
           "available": {"BOOL": false}
         }
       }
@@ -35,6 +41,9 @@
           "ownerEmail": {"S": "Pamela@notARealMail.com"},
           "age": {"N": "5"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0002"]
+          },
           "available": {"BOOL": false}
         }
       }
@@ -48,6 +57,9 @@
           "ownerEmail": {"S": "Amirah@notARealMail.com"},
           "age": {"N": "6"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0003"]
+          },
           "available": {"BOOL": false}
         }
       }
@@ -61,6 +73,9 @@
           "ownerEmail": {"S": "Tori@notARealMail.com"},
           "age": {"N": "7"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["RH_0004"]
+          },
           "available": {"BOOL": false}
         }
       }
@@ -74,6 +89,9 @@
           "ownerEmail": {"S": "Amirah@notARealMail.com"},
           "age": {"N": "6"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["0"]
+          },
           "available": {"BOOL": true}
         }
       }
@@ -87,6 +105,9 @@
           "ownerEmail": {"S": "Amirah@notARealMail.com"},
           "age": {"N": "6"},
           "gender": {"S": "MALE"},
+          "rentalHistory": {
+            "SS": ["0"]
+          },
           "available": {"BOOL": true}
         }
       }

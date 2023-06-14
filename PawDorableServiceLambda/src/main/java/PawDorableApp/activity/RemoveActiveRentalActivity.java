@@ -27,19 +27,20 @@ public class RemoveActiveRentalActivity {
 
     public RemoveActiveRentalResult handleRequest(final RemoveActiveRentalRequest getRequest){
 
-        ActiveRental rentalEnded = activeDao.getActiveRental(getRequest.getRentalID());
-        RentalHistory updateRentalHistory = rentalDao.UpdateRentalHistory(rentalEnded.getRentalHistory(), getRequest.getScore());
+        String petID = getRequest.getPetID();
+        String profileID = getRequest.getProfileID();
+        String score = getRequest.getScore();
 
+        RentalHistory updateRentalHistory = rentalDao.findRentalHistory(petID, profileID);
         String historyID = updateRentalHistory.getID();
-        double newScore = updateRentalHistory.getScore();
-        String petID = updateRentalHistory.getPetID();
+        rentalDao.UpdateRentalHistory(historyID, score);
 
-        petDao.addRentalHistory(petID, historyID);
-        String profileID = updateRentalHistory.getProfileID();
-        profileDao.addProfileRentalHistory(profileID, historyID, newScore);
         profileDao.deleteProfilerRental(profileID, petID);
+        profileDao.addProfileRentalHistory(profileID, historyID, updateRentalHistory.getScore());
+        petDao.updateAvailablePet(petID, "true");
 
-        boolean result = activeDao.removeActiveRental(rentalEnded.getID());
+
+        boolean result = activeDao.removeActiveRental("AR_" + historyID);
 
         return RemoveActiveRentalResult.builder().withRemove(result).build();
     }

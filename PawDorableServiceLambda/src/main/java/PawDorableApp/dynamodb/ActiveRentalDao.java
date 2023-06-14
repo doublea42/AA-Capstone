@@ -37,8 +37,9 @@ public class ActiveRentalDao {
     public ActiveRental saveNewActiveRental(String rentalID){
 
         ActiveRental selectedActiveRental = new ActiveRental();
-        selectedActiveRental.setID("AR_" + PawDorableServiceUtils.generateId());
+        selectedActiveRental.setID("AR_" + rentalID);
         selectedActiveRental.setRentalHistory(rentalID);
+        dynamoDbMapper.save(selectedActiveRental);
 
         return selectedActiveRental;
     }

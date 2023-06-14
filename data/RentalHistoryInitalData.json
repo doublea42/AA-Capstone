@@ -6,7 +6,7 @@
           "ID": {"S": "RH_0001"},
           "petID": {"S": "PET_0002"},
           "profileID": {"S": "jhon@notARealMail.com"},
-          "timesRented": {"N": "1"},
+          "timesRented": {"N": "3"},
           "score": {"N": "5.0"}
         }
       }
@@ -17,7 +17,7 @@
           "ID": {"S": "RH_0002"},
           "petID": {"S": "PET_0003"},
           "profileID": {"S": "Dylan@notARealMail.com"},
-          "timesRented": {"N": "1"},
+          "timesRented": {"N": "3"},
           "score": {"N": "5.0"}
         }
       }
@@ -28,7 +28,7 @@
           "ID": {"S": "RH_0003"},
           "petID": {"S": "PET_0004"},
           "profileID": {"S": "Tori@notARealMail.com"},
-          "timesRented": {"N": "1"},
+          "timesRented": {"N": "3"},
           "score": {"N": "5.0"}
         }
       }
@@ -39,7 +39,7 @@
           "ID": {"S": "RH_0004"},
           "petID": {"S": "PET_0005"},
           "profileID": {"S": "Pamela@notARealMail.com"},
-          "timesRented": {"N": "1"},
+          "timesRented": {"N": "3"},
           "score": {"N": "5.0"}
         }
       }
@@ -50,7 +50,7 @@
           "ID": {"S": "RH_0005"},
           "petID": {"S": "PET_0001"},
           "profileID": {"S": "Amirah@notARealMail.com"},
-          "timesRented": {"N": "1"},
+          "timesRented": {"N": "3"},
           "score": {"N": "5.0"}
         }
       }

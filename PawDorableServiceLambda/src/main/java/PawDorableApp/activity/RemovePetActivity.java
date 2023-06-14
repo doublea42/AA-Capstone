@@ -5,10 +5,13 @@ import PawDorableApp.activity.results.RemovePetResult;
 import PawDorableApp.dynamodb.PetDao;
 import PawDorableApp.dynamodb.ProfileDao;
 
+import javax.inject.Inject;
+
 public class RemovePetActivity {
     private final PetDao petDao;
     private final ProfileDao profileDao;
 
+    @Inject
     public RemovePetActivity(PetDao petDao, ProfileDao profileDao) {
         this.petDao = petDao;
         this.profileDao = profileDao;
