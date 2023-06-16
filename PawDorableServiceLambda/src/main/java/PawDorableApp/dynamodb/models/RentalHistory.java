@@ -32,7 +32,6 @@ public class RentalHistory {
         return timesRented;
     }
 
-//    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.)
     @DynamoDBAttribute(attributeName = "score")
     public double getScore() {
         return score;

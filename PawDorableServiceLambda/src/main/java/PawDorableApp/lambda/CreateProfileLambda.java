@@ -20,7 +20,6 @@ implements RequestHandler<AuthenticatedLambdaRequest<CreateProfileRequest>, Lamb
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateProfileRequest> input, Context context) {
-//        log.info("create profile input --------> {}",input);
         return super.runActivity(
                 () -> {
                     try {

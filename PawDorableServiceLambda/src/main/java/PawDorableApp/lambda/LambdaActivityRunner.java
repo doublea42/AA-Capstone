@@ -25,11 +25,8 @@ public class LambdaActivityRunner<TRequest, TResult> {
         log.info("runActivity");
         try {
             TRequest request = requestSupplier.get();
-//            log.info("-----------------> here request {}", request);
             ServiceComponent serviceComponent = getService();
-//            log.info("-----------------> here service {}", serviceComponent);
             TResult result = handleRequest.apply(request, serviceComponent);
-//            log.info("-----------------> here");
             return LambdaResponse.success(result);
         } catch (Exception e) {
             return LambdaResponse.error(e);

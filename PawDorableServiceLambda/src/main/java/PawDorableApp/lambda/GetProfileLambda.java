@@ -19,7 +19,6 @@ public class GetProfileLambda extends LambdaActivityRunner<GetProfileRequest, Ge
      */
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetProfileRequest> input, Context context) {
-//        log.info("create profile input --------> {}",input);
 
         return super.runActivity(
                 () -> input.fromPath(path -> GetProfileRequest.builder()
