@@ -49,17 +49,10 @@ public class PetDao {
         Gender petsGender = PawDorableServiceUtils.genderEnum(gender);
         Boolean isPetAvailable = this.isAvailableCheck(available);
 
-//        log.info("isPetAvailable ----------> {} class -----> type {}  ", isPetAvailable, isPetAvailable.getClass());
-
-
         if(kind == null || name == null || name.isEmpty()
                 || ownerEmail == null || ownerEmail.isEmpty()
                 || petAge > 10 || petAge < 2
                 || petsGender == null){
-
-
-            log.info("PetDao values  ---- > kind: {} name: {}, ownerEmail: {}, age: {}, gender: {}",
-                    kind, name, ownerEmail, petAge,petsGender);
 
             metricsPublisher.addCount(MetricsConstants.UPDATE_PET_INVALID_ATTRIBUTE_VALUE ,1);
             throw new PetInvalidValuesException("could not update pet with current values");
@@ -74,7 +67,7 @@ public class PetDao {
         }
 
         Set<String> rentalHistory = new HashSet<>();
-        rentalHistory.add("0");
+        rentalHistory.add("NEW");
 
         selectedPet.setRentalHistory(rentalHistory);
 
@@ -106,11 +99,9 @@ public class PetDao {
         Pet selectedPet = this.getPet(petID);
 
         Set<String> tempList = selectedPet.getRentalHistory();
-        if(tempList.size() == 1){
-            tempList.remove("0");
-        }
-        selectedPet.setRentalHistory(tempList);
         tempList.add(rentalH);
+        this.checkEmpty(tempList);
+        selectedPet.setRentalHistory(tempList);
 
         dynamoDbMapper.save(selectedPet);
     }
@@ -129,10 +120,18 @@ public class PetDao {
         return Boolean.FALSE;
     }
 
-    public Boolean isAvailable(String petID){
+    public void isAvailable(String petID){
         if(this.getPet(petID).isAvailable()){
-            return Boolean.TRUE;
+            return;
         }
         throw new PetIsunavailableException("Pet is unavailable");
     }
+
+    private void checkEmpty(Set<String> tempList){
+        if(tempList.size() == 2){
+            String temp = "NEW";
+            tempList.remove(temp);
+        }
+    }
+
 }

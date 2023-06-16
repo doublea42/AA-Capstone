@@ -95,9 +95,12 @@ public class RentalHistoryDao {
 
         List<RentalHistory> searchList = dynamoDbMapper.query(RentalHistory.class, queryExpression);
 
-        selectedRentalHistory = searchList.get(0);
-
-        return selectedRentalHistory;
+        if(searchList.size() == 1){
+            return searchList.get(0);
+        }
+        else{
+            return null;
+        }
     }
 
 
