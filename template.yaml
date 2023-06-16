@@ -209,13 +209,33 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/profile"
 
-#        - PolicyName: 'AccessAlbumTracksTable'
-#          PolicyDocument:
-#            Version: '2012-10-17'
-#            Statement:
-#              - Effect: Allow
-#                Action: dynamodb:*
-#                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
+        - PolicyName: 'AccessRentalHistoryTable'
+          PolicyDocument:
+             Version: '2012-10-17'
+             Statement:
+               - Effect: Allow
+                 Action: dynamodb:*
+                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory"
+               - Effect: Allow
+                 Action:
+                   - dynamodb:query
+                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory/index/AvailabilityClassIndex"
+
+        - PolicyName: 'AccessPetsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/pets"
+
+        - PolicyName: 'AccessActiveRentalTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/activeRental"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
@@ -479,11 +499,34 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "ID"
           AttributeType: "S"
+        - AttributeName: "profileID"
+          AttributeType: "S"
+        - AttributeName: "petID"
+          AttributeType: "S"
+        - AttributeName: "score"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "ID"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "rentalHistory"
+      GlobalSecondaryIndexes:
+        - IndexName: "RentalHistoryByFavoritePetIDIndex"
+          KeySchema:
+            - AttributeName: "profileID"
+              KeyType: "HASH"
+            - AttributeName: "score"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "RentalHistoryByProfileIDIndex"
+          KeySchema:
+            - AttributeName: "profileID"
+              KeyType: "HASH"
+            - AttributeName: "petID"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
 
   ActiveRentalTable:
     Type: AWS::DynamoDB::Table
@@ -496,6 +539,8 @@ Resources:
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "activeRental"
+
+
 
 #  PlaylistsTable:
 #    Type: AWS::DynamoDB::Table

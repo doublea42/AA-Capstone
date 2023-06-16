@@ -17,7 +17,7 @@ import java.util.Set;
 @Singleton
 public class ProfileDao {
 
-    private final Logger log = LogManager.getLogger();
+//    private final Logger log = LogManager.getLogger();
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
@@ -27,7 +27,7 @@ public class ProfileDao {
         this.metricsPublisher = metricsPublisher;
     }
 
-    public Profile getPofile(String email){
+    public Profile getProfile(String email){
         Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,email);
         if(email == null){
             metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
@@ -75,7 +75,7 @@ public class ProfileDao {
     }
 
     public Profile updateProfile(String email, String first, String last, String age){
-        Profile selectedProfile = this.getPofile(email);
+        Profile selectedProfile = this.getProfile(email);
 
         selectedProfile.setFirstName(first);
         selectedProfile.setLastName(last);
@@ -86,7 +86,7 @@ public class ProfileDao {
     }
 
     public void addProfilePets(String profileID, String newPet){
-        Profile selectedProfile = this.getPofile(profileID);
+        Profile selectedProfile = this.getProfile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         this.checkEmpty(tempList);
         tempList.add(newPet);
@@ -94,7 +94,7 @@ public class ProfileDao {
         dynamoDbMapper.save(selectedProfile);
     }
     public void addProfileRental(String profileID, String newRent){
-        Profile selectedProfile = this.getPofile(profileID);
+        Profile selectedProfile = this.getProfile(profileID);
 
         Set<String> tempList = selectedProfile.getRental();
         this.checkEmpty(tempList);
@@ -103,9 +103,9 @@ public class ProfileDao {
 
         dynamoDbMapper.save(selectedProfile);
     }
-    public Profile addProfileRentalHistory(String profileID, String newRentalHistory, double score){
+    public void addProfileRentalHistory(String profileID, String newRentalHistory, double score){
 
-        Profile selectedProfile = this.getPofile(profileID);
+        Profile selectedProfile = this.getProfile(profileID);
         Set<String> rentalHistory = selectedProfile.getRentalHistory();
         this.checkEmpty(rentalHistory);
 
@@ -127,27 +127,24 @@ public class ProfileDao {
         }
 
         dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
     }
 
 
-    public Profile deleteProfilePet(String profileID, String petID){
-        Profile selectedProfile = this.getPofile(profileID);
+    public void deleteProfilePet(String profileID, String petID){
+        Profile selectedProfile = this.getProfile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
         tempList.remove(petID);
         this.checkEmpty(tempList);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
     }
-    public Profile deleteProfilerRental(String profileID, String petID){
-        Profile selectedProfile = this.getPofile(profileID);
+    public void deleteProfilerRental(String profileID, String petID){
+        Profile selectedProfile = this.getProfile(profileID);
         Set<String> tempList = selectedProfile.getRental();
         tempList.remove(petID);
         this.checkEmpty(tempList);
         selectedProfile.setRental(tempList);
         dynamoDbMapper.save(selectedProfile);
-        return selectedProfile;
     }
 
     private Boolean ageCheck(String age){

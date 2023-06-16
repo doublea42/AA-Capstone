@@ -6,13 +6,17 @@ import PawDorableApp.metrics.MetricsConstants;
 import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class RentalHistoryDao {
@@ -78,15 +82,21 @@ public class RentalHistoryDao {
     public RentalHistory findRentalHistory(String petID, String profileID){
 
         RentalHistory selectedRentalHistory = null;
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-        List<RentalHistory> searchList = dynamoDbMapper.scan(RentalHistory.class, scanExpression);
+        DynamoDBQueryExpression<RentalHistory> queryExpression = new DynamoDBQueryExpression<>();
+        Map<String, AttributeValue> valueMap = new HashMap<>();
+        valueMap.put(":profileID", new AttributeValue().withS(profileID));
+        valueMap.put(":petID", new AttributeValue().withS(petID));
+        queryExpression.withIndexName("RentalHistoryByProfileIDIndex")
+                .withConsistentRead(false)
+                .withKeyConditionExpression("profileID = :profileID and petID = :petID")
+                .withExpressionAttributeValues(valueMap);
 
-        for (RentalHistory tempRentalHistory : searchList){
-            if( petID.equals(tempRentalHistory.getPetID()) && profileID.equals(tempRentalHistory.getProfileID())){
-                selectedRentalHistory = tempRentalHistory;
-                break;
-            }
-        }
+
+
+        List<RentalHistory> searchList = dynamoDbMapper.query(RentalHistory.class, queryExpression);
+
+        selectedRentalHistory = searchList.get(0);
+
         return selectedRentalHistory;
     }
 
