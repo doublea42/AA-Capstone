@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<head>
+    <script type="text/javascript" src="assets/AddPet.js"></script>
+</head>
+
+<body>
+    <header>  
+        <h1>Add Pet Page</h1>
+        <button type="button" class="btn-dark" id="home-page"><strong>pawdorable</strong></button>
+        <button type="button" class="btn-dark" id="profile"><strong>profile</strong></button>
+        <button type="button" class="btn-dark" id="log-out"><strong>LogOut</strong></button>
+    </header><br>
+
+    <form>
+        <div>
+            <label for="pet-Name">Name</label>
+            <input type="text" id="pet-Name" placeholder="Pets's Name" required> 
+        </div> <br>
+
+        <div>
+            <label for="pet-king">Kind</label>
+            <select type="text" id="pet-king" required>
+                <option value=""></option> 
+                <option value="CAT"> Cat </option>
+                <option value="DOG"> Dog </option>
+            </select>
+
+        </div> <br>
+
+        <div>
+            <label for="age">age</label>
+            <input type="text" id="age" placeholder="Age" required> 
+        </div> <br>
+
+        <div>
+            <label for="pets-gender">Gender</label>
+            <select type="text" id="pets-gender" required>
+                <option value=""></option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select>
+        </div> <br>
+
+        <div>
+            <label for="rent">Rentable?</label>
+            <select type="text" id="rent" required> 
+                <option value=""></option>
+                <option value="true"> YES </option>
+                <option value="false"> NO</option>
+            </select>
+        </div> <br>
+
+        <div>
+            <input type="submit">
+        </div>
+
+    </form>
+</body>
+
+</html>

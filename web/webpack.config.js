@@ -23,8 +23,18 @@ module.exports = {
     usedExports: true
   },
   entry: {
-
     index: path.resolve(__dirname, 'src', 'pages', 'index.js'),
+    HomePage: path.resolve(__dirname, 'src', 'pages', 'HomePage.js'),
+    CreateUpdateProfile: path.resolve(__dirname, 'src', 'pages', 'CreateUpdateProfile.js'),
+    Profile: path.resolve(__dirname, 'src', 'pages', 'Profile.js'),
+    PetPage: path.resolve(__dirname, 'src', 'pages', 'PetPage.js'),
+    ReturnPet: path.resolve(__dirname, 'src', 'pages', 'ReturnPet.js'),
+    MyPets: path.resolve(__dirname, 'src', 'pages', 'MyPets.js'),
+    AddPet: path.resolve(__dirname, 'src', 'pages', 'AddPet.js'),
+    MyPetProfile: path.resolve(__dirname, 'src', 'pages', 'MyPetProfile.js'),
+    ComingHome: path.resolve(__dirname, 'src', 'pages', 'ComingHome.js'),
+    Buddies: path.resolve(__dirname, 'src', 'pages', 'Buddies.js'),
+    BestBuddies: path.resolve(__dirname, 'src', 'pages', 'BestBuddies.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

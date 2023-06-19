@@ -10,12 +10,15 @@ import PawDorableApp.models.Gender;
 import PawDorableApp.models.KindOfPet;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Singleton
@@ -132,6 +135,18 @@ public class PetDao {
             String temp = "NEW";
             tempList.remove(temp);
         }
+    }
+
+    public List<Pet> getAllPetsAvailable(String profilesID){
+        List<Pet> result = new ArrayList<>();
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<Pet> petsList = dynamoDbMapper.scan(Pet.class, scanExpression);
+        for(Pet tempPet : petsList){
+            if(tempPet.isAvailable() && !tempPet.getOwnerEmail().equals(profilesID)){
+                result.add(tempPet);
+            }
+        }
+        return result;
     }
 
 }
