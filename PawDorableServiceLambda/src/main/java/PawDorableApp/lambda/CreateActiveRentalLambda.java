@@ -20,10 +20,12 @@ public class CreateActiveRentalLambda extends LambdaActivityRunner<CreateActiveR
 
                 () -> {
                     CreateActiveRentalRequest createRequest = input.fromBody(CreateActiveRentalRequest.class);
-                        return CreateActiveRentalRequest.builder()
-                                .withPetID(createRequest.getPetID())
-                                .withProfileID(createRequest.getProfileID())
-                                .build();
+                    return input.fromUserClaims(claims ->
+                            CreateActiveRentalRequest.builder()
+                                    .withPetID(createRequest.getPetID())
+                                    .withProfileID(claims.get("email"))
+                                    .build()
+                    );
                 },
                 (request,serviceComponent) ->{
                     try{

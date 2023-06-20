@@ -1,6 +1,7 @@
 package PawDorableApp.lambda;
 
 import PawDorableApp.activity.request.GetAllPetsAvailableRequest;
+import PawDorableApp.activity.request.GetProfileRequest;
 import PawDorableApp.activity.results.GetAllPetsAvailableResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -18,9 +19,8 @@ public class GetAllPetsLambda extends LambdaActivityRunner<GetAllPetsAvailableRe
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetAllPetsAvailableRequest> input, Context context) {
         return super.runActivity(
-                () -> GetAllPetsAvailableRequest.builder()
-                        .withProfileID(input.fromBody(GetAllPetsAvailableRequest.class).getProfilesID())
-                        .build(),
+                        () -> input.fromUserClaims(claims -> GetAllPetsAvailableRequest.builder()
+                                .withProfileID(claims.get("emailAddress")).build()),
                 (request,serviceComponent) ->
                 {
                     try {

@@ -105,14 +105,14 @@ export default class PawDorableClient extends BindingClass{
         }
     }
 
-    async getAllPets(profileEmail, errorCallback) {
+    async getAllPets(errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
             const response = await this.axiosClient.get(`pet/All`,
-            {profileID: profileEmail},
             {
                  headers: {
-                Authorization: `Bearer ${token}`}
+                Authorization: `Bearer ${token}`,
+                }
             }
             );
             console.log(response);
@@ -122,7 +122,7 @@ export default class PawDorableClient extends BindingClass{
         }
     }
 
-    async getProfile(emailAddress, errorCallback) {
+    async getProfile( errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
             const response = await this.axiosClient.get(`profile/${emailAddress}`,

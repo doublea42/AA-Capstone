@@ -9,7 +9,7 @@ class HomePage extends BindingClass{
         super();
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage', 'redirectProfilePage',
-                                'redirectMyPetsPage', 'redirectRentPage', 'clientLoaded'], this)
+                                'redirectMyPetsPage', 'redirectRentPage', 'clientLoaded', 'loadPets'], this)
 
 
         this.client = new PawDorableClient();
@@ -25,6 +25,7 @@ class HomePage extends BindingClass{
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPetsPage);
         
         this.clientLoaded();
+        this.loadPets();
         
     }
 
@@ -32,8 +33,23 @@ class HomePage extends BindingClass{
         const identity = await this.client.getIdentity();
         const profileEmail = identity.email;
 
-        const allPets = await this.client.getAllPets(profileEmail);
+        // const allPets = await this.client.getAllPets(profileEmail);
         
+    }
+
+    async loadPets(){
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        console.log(profileEmail);
+        const newDiv = document.createElement("div");
+        const allPets = await this.client.getAllPets();
+        const string = JSON.stringify(allPets)
+        console.log(string);
+        newDiv.append(string);
+        const currentDiv = document.getElementById("result-body");
+        document.body.insertBefore(newDiv, currentDiv);
+
+
     }
 
 
