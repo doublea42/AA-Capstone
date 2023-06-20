@@ -10,8 +10,6 @@ class IndexPage extends BindingClass{
 
         this.bindClassMethods(['mount', 'login', 'logout'], this)
 
-        // this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
-        // this.header = new Header(this.dataStore);
 
         this.client = new PawDorableClient();
         this.header = new Header(this.DataStore);
@@ -26,7 +24,7 @@ class IndexPage extends BindingClass{
 
     async login(){
         await this.client.login();
-        window.location.href = '/HomePage.html';
+        // window.location.href = '/HomePage.html';
     }
 
     logout(){
