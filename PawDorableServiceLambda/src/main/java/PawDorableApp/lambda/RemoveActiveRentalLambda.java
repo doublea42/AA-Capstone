@@ -17,16 +17,14 @@ public class RemoveActiveRentalLambda extends LambdaActivityRunner<RemoveActiveR
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RemoveActiveRentalRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    RemoveActiveRentalRequest unauthenticatedRequest = input.fromBody(RemoveActiveRentalRequest.class);
-                    return input.fromUserClaims(claims ->
-                                    RemoveActiveRentalRequest.builder()
-                                    .withPetID(unauthenticatedRequest.getPetID())
-                                    .withProfileID(claims.get("email"))
-                                    .withRentalScore(unauthenticatedRequest.getScore())
-                                    .build()
-                            );
-                    },
+
+                () -> input.fromPath( path ->
+                        RemoveActiveRentalRequest.builder()
+                                .withPetID(path.get("petID"))
+                                .withProfileID(path.get("profileID"))
+                                .withRentalScore(path.get("rentalScore"))
+                                .build()
+                ),
                 (request,serviceComponent) ->
                 {
                     try {

@@ -339,7 +339,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /pet/
+            Path:  /pet/{id}
             Method: get
 
   GetAllPetsLambda:
@@ -399,7 +399,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:   /history/
+            Path:   /history/{historyID}
             Method: get
 
   GetActiveRentalLambda:
@@ -419,7 +419,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:   /active/
+            Path:   /active/{rentalID}
             Method: get
 
   UpdatePetLambda:
@@ -460,7 +460,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /pet/id/delete/
+            Path:  /pet/id/delete/{id}
             Method: delete
 
 
@@ -481,7 +481,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /active/id/delete/
+            Path:  /active/id/delete/{petID}/{profileID}/{rentalScore}
             Method: delete
 
 

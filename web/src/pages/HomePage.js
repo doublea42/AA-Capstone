@@ -30,16 +30,16 @@ class HomePage extends BindingClass{
         this.clientLoaded();
         // this.loadPets(); //this works
         // this.loadProfile(); //this works
-        // this.loadPet();
-        // this.loadREntalHistory();
-        // this.loadActive();
+        // this.loadPet(); //this works
+        // this.loadREntalHistory();  //thisworks
+        // this.loadActive();  //thisworks
         // this.pageCreateProfile(); // this works
         // this.pageCreatePet(); // this works
         // this.pageCreateActive(); //this works
         // this.pageUpdateProfile(); //this works
         // this.pageUpdatePet(); // this works
-        // this.pageRemovePet();
-        // this.pageRemoveActiveRental();
+        // this.pageRemovePet(); // this works
+        // this.pageRemoveActiveRental(); //this works
         
     }
 
@@ -196,7 +196,7 @@ class HomePage extends BindingClass{
     }
 
     async pageRemovePet(){
-        const a = "PET_8FIIN";
+        const a = "PET_ZKXRW";
         
         // console.log(ID);
         const newDiv = document.createElement("div");
@@ -211,12 +211,15 @@ class HomePage extends BindingClass{
     }
 
     async pageRemoveActiveRental(){
-        const a = "RH_0003";
-        const b = "5";
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        const a = "PET_YVCWM";
+        const b = profileEmail;
+        const c = "5";
         
         // console.log(ID);
         const newDiv = document.createElement("div");
-        const object = await this.client.RemoveActiveRental(a,b);
+        const object = await this.client.RemoveActiveRental(a,b,c);
         const string = JSON.stringify(object)
         console.log(string);
         newDiv.append(string);

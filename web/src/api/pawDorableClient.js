@@ -142,10 +142,7 @@ export default class PawDorableClient extends BindingClass{
         try {
 
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`pet/`,
-             {
-                id: petID,
-            },
+            const response = await this.axiosClient.get(`pet/${petID}`,
              {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -163,8 +160,7 @@ export default class PawDorableClient extends BindingClass{
     async getRentalHistory(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`history/`,
-            {historyID: id},
+            const response = await this.axiosClient.get(`history/${id}`,
             {
                  headers: {
                 Authorization: `Bearer ${token}`}
@@ -180,8 +176,7 @@ export default class PawDorableClient extends BindingClass{
     async getActiveRental(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`active/`,
-            {rentalID: id},
+            const response = await this.axiosClient.get(`active/${id}`,
             {
                  headers: {
                 Authorization: `Bearer ${token}`}
@@ -282,8 +277,7 @@ export default class PawDorableClient extends BindingClass{
     async RemovePet(petsID, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.delete(`pet/id/delete/`,
-            {id: petsID},
+            const response = await this.axiosClient.delete(`pet/id/delete/${petsID}`,
             {
                  headers: {
                 Authorization: `Bearer ${token}`}
@@ -297,11 +291,10 @@ export default class PawDorableClient extends BindingClass{
     }
 
 
-    async RemoveActiveRental(petsID, score, errorCallback) {
+    async RemoveActiveRental(petsID, email, score, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.delete(`active/id/delete/`,
-            {petID: petsID, rentalScore: score},
+            const response = await this.axiosClient.delete(`active/id/delete/${petsID}/${email}/${score}`,
             {
                  headers: {
                 Authorization: `Bearer ${token}`}
