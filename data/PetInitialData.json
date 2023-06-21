@@ -90,7 +90,7 @@
           "age": {"N": "6"},
           "gender": {"S": "MALE"},
           "rentalHistory": {
-            "SS": ["0"]
+            "SS": ["NEW"]
           },
           "available": {"BOOL": true}
         }
@@ -106,7 +106,7 @@
           "age": {"N": "6"},
           "gender": {"S": "MALE"},
           "rentalHistory": {
-            "SS": ["0"]
+            "SS": ["NEW"]
           },
           "available": {"BOOL": true}
         }

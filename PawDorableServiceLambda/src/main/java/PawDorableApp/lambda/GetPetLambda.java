@@ -18,11 +18,11 @@ public class GetPetLambda extends LambdaActivityRunner<GetPetRequest, GetPetResu
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetPetRequest> input, Context context) {
         return super.runActivity(
-                () ->
-                    GetPetRequest.builder()
-                            .withID(input.fromBody(GetPetRequest.class).getID())
-                            .build()
-                ,
+                () -> input.fromPath( path ->
+                        GetPetRequest.builder()
+                        .withID(path.get("id"))
+                        .build()
+                ),
                 (request,serviceComponent) ->
                 {
                     try {

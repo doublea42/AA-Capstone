@@ -22,11 +22,9 @@ public class CreatePetLambda extends LambdaActivityRunner<CreatePetRequest, Crea
         return super.runActivity(
                 () -> {
                     CreatePetRequest unauthenticatedRequest = input.fromBody(CreatePetRequest.class);
-//                    log.info("here <------------------------------------");
 
                     return input.fromUserClaims(claims ->
                             CreatePetRequest.builder()
-//                                    .withOwnerEmail(unauthenticatedRequest.getOwnerEmail())
                                     .withOwnerEmail(claims.get("email"))
                                     .withName(unauthenticatedRequest.getName())
                                     .withKindOfPet(unauthenticatedRequest.getKindOfPet())

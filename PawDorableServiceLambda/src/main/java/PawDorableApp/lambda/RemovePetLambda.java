@@ -18,10 +18,20 @@ public class RemovePetLambda extends LambdaActivityRunner<RemovePetRequest, Remo
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RemovePetRequest> input, Context context) {
         return super.runActivity(
-                () -> RemovePetRequest.builder()
-                        .withID(input.fromBody(RemovePetRequest.class).getID())
-                        .build()
-                ,(request,serviceComponent) -> serviceComponent.provideRemovePetActivity().handleRequest(request)
+                () -> input.fromPath( path ->
+                        RemovePetRequest.builder()
+                                .withID(path.get("id"))
+                                .build()
+                ),
+
+                (request,serviceComponent) ->{
+                    try {
+                        return serviceComponent.provideRemovePetActivity().handleRequest(request);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        throw e;
+                    }
+                }
         );
     }
 }

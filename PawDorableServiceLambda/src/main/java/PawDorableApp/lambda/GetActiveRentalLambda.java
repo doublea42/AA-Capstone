@@ -17,9 +17,11 @@ public class GetActiveRentalLambda extends LambdaActivityRunner<GetActiveRentalR
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetActiveRentalRequest> input, Context context) {
         return super.runActivity(
-                () -> GetActiveRentalRequest.builder()
-                        .withRentalID(input.fromBody(GetActiveRentalRequest.class).getRentalID())
-                        .build(),
+                () -> input.fromPath( path ->
+                        GetActiveRentalRequest.builder()
+                                .withRentalID(path.get("rentalID"))
+                                .build()
+                ),
                 (request,serviceComponent) ->
                 {
                     try {

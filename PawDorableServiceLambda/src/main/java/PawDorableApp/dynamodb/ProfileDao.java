@@ -17,7 +17,7 @@ import java.util.Set;
 @Singleton
 public class ProfileDao {
 
-//    private final Logger log = LogManager.getLogger();
+    private final Logger log = LogManager.getLogger();
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
@@ -29,6 +29,7 @@ public class ProfileDao {
 
     public Profile getProfile(String email){
         Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,email);
+//        log.info("ProfileDao selectetd profile -----> {}", selectedProfile);
         if(email == null){
             metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
             throw new ProfileNotFoundException("could not find Profile with email.");
@@ -88,8 +89,8 @@ public class ProfileDao {
     public void addProfilePets(String profileID, String newPet){
         Profile selectedProfile = this.getProfile(profileID);
         Set<String> tempList = selectedProfile.getMyPets();
-        this.checkEmpty(tempList);
         tempList.add(newPet);
+        this.checkEmpty(tempList);
         selectedProfile.setMyPets(tempList);
         dynamoDbMapper.save(selectedProfile);
     }
@@ -97,8 +98,8 @@ public class ProfileDao {
         Profile selectedProfile = this.getProfile(profileID);
 
         Set<String> tempList = selectedProfile.getRental();
-        this.checkEmpty(tempList);
         tempList.add(newRent);
+        this.checkEmpty(tempList);
         selectedProfile.setRental(tempList);
 
         dynamoDbMapper.save(selectedProfile);
@@ -121,8 +122,8 @@ public class ProfileDao {
             selectedProfile.setFavoriteRental(tempFavList);
         }
         else if(!isFavorite && score > 3.9){
-            this.checkEmpty(tempFavList);
             tempFavList.add(newRentalHistory);
+            this.checkEmpty(tempFavList);
             selectedProfile.setFavoriteRental(tempFavList);
         }
 
@@ -151,8 +152,8 @@ public class ProfileDao {
         return Integer.parseInt(age) > 18 || Integer.parseInt(age) < 100;
     }
     private void checkEmpty(Set<String> tempList){
-        String temp = "0";
-        if(tempList.size() == 1){
+        String temp = "NEW";
+        if(tempList.size() == 2){
             tempList.remove(temp);
         }
         if(tempList.isEmpty()){

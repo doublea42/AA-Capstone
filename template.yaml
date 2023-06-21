@@ -339,7 +339,27 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /pet/
+            Path:  /pet/{id}
+            Method: get
+
+  GetAllPetsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: PawDorableServiceLambda
+      Handler: PawDorableApp.lambda.GetAllPetsLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path:  /pet/All/
             Method: get
 
   CreateActiveRentalLambda:
@@ -379,7 +399,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:   /history/
+            Path:   /history/{historyID}
             Method: get
 
   GetActiveRentalLambda:
@@ -399,7 +419,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:   /active/
+            Path:   /active/{rentalID}
             Method: get
 
   UpdatePetLambda:
@@ -440,7 +460,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /pet/id/delete/
+            Path:  /pet/id/delete/{id}
             Method: delete
 
 
@@ -461,7 +481,7 @@ Resources:
         MusicPlaylistService:
           Type: Api
           Properties:
-            Path:  /active/id/delete/
+            Path:  /active/id/delete/{petID}/{profileID}/{rentalScore}
             Method: delete
 
 

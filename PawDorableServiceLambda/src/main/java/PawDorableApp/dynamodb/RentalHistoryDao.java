@@ -7,7 +7,6 @@ import PawDorableApp.metrics.MetricsPublisher;
 import PawDorableApp.utils.PawDorableServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -95,9 +94,12 @@ public class RentalHistoryDao {
 
         List<RentalHistory> searchList = dynamoDbMapper.query(RentalHistory.class, queryExpression);
 
-        selectedRentalHistory = searchList.get(0);
-
-        return selectedRentalHistory;
+        if(searchList.size() == 1){
+            return searchList.get(0);
+        }
+        else{
+            return null;
+        }
     }
 
 
