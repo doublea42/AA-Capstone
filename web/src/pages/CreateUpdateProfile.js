@@ -8,20 +8,32 @@ class CreateUpdateProfile extends BindingClass{
     constructor(){
         super();
 
-        this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage'], this)
+        this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage',
+                                'getDataFromForm'], this)
 
-        // this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
-        // this.header = new Header(this.dataStore);
 
         this.client = new PawDorableClient();
-
+        this.getDataFromForm();
     }
 
     mount(){
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('sign-up').addEventListener('click', this.login);
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const age = document.getElementById('age');
+        document.getElementById('submit').addEventListener('click', this.getDataFromForm);
         
     }
+
+    async getDataFromForm(){
+
+        console.log(firstName.value);
+        console.log(lastName.value);
+        console.log(age.value);
+        this.client.CreateProfile(firstName,lastName,age);
+    }
+
 
     async login(){
         await this.client.login();

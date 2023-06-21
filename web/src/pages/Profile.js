@@ -10,7 +10,8 @@ class Profile extends BindingClass{
         super();
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage','redirectMyPets',
-         'redirectUpdateProfile', 'redirectComingHome', 'redirectBuddies', 'redirectBestBuddies', 'redirectProfilePage'], this)
+         'redirectUpdateProfile', 'redirectComingHome', 'redirectBuddies', 'redirectBestBuddies',
+          'redirectProfilePage', 'loadProfile', 'loadProfileCheck'], this)
         this.client = new PawDorableClient();
     }
 
@@ -27,8 +28,40 @@ class Profile extends BindingClass{
         document.getElementById('my-pets-1').addEventListener('click', this.redirectMyPets);
 
 
+        // this.loadProfileCheck();
+        this.loadProfile();
+    }
+
+
+    async loadProfileCheck(){
+        const profile = null;
+        try{
+            profile = this.client.getProfile();
+
+        }catch{}
+        console.log(profile);
+
+        if(profile == null){
+            this.redirectUpdateProfile();
+        }
+
+    }
+
+    async loadProfile(){
+
+        const identity = await this.client.getIdentity();
+        const email = identity.email;
+        console.log(email);
+
+        const profile = this.client.getProfile(email);
+        
+        console.log(profile.value);
+        
         
     }
+
+
+
 
     async login(){
         await this.client.login();

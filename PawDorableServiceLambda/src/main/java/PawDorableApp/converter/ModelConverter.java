@@ -16,7 +16,7 @@ public class ModelConverter {
     private final Logger log = LogManager.getLogger();
 
     public ProfileModel toProfileModel(Profile profile){
-
+//        log.info("profile ------> {}", profile);
         return ProfileModel.builder()
                 .withEmailAddress(profile.getEmailAddress())
                 .withFirstName(profile.getFirstName())

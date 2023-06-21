@@ -35,6 +35,8 @@ module.exports = {
     ComingHome: path.resolve(__dirname, 'src', 'pages', 'ComingHome.js'),
     Buddies: path.resolve(__dirname, 'src', 'pages', 'Buddies.js'),
     BestBuddies: path.resolve(__dirname, 'src', 'pages', 'BestBuddies.js'),
+    // TestFuctions: path.resolve(__dirname, 'src', 'pages', 'TestFuctions.js'),
+    // Test: path.resolve(__dirname, 'src', 'pages', 'Test.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

@@ -17,7 +17,7 @@ import java.util.Set;
 @Singleton
 public class ProfileDao {
 
-//    private final Logger log = LogManager.getLogger();
+    private final Logger log = LogManager.getLogger();
     private final DynamoDBMapper dynamoDbMapper;
     private final MetricsPublisher metricsPublisher;
 
@@ -29,6 +29,7 @@ public class ProfileDao {
 
     public Profile getProfile(String email){
         Profile selectedProfile = this.dynamoDbMapper.load(Profile.class ,email);
+//        log.info("ProfileDao selectetd profile -----> {}", selectedProfile);
         if(email == null){
             metricsPublisher.addCount(MetricsConstants.GET_PROFILE_PROFILE_NOT_FOUND_COUNT, 1);
             throw new ProfileNotFoundException("could not find Profile with email.");

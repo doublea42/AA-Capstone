@@ -122,10 +122,10 @@ export default class PawDorableClient extends BindingClass{
         }
     }
 
-    async getProfile( errorCallback) {
+    async getProfile(email, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`profile/${emailAddress}`,
+            const token = await this.getTokenOrThrow("Only authenticated users can see their profiles.");
+            const response = await this.axiosClient.get(`profile/${email}`,
             {
                  headers: {
                 Authorization: `Bearer ${token}`}
@@ -140,14 +140,19 @@ export default class PawDorableClient extends BindingClass{
 
     async getPet(petID, errorCallback) {
         try {
+
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
             const response = await this.axiosClient.get(`pet/`,
-            {id: petID},
-            {
-                 headers: {
-                Authorization: `Bearer ${token}`}
-            }
+             {
+                id: petID,
+            },
+             {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            },
             );
+
             console.log(response);
             return response.data.pet;
         } catch (error) {
@@ -192,7 +197,7 @@ export default class PawDorableClient extends BindingClass{
     async CreateProfile(first, last, age, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`profile/create/`,
+            const response = await this.axiosClient.post(`profile/create/`,
             {firstName: first, lastName: last, age: age},
             {
                  headers: {
@@ -209,7 +214,7 @@ export default class PawDorableClient extends BindingClass{
     async CreatePet(petsName, kind, age, gender, rentable, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`pet/create`,
+            const response = await this.axiosClient.post(`pet/create`,
             {name: petsName, kindOfPet: kind, age: age, gender: gender, available: rentable},
             {
                  headers: {
@@ -225,8 +230,8 @@ export default class PawDorableClient extends BindingClass{
 
     async CreateActiveRental(petsID, email, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`Active/create`,
+            const token = await this.getTokenOrThrow("Only authenticated users can rent pets.");
+            const response = await this.axiosClient.post(`Active/create`,
             {petID: petsID, profileID: email},
             {
                  headers: {
@@ -234,7 +239,7 @@ export default class PawDorableClient extends BindingClass{
             }
             );
             console.log(response);
-            return response.data.pet;
+            return response.data.activeRental;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
@@ -243,7 +248,7 @@ export default class PawDorableClient extends BindingClass{
     async UpdateProfile(emailAddress, firstName, lastName, age, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`profile/update/${emailAddress}`,
+            const response = await this.axiosClient.put(`profile/update/${emailAddress}`,
             {firstName: firstName, lastName: lastName, age: age},
             {
                  headers: {
@@ -260,7 +265,7 @@ export default class PawDorableClient extends BindingClass{
     async UpdatePet(petsID, rent, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`pet/update/}`,
+            const response = await this.axiosClient.put(`pet/update/`,
             {id: petsID, available: rent},
             {
                  headers: {
@@ -277,7 +282,7 @@ export default class PawDorableClient extends BindingClass{
     async RemovePet(petsID, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`pet/id/delete/}`,
+            const response = await this.axiosClient.delete(`pet/id/delete/`,
             {id: petsID},
             {
                  headers: {
@@ -292,11 +297,11 @@ export default class PawDorableClient extends BindingClass{
     }
 
 
-    async RemoveActiveRental(petsID, email, score, errorCallback) {
+    async RemoveActiveRental(petsID, score, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
-            const response = await this.axiosClient.get(`active/id/delete/}`,
-            {petID: petsID, profileID: email, rentalScore: score},
+            const response = await this.axiosClient.delete(`active/id/delete/`,
+            {petID: petsID, rentalScore: score},
             {
                  headers: {
                 Authorization: `Bearer ${token}`}

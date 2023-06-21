@@ -29,6 +29,7 @@ public class GetProfileActivity {
             throw new ProfileInvalidValuesException("Your email cannot contain illegal characters");
         }
 
+//        log.info("getProfileRequest ---------->{}", getProfileRequest.getEmailAddress());
         Profile selectedProfile = profileDao.getProfile(getProfileRequest.getEmailAddress());
 
         ProfileModel profileModel = new ModelConverter().toProfileModel(selectedProfile);
