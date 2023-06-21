@@ -141,7 +141,7 @@ export default class PawDorableClient extends BindingClass{
     async getPet(petID, errorCallback) {
         try {
 
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can see the pet.");
             const response = await this.axiosClient.get(`pet/${petID}`,
              {
                 headers: {
@@ -159,7 +159,7 @@ export default class PawDorableClient extends BindingClass{
 
     async getRentalHistory(id, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can see rental history.");
             const response = await this.axiosClient.get(`history/${id}`,
             {
                  headers: {
@@ -175,7 +175,7 @@ export default class PawDorableClient extends BindingClass{
 
     async getActiveRental(id, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can see the active rental.");
             const response = await this.axiosClient.get(`active/${id}`,
             {
                  headers: {
@@ -191,7 +191,7 @@ export default class PawDorableClient extends BindingClass{
 
     async CreateProfile(first, last, age, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can create profile.");
             const response = await this.axiosClient.post(`profile/create/`,
             {firstName: first, lastName: last, age: age},
             {
@@ -208,7 +208,7 @@ export default class PawDorableClient extends BindingClass{
 
     async CreatePet(petsName, kind, age, gender, rentable, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can create pets.");
             const response = await this.axiosClient.post(`pet/create`,
             {name: petsName, kindOfPet: kind, age: age, gender: gender, available: rentable},
             {
@@ -242,7 +242,7 @@ export default class PawDorableClient extends BindingClass{
 
     async UpdateProfile(emailAddress, firstName, lastName, age, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can update profile.");
             const response = await this.axiosClient.put(`profile/update/${emailAddress}`,
             {firstName: firstName, lastName: lastName, age: age},
             {
@@ -259,7 +259,7 @@ export default class PawDorableClient extends BindingClass{
 
     async UpdatePet(petsID, rent, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can update pets.");
             const response = await this.axiosClient.put(`pet/update/`,
             {id: petsID, available: rent},
             {
@@ -276,7 +276,7 @@ export default class PawDorableClient extends BindingClass{
 
     async RemovePet(petsID, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can remove pets.");
             const response = await this.axiosClient.delete(`pet/id/delete/${petsID}`,
             {
                  headers: {
@@ -293,7 +293,7 @@ export default class PawDorableClient extends BindingClass{
 
     async RemoveActiveRental(petsID, email, score, errorCallback) {
         try {
-            const token = await this.getTokenOrThrow("Only authenticated users can see pets.");
+            const token = await this.getTokenOrThrow("Only authenticated users can return pets.");
             const response = await this.axiosClient.delete(`active/id/delete/${petsID}/${email}/${score}`,
             {
                  headers: {

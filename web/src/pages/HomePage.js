@@ -28,7 +28,7 @@ class HomePage extends BindingClass{
         // document.getElementById('test').addEventListener('click', this.redirectTest);
         
         this.clientLoaded();
-        // this.loadPets(); //this works
+        this.loadPets(); //this works
         // this.loadProfile(); //this works
         // this.loadPet(); //this works
         // this.loadREntalHistory();  //thisworks
