@@ -19,12 +19,12 @@ class Profile extends BindingClass{
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
         document.getElementById('log-out').addEventListener('click', this.logout);
-        document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
+        // document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPets);
         document.getElementById('update-profile').addEventListener('click', this.redirectUpdateProfile);
-        document.getElementById('buddies').addEventListener('click', this.redirectBuddies);
-        document.getElementById('best-buddies').addEventListener('click', this.redirectBestBuddies);
-        document.getElementById('coming-home-1').addEventListener('click', this.redirectComingHome);
+        // document.getElementById('buddies').addEventListener('click', this.redirectBuddies);
+        // document.getElementById('best-buddies').addEventListener('click', this.redirectBestBuddies);
+        // document.getElementById('coming-home-1').addEventListener('click', this.redirectComingHome);
         document.getElementById('my-pets-1').addEventListener('click', this.redirectMyPets);
 
 

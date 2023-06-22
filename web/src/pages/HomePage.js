@@ -23,7 +23,7 @@ class HomePage extends BindingClass{
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
         document.getElementById('log-out').addEventListener('click', this.logout);
-        document.getElementById('rent').addEventListener('click', this.redirectRentPage);
+        // document.getElementById('rent').addEventListener('click', this.redirectRentPage);
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPetsPage);
         // document.getElementById('test').addEventListener('click', this.redirectTest);
         
