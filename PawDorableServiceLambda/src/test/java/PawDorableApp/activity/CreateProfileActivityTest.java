@@ -6,15 +6,17 @@ import PawDorableApp.dynamodb.ProfileDao;
 import PawDorableApp.dynamodb.models.Profile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class CreateProfileActivityTest {
     @Mock
     private ProfileDao profileDao;
-
+    @InjectMocks
     private CreateProfileActivity createProfileActivity;
 
     @BeforeEach
@@ -32,6 +34,7 @@ class CreateProfileActivityTest {
         String email = "jhon@notEmail.com";
 
         CreateProfileRequest request = CreateProfileRequest.builder()
+                .withEmailAddress(email)
                 .withFirstName(name)
                 .withLastName(last)
                 .withAge(age)
@@ -44,9 +47,9 @@ class CreateProfileActivityTest {
         savedProfile.setEmailAddress(email);
 
         //WHEN
+        when(profileDao.saveNewProfile(email, name, last, age)).thenReturn(savedProfile);
         CreateProfileResult result = createProfileActivity.handleRequest(request);
         //THEN
-        profileDao.saveNewProfile(email,name,last,age);
 
         assertNotNull(result.getProfile().getEmailAddress());
         assertEquals(savedProfile.getFirstName(), result.getProfile().getFirstName());

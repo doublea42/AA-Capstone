@@ -49,13 +49,17 @@ class Profile extends BindingClass{
 
     async loadProfile(){
 
-        const identity = await this.client.getIdentity();
-        const email = identity.email;
-        console.log(email);
 
-        const profile = this.client.getProfile(email);
-        
-        console.log(profile.value);
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        console.log(profileEmail);
+        const newDiv = document.createElement("div");
+        const allPets = await this.client.getProfile(profileEmail);
+        const string = JSON.stringify(allPets)
+        console.log(string);
+        newDiv.append(string);
+        const currentDiv = document.getElementById("result-body");
+        document.body.insertBefore(newDiv, currentDiv);
         
         
     }

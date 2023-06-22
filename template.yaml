@@ -215,11 +215,8 @@ Resources:
              Statement:
                - Effect: Allow
                  Action: dynamodb:*
-                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory"
-               - Effect: Allow
-                 Action:
-                   - dynamodb:query
-                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory/index/AvailabilityClassIndex"
+                 Resource: [!Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory",
+                            !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/rentalHistory/index/*"]
 
         - PolicyName: 'AccessPetsTable'
           PolicyDocument:

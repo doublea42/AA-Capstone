@@ -9,29 +9,62 @@ class CreateUpdateProfile extends BindingClass{
         super();
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage',
-                                'getDataFromForm'], this)
+                                'getDataFromForm', 'getDataFromForm','redirectProfilePage'], this)
 
 
         this.client = new PawDorableClient();
-        this.getDataFromForm();
     }
 
     mount(){
+        
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('sign-up').addEventListener('click', this.login);
         const firstName = document.getElementById('firstName');
         const lastName = document.getElementById('lastName');
         const age = document.getElementById('age');
         document.getElementById('submit').addEventListener('click', this.getDataFromForm);
+        this.loadProfile();
         
     }
 
     async getDataFromForm(){
 
-        console.log(firstName.value);
-        console.log(lastName.value);
-        console.log(age.value);
-        this.client.CreateProfile(firstName,lastName,age);
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        const fname = firstName.value;
+        const lname = lastName.value;
+        const newAge = age.value;
+
+        console.log(fname);
+        console.log(lname);
+        console.log(newAge);
+
+        let update = null;
+
+        update = this.client.UpdateProfile(profileEmail, fname,lname,newAge);
+
+
+        this.redirectProfilePage();
+        
+        
+
+    }
+
+    async loadProfile(){
+
+
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        console.log(profileEmail);
+        const newDiv = document.createElement("div");
+        const allPets = await this.client.getProfile(profileEmail);
+        const string = JSON.stringify(allPets)
+        console.log(string);
+        newDiv.append(string);
+        const currentDiv = document.getElementById("result-body");
+        document.body.insertBefore(newDiv, currentDiv);
+        
+        
     }
 
 
@@ -46,6 +79,12 @@ class CreateUpdateProfile extends BindingClass{
     redirectHomePage(){
         window.location.href = '/HomePage.html';
     }
+
+    redirectProfilePage(){
+        window.location.href = '/Profile.html';
+    }
+
+    
 
    
 

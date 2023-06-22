@@ -20,6 +20,7 @@ class MyPets extends BindingClass{
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPets);
         document.getElementById('add-pet').addEventListener('click', this.redirectAddPet);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
+        document.getElementById('remove_pet').addEventListener('click', this.redirectDeletePet);
 
         
     }
@@ -51,6 +52,10 @@ class MyPets extends BindingClass{
 
     redirectAddPet(){
         window.location.href = '/AddPet.html';
+    }
+    
+    redirectDeletePet(){
+        window.location.href = '/DeletePet.html';
     }
 
 
