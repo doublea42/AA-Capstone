@@ -11,7 +11,7 @@ class Profile extends BindingClass{
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage','redirectMyPets',
          'redirectUpdateProfile', 'redirectComingHome', 'redirectBuddies', 'redirectBestBuddies',
-          'redirectProfilePage', 'loadProfile', 'loadProfileCheck'], this)
+          'redirectProfilePage', 'loadProfile', 'loadProfileCheck', 'getHTMLForSearchResults'], this)
         this.client = new PawDorableClient();
     }
 
@@ -19,12 +19,12 @@ class Profile extends BindingClass{
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
         document.getElementById('log-out').addEventListener('click', this.logout);
-        document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
+        // document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPets);
         document.getElementById('update-profile').addEventListener('click', this.redirectUpdateProfile);
-        document.getElementById('buddies').addEventListener('click', this.redirectBuddies);
-        document.getElementById('best-buddies').addEventListener('click', this.redirectBestBuddies);
-        document.getElementById('coming-home-1').addEventListener('click', this.redirectComingHome);
+        // document.getElementById('buddies').addEventListener('click', this.redirectBuddies);
+        // document.getElementById('best-buddies').addEventListener('click', this.redirectBestBuddies);
+        // document.getElementById('coming-home-1').addEventListener('click', this.redirectComingHome);
         document.getElementById('my-pets-1').addEventListener('click', this.redirectMyPets);
 
 
@@ -49,16 +49,50 @@ class Profile extends BindingClass{
 
     async loadProfile(){
 
-        const identity = await this.client.getIdentity();
-        const email = identity.email;
-        console.log(email);
 
-        const profile = this.client.getProfile(email);
-        
-        console.log(profile.value);
+        const identity = await this.client.getIdentity();
+        const profileEmail = identity.email;
+        console.log(profileEmail);
+        const newDiv = document.createElement("div");
+        const profileInfo = await this.client.getProfile(profileEmail);
+        const string = JSON.stringify(profileInfo)
+        console.log(profileInfo);
+
+        newDiv.innerHTML = this.getHTMLForSearchResults(profileInfo);
+
+        // const string = JSON.stringify(allPets)
+        // console.log(string);
+        // newDiv.append(string);
+        const currentDiv = document.getElementById("result-body");
+        document.body.insertBefore(newDiv, currentDiv);
         
         
     }
+
+    getHTMLForSearchResults(searchResults) {
+        console.log(searchResults , "from getHTMLForSearchResults");
+            //    if (!searchResults || !searchResults.allEventList || searchResults.allEventList.length === 0) {
+            //        return '<h4>No results found</h4>';
+            //    }
+               let html = "";
+                    console.log(searchResults);
+                   html += `
+                   <tr>
+                   <td>
+                            ${searchResults.firstName}
+                    </td><br>
+                    <td>
+                            ${searchResults.lastName}
+                     </td><br>
+                     <td>
+                            ${searchResults.age}
+                      </td><br>
+                       <td>
+                            ${searchResults.myPets}
+                     </td>
+                   </tr><br>`;
+               return html;
+           }
 
 
 

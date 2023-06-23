@@ -16,10 +16,11 @@ class MyPets extends BindingClass{
     mount(){
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('log-out').addEventListener('click', this.logout);
-        document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
-        document.getElementById('my-pets').addEventListener('click', this.redirectMyPets);
+        // document.getElementById('coming-home').addEventListener('click', this.redirectComingHome);
+        // document.getElementById('my-pets').addEventListener('click', this.redirectMyPets);
         document.getElementById('add-pet').addEventListener('click', this.redirectAddPet);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
+        document.getElementById('remove_pet').addEventListener('click', this.redirectDeletePet);
 
         
     }
@@ -51,6 +52,10 @@ class MyPets extends BindingClass{
 
     redirectAddPet(){
         window.location.href = '/AddPet.html';
+    }
+    
+    redirectDeletePet(){
+        window.location.href = '/DeletePet.html';
     }
 
 

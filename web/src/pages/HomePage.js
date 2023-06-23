@@ -12,7 +12,7 @@ class HomePage extends BindingClass{
                                 'redirectMyPetsPage', 'redirectRentPage', 'clientLoaded', 'loadPets',
                             'loadProfile', 'loadPet', 'loadREntalHistory', 'loadActive', 'pageCreatePet',
                         'pageCreateActive', 'pageUpdateProfile', 'pageUpdatePet', 'pageRemovePet'
-                    ,'pageRemoveActiveRental', 'pageCreateProfile'], this)
+                    ,'pageRemoveActiveRental', 'pageCreateProfile', 'getHTMLForSearchResults'], this)
 
 
         this.client = new PawDorableClient();
@@ -23,7 +23,7 @@ class HomePage extends BindingClass{
         document.getElementById('home-page').addEventListener('click', this.redirectHomePage);
         document.getElementById('profile').addEventListener('click', this.redirectProfilePage);
         document.getElementById('log-out').addEventListener('click', this.logout);
-        document.getElementById('rent').addEventListener('click', this.redirectRentPage);
+        // document.getElementById('rent').addEventListener('click', this.redirectRentPage);
         document.getElementById('my-pets').addEventListener('click', this.redirectMyPetsPage);
         // document.getElementById('test').addEventListener('click', this.redirectTest);
         
@@ -54,15 +54,54 @@ class HomePage extends BindingClass{
         const profileEmail = identity.email;
         console.log(profileEmail);
         const newDiv = document.createElement("div");
+
         const allPets = await this.client.getAllPets();
+        console.log(allPets);
         const string = JSON.stringify(allPets)
-        console.log(string);
-        newDiv.append(string);
+
+        // if(allPets == null){
+        //     newDiv.innerText = "No Pets Found"
+        // }
+
+        newDiv.innerHTML = this.getHTMLForSearchResults(allPets);
+
+        // console.log(string);
+        // newDiv.append(string);
         const currentDiv = document.getElementById("result-body");
         document.body.insertBefore(newDiv, currentDiv);
 
 
     }
+
+    getHTMLForSearchResults(searchResults) {
+        console.log(searchResults , "from getHTMLForSearchResults");
+            //    if (!searchResults || !searchResults.allEventList || searchResults.allEventList.length === 0) {
+            //        return '<h4>No results found</h4>';
+            //    }
+               let html = "";
+               for (const res of searchResults) {
+                    console.log(res);
+                   html += `
+                   <tr>
+                   <td>
+                            ${res.id}
+                    </td>
+                    <td>
+                            ${res.name}
+                     </td>
+                     <td>
+                            ${res.kindOfPet}
+                      </td>
+                       <td>
+                            ${res.age}
+                     </td>
+                     <td>
+                             ${res.gender}
+                    </td>
+                   </tr><br>`;
+               }
+               return html;
+           }
 
     async loadProfile(){
 

@@ -12,15 +12,15 @@
         <button type="button" class="btn-dark" id="log-out"><strong>LogOut</strong></button>
     </header><br>
 
-    <form>
+    <form method="dialog">
         <div>
-            <label for="pet-Name">Name</label>
-            <input type="text" id="pet-Name" placeholder="Pets's Name" required> 
+            <label for="petName">Pet's Name</label>
+            <input type="text" id="petName" placeholder="Pet's Name" required> 
         </div> <br>
 
         <div>
-            <label for="pet-king">Kind</label>
-            <select type="text" id="pet-king" required>
+            <label for="pet-kind">Kind</label>
+            <select type="text" id="pet-kind" required>
                 <option value=""></option> 
                 <option value="CAT"> Cat </option>
                 <option value="DOG"> Dog </option>
@@ -29,8 +29,8 @@
         </div> <br>
 
         <div>
-            <label for="age">age</label>
-            <input type="text" id="age" placeholder="Age" required> 
+            <label for="pet-age">age</label>
+            <input type="text" id="pet-age" placeholder="Age" required> 
         </div> <br>
 
         <div>
@@ -47,15 +47,20 @@
             <select type="text" id="rent" required> 
                 <option value=""></option>
                 <option value="true"> YES </option>
-                <option value="false"> NO</option>
+                <option value="false"> NO </option>
             </select>
         </div> <br>
 
-        <div>
-            <input type="submit">
-        </div>
 
+        <div>
+            <input type="submit" id="submitPet">
+        </div><br>
+        
+    
     </form>
+
+    
+    
 </body>
 
 </html>
