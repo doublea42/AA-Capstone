@@ -9,7 +9,7 @@ class AddPet extends BindingClass{
         super();
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage', 'pageCreatePet',
-         'getDataFromForm',], this)
+         'getDataFromForm', 'getHTMLForSearchResults'], this)
         this.client = new PawDorableClient();
     }
 
@@ -51,14 +51,52 @@ class AddPet extends BindingClass{
         const e = available;
         const newDiv = document.createElement("div");
         const object = await this.client.CreatePet(a,b,c,d,e);
-        const string = JSON.stringify(object)
-        console.log(string);
-        newDiv.append(string);
+
+        newDiv.innerHTML = this.getHTMLForSearchResults(object);
+        // const string = JSON.stringify(object)
+        // console.log(string);
+        // newDiv.append(string);
         const currentDiv = document.getElementById("result-body");
         document.body.insertBefore(newDiv, currentDiv);
 
 
     }
+
+
+    getHTMLForSearchResults(searchResults) {
+        console.log(searchResults , "from getHTMLForSearchResults");
+            //    if (!searchResults || !searchResults.allEventList || searchResults.allEventList.length === 0) {
+            //        return '<h4>No results found</h4>';
+            //    }
+               let html = "";
+                    console.log(searchResults);
+                   html += `
+                   <tr>
+                   Your Pet Info:
+                   <br><br>
+                   <td>
+                            ${searchResults.id}
+                    </td>
+                    <td>
+                            ${searchResults.name}
+                     </td>
+                     <td>
+                            ${searchResults.kindOfPet}
+                      </td>
+                       <td>
+                            ${searchResults.age}
+                     </td>
+                     <td>
+                             ${searchResults.gender}
+                    </td>
+                       
+                   </tr><br>`;
+               return html;
+           }
+
+
+
+
 
     async login(){
         await this.client.login();

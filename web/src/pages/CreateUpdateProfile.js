@@ -9,7 +9,8 @@ class CreateUpdateProfile extends BindingClass{
         super();
 
         this.bindClassMethods(['mount', 'login', 'logout', 'redirectHomePage',
-                                'getDataFromForm', 'getDataFromForm','redirectProfilePage'], this)
+                                'getDataFromForm', 'getDataFromForm','redirectProfilePage'
+                            ,'getHTMLForSearchResults'], this)
 
 
         this.client = new PawDorableClient();
@@ -57,15 +58,45 @@ class CreateUpdateProfile extends BindingClass{
         const profileEmail = identity.email;
         console.log(profileEmail);
         const newDiv = document.createElement("div");
-        const allPets = await this.client.getProfile(profileEmail);
-        const string = JSON.stringify(allPets)
-        console.log(string);
-        newDiv.append(string);
+        const profileInfo = await this.client.getProfile(profileEmail);
+        const string = JSON.stringify(profileInfo)
+        console.log(profileInfo);
+
+        newDiv.innerHTML = this.getHTMLForSearchResults(profileInfo);
+
+        // const string = JSON.stringify(allPets)
+        // console.log(string);
+        // newDiv.append(string);
         const currentDiv = document.getElementById("result-body");
         document.body.insertBefore(newDiv, currentDiv);
         
         
     }
+
+    getHTMLForSearchResults(searchResults) {
+        console.log(searchResults , "from getHTMLForSearchResults");
+            //    if (!searchResults || !searchResults.allEventList || searchResults.allEventList.length === 0) {
+            //        return '<h4>No results found</h4>';
+            //    }
+               let html = "";
+                    console.log(searchResults);
+                   html += `
+                   <tr>
+                   Your Past Info:
+                   <br><br>
+                   <td>
+                            ${searchResults.firstName}
+                    </td><br>
+                    <td>
+                            ${searchResults.lastName}
+                     </td><br>
+                     <td>
+                            ${searchResults.age}
+                      </td><br>
+                       
+                   </tr><br>`;
+               return html;
+           }
 
 
     async login(){
